@@ -1,8 +1,8 @@
 {
     "_JSON_": true,
     "AUTHOR": "Thamer1t",
-    "LANGUAGE": "Arabic",
-    "LANGCODE": "ar",
+    "LANGUAGE": "English",
+    "LANGCODE": "en",
     "STRINGS": {
     "updater": {
     "UPDATE": "محدث اخر تحديث ",
