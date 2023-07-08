@@ -1004,5 +1004,5 @@ cmd({ on: "text" }, async(Void, citel) => {
         }
     }
 
-})
+}
 }
