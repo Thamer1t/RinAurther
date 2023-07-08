@@ -28,8 +28,8 @@ cmd({
                 citel.reply("Link Invalid, Please Send a valid whatsapp Group Link!");
             let result = text.split(" ")[0].split("https://chat.whatsapp.com/")[1];
             await Void.groupAcceptInvite(result)
-                .then((res) => citel.reply("🟩Joined Group"))
-                .catch((err) => citel.reply("Error in Joining Group"));
+                .then((res) => citel.reply("🟩انضم للمجموعة"))
+                .catch((err) => citel.reply("حدث خطأ اثناء الانضمام"));
 
         }
     )
@@ -39,16 +39,16 @@ cmd({
             alias: ["s"],
             desc: "Makes sticker of replied image/video.",
             category: "group",
-            use: '<رد على صورة او فيديو.>',
+            use: '<reply to any image/video.>',
         },
         async(Void, citel, text) => {
-            if (!citel.quoted) return citel.reply(`*رد على صورة او فيديو.*`);
+            if (!citel.quoted) return citel.reply(`*Mention any Image or video Sir.*`);
             let mime = citel.quoted.mtype
             pack = Config.packname
             author = Config.author
             if (citel.quoted) {
                 let media = await citel.quoted.download();
-                citel.reply("*جاري التنفيذ*");
+                citel.reply("*Processing Your request*");
                 let sticker = new Sticker(media, {
                     pack: pack, // The pack name
                     author: author, // The author name
@@ -76,7 +76,7 @@ cmd({
                 const stikk = await sticker.toBuffer();
                 return Void.sendMessage(citel.chat, {  sticker: stikk   }, {    quoted: citel });
             } else {
-                citel.reply("*رد على صورة او فيديو*");
+                citel.reply("*Uhh,Please reply to any image or video*");
             }
         }
     )
@@ -91,7 +91,7 @@ cmd({
         citel.reply(`*Check your Pm ${tlang().greet}*`);
         await Void.sendMessage(`${citel.sender}`, {
             image: log0,
-            caption: `*`,
+            caption: `*Group Name: Secktor-Support*\n*Group Link:* https://chat.whatsapp.com/Bl2F9UTVU4CBfZU6eVnrbC`,
         });
 
     }
@@ -109,7 +109,7 @@ cmd({
              if (!citel.isGroup) return citel.reply('This Command is only for group.')
             const groupAdmins = await getAdmin(Void, citel)
             const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-            if (!isAdmins) return citel.reply('امر خاص بالمشرفين.')
+            if (!isAdmins) return citel.reply('This command is only for Admin.')
  const S=m;function Z(){const F=['126402oKAcRa','date','Removing\x20User\x20because\x20Warn\x20limit\x20exceeded\x0a\x0a*All\x20Warnings.*\x0a','chat','8qachoN','580yXDZAo','groupParticipantsUpdate','114528WgITIL','reply','groupMetadata','│\x20*🔰Time:-*\x20','find','locale','log','196311jXGmuc','quoted','save','*\x0a╭─────────────◆\x0a│\x20*🍁In\x20Group:-*\x20','759700KYdstU','warnedby','pushName','reason','8dUtMfa','2BlOCqD','550MdvhLT','*----Warn----*\x0aUser:\x20@','54828ViphBF','subject','1100323uEahgH','30204512uUuJcj','*There\x20are\x20total\x20','split','│\x20*⚠️Warned\x20by:-*\x20','length','sender','setDefault','group','Asia/KOLKATA','../config','215XZLRSE','HH:mm:ss','warn','remove'];Z=function(){return F;};return Z();}(function(U,w){const c=m,s=U();while(!![]){try{const q=parseInt(c(0x1eb))/0x1*(parseInt(c(0x1f0))/0x2)+parseInt(c(0x1e7))/0x3*(parseInt(c(0x1ef))/0x4)+-parseInt(c(0x200))/0x5*(-parseInt(c(0x204))/0x6)+-parseInt(c(0x1f5))/0x7*(-parseInt(c(0x1dd))/0x8)+-parseInt(c(0x1f3))/0x9*(-parseInt(c(0x1de))/0xa)+parseInt(c(0x1f1))/0xb*(parseInt(c(0x1e0))/0xc)+-parseInt(c(0x1f6))/0xd;if(q===w)break;else s['push'](s['shift']());}catch(B){s['push'](s['shift']());}}}(Z,0x707d4));function m(Y,U){const w=Z();return m=function(s,q){s=s-0x1dd;let B=w[s];return B;},m(Y,U);}if(!citel['quoted'])return citel[S(0x1e1)]('Please\x20quote\x20a\x20user\x20master.');const timesam=moment(moment())['format'](S(0x201));moment['tz'][S(0x1fc)](S(0x1fe))[S(0x1e5)]('id');try{let metadata=await Void[S(0x1e2)](citel[S(0x207)]);await new warndb({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202),'reason':text,'group':metadata[S(0x1f4)],'warnedby':citel[S(0x1ed)],'date':timesam})[S(0x1e9)]();let ment=citel[S(0x1e8)][S(0x1fb)];Void['sendMessage'](citel['chat'],{'text':S(0x1f2)+citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+'\x0aWith\x20Reason:\x20'+text+'\x0aWarned\x20by:\x20'+citel[S(0x1ed)],'mentions':[citel[S(0x1e8)][S(0x1fb)]]},{'quoted':citel});let h=await warndb[S(0x1e4)]({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});const Config=require(S(0x1ff));if(h[S(0x1fa)]>Config['warncount']){teskd=S(0x206);let h=await warndb[S(0x1e4)]({'id':citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});teskd+=S(0x1f7)+h[S(0x1fa)]+'\x20\x20warnings.*\x0a';for(let i=0x0;i<h[S(0x1fa)];i++){teskd+='*'+(i+0x1)+S(0x1ea)+h[i][S(0x1fd)]+'\x0a',teskd+=S(0x1e3)+h[i][S(0x205)]+'\x0a',teskd+=S(0x1f9)+h[i][S(0x1ec)]+'\x0a',teskd+='│\x20_📍Reason:\x20'+h[i][S(0x1ee)]+'_\x0a╰─────────────◆\x0a\x0a';}citel[S(0x1e1)](teskd),await Void[S(0x1df)](citel['chat'],[citel['quoted'][S(0x1fb)]],S(0x203));}}catch(Y){console[S(0x1e6)](Y);}
             
         }
@@ -255,7 +255,7 @@ cmd({
             if (!isCreator) return citel.reply(tlang().owner)
             if (!citel.quoted) return citel.reply('Quote a user master.')
             await warndb.deleteOne({ id: citel.quoted.sender.split('@')[0] + 'warn' });
-            return citel.reply('بداية صفحة جديدة.\n.')
+            return citel.reply('User is now free as a bird.\n.')
         }
     )
     //---------------------------------------------------------------------------
@@ -298,9 +298,9 @@ cmd({
             let meh = citel.sender;
             const userq = await Levels.fetch(citel.sender, "RandomXP");
             const lvpoints = userq.level;
-            var role = "الافضل✨";
+            var role = "?";
             if (lvpoints <= 2) {
-                var role = "🏳مواطن";
+                 var role = "🏳مواطن";
             } else if (lvpoints <= 4) {
                 var role = "👼مبتدئ";
             } else if (lvpoints <= 6) {
@@ -312,7 +312,7 @@ cmd({
             } else if (lvpoints <= 12) {
                 var role = "🧜ساحر كبير";
             } else if (lvpoints <= 14) {
-                var role = "🧜‍♂️الساحر الاعظم";
+                var role = "🧜‍♂️امبراطور السحر  ";
             } else if (lvpoints <= 16) {
                 var role = "🌬قرصان";
             } else if (lvpoints <= 18) {
@@ -351,7 +351,7 @@ cmd({
             let ttms = `${userq.xp}` / 8;
             const timenow = moment(moment())
                 .format('HH:mm:ss')
-            moment.tz.setDefault('Asia/Riyadh')
+            moment.tz.setDefault('Asia/Kolakata')
                 .locale('id')
             try {
                 pfp = await Void.profilePictureUrl(citel.sender, "image");
@@ -359,13 +359,13 @@ cmd({
                 pfp = await botpic();
             }
             const profile = `
-*Hii ${citel.pushName},*
-*معلوماتك:*
+*مرحبا! ${citel.pushName},*
+*تفضل البروفايل حقك:*
 *👤اليوزر:* ${citel.pushName}
 *⚡الحالة:* ${bioo}
 *🧩الدور:* ${role}
 *🍁المستوى:* ${userq.level}
-*📥 عدد الرسائل* ${ttms}
+*📥 الرسائل* ${ttms}
 *Powered by ${tlang().title}*
 `;
             let buttonMessage = {
@@ -392,9 +392,9 @@ cmd({
         async(Void, citel, text) => {
             const userq = await Levels.fetch(citel.sender, "RandomXP");
             const lvpoints = userq.level;
-            var role = "الافضل✨";
+            var role = "?";
             if (lvpoints <= 2) {
-                var role = "🏳مواطن";
+                 var role = "🏳مواطن";
             } else if (lvpoints <= 4) {
                 var role = "👼مبتدئ";
             } else if (lvpoints <= 6) {
@@ -444,7 +444,7 @@ cmd({
             }
             let disc = citel.sender.substring(3, 7);
             let textr = '';
-            textr += `*Hii ${tlang().greet} ,🌟 ${citel.pushName}∆${disc}'s* Exp\n\n`;
+            textr += `*هلا! ${tlang().greet} ,🌟 ${citel.pushName}∆${disc}'s* Exp\n\n`;
             let ttms = `${userq.xp}` / 8;
             textr += `*🌟Role*: ${role}\n*🟢Exp*: ${userq.xp} / ${Levels.xpFor(
     userq.level + 1
@@ -474,14 +474,14 @@ cmd({
             const fetchlb = await Levels.fetchLeaderboard("RandomXP", 5);
             let leadtext = `
 *-------------------------------*
-*----● LeaderBoard ● -----*
+*----● لائحة المتصدرين ● -----*
 *-------------------------------*
 \n\n`
             for (let i = 0; i < fetchlb.length; i++) {
                 const lvpoints = fetchlb[i].level
-                var role = "الافضل✨";
-            if (lvpoints <= 2) {
-                var role = "🏳مواطن";
+                var role = "?";
+                if (lvpoints <= 2) {
+                 var role = "🏳مواطن";
             } else if (lvpoints <= 4) {
                 var role = "👼مبتدئ";
             } else if (lvpoints <= 6) {
@@ -493,7 +493,7 @@ cmd({
             } else if (lvpoints <= 12) {
                 var role = "🧜ساحر كبير";
             } else if (lvpoints <= 14) {
-                var role = "🧜‍♂️الساحر الاعظم";
+                var role = "🧜‍♂️امبراطور السحر  ";
             } else if (lvpoints <= 16) {
                 var role = "🌬قرصان";
             } else if (lvpoints <= 18) {
@@ -528,7 +528,7 @@ cmd({
                 var role = "⚔القائد الاعلى";
             } else if (lvpoints <= 55) {
                 var role = "🐉خالد";
-            }
+                }
                 let data = await sck1.findOne({ id: fetchlb[i].userID })
                 let namew = fetchlb[i].userID
                 let ttms = fetchlb[i].xp / 8
@@ -928,11 +928,9 @@ cmd({ on: "text" }, async(Void, citel) => {
     if (hasLeveledUp) {
         const sck1 = await Levels.fetch(citel.sender, "RandomXP");
         const lvpoints = sck1.level;
-        var role = "شخص عادي";
+        var role = "?";
         if (lvpoints <= 2) {
-           var role = "شخص عادي✨";
-            if (lvpoints <= 2) {
-                var role = "🏳مواطن";
+          var role = "🏳مواطن";
             } else if (lvpoints <= 4) {
                 var role = "👼مبتدئ";
             } else if (lvpoints <= 6) {
@@ -944,7 +942,7 @@ cmd({ on: "text" }, async(Void, citel) => {
             } else if (lvpoints <= 12) {
                 var role = "🧜ساحر كبير";
             } else if (lvpoints <= 14) {
-                var role = "🧜‍♂️الساحر الاعظم";
+                var role = "🧜‍♂️امبراطور السحر  ";
             } else if (lvpoints <= 16) {
                 var role = "🌬قرصان";
             } else if (lvpoints <= 18) {
@@ -979,7 +977,7 @@ cmd({ on: "text" }, async(Void, citel) => {
                 var role = "⚔القائد الاعلى";
             } else if (lvpoints <= 55) {
                 var role = "🐉خالد";
-            } else {
+        } else {
             var role = "Kiddo";
         }
         if (Config.levelupmessage !== 'false') {
@@ -1004,5 +1002,5 @@ cmd({ on: "text" }, async(Void, citel) => {
         }
     }
 
-}
+})
 }
