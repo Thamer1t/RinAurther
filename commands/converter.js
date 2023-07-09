@@ -17,7 +17,7 @@ const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter")
 
     //---------------------------------------------------------------------------
     cmd({
-        pattern: "photo",
+        pattern: "صورة",
         desc: "Makes photo of replied sticker.",
         category: "converter",
         use: '<reply to any gif>',
@@ -76,14 +76,14 @@ if(quot.message.videoMessage)
 }
  
 }
-//else citel.reply("```This is Not A ViewOnce Message```") 
+//else citel.reply("```ليست رسالة قراءة مرة واحدة```") 
        
 }  
      
 catch(e) {  console.log("error" , e ) }     
 
        
-if(!citel.quoted) return citel.reply("```Uh Please Reply A ViewOnce Message```")           
+if(!citel.quoted) return citel.reply("```رد على رسالة قراءة مره واحدة```")           
 if(citel.quoted.mtype === "viewOnceMessage")
 { console.log("ViewOnce Entered") 
  if(citel.quoted.message.imageMessage )
@@ -100,11 +100,11 @@ else if(citel.quoted.message.videoMessage )
 }
 
 }
-else return citel.reply("```This is Not A ViewOnce Message```")
+else return citel.reply("```ليست رسالة قراءة مرة واحدة```")
 
 })    //---------------------------------------------------------------------------
 cmd({
-            pattern: "quotely",
+            pattern: "مقولة",
             desc: "Makes Sticker of quoted text.",
             alias: ["q"],
             category: "converter",
@@ -112,7 +112,7 @@ cmd({
             filename: __filename
         },
         async(Void, citel, text) => {
-            if (!citel.quoted) return citel.reply("Please quote/reply to any message");
+            if (!citel.quoted) return citel.reply("رد على اي رسالة");
             let textt = citel.quoted.text;
             let pfp;
             try {
@@ -152,13 +152,13 @@ cmd({
             };
             let res = await axios.post("https://bot.lyo.su/quote/generate", body);
             let img = Buffer.alloc(res.data.result.image.length, res.data.result.image, "base64");
-            return citel.reply(img,{packname:'Secktor',author:'Quotely'},"sticker")
+            return citel.reply(img,{packname:'غومونريونغ',author:'مقولة'},"sticker")
 
         }
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "fancy",
+            pattern: "زخرفة",
             desc: "Makes stylish/fancy given text",
             category: "converter",
             use: '56 Secktor',
@@ -183,7 +183,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "tiny",
+            pattern: "رابط",
             desc: "Makes url tiny.",
             category: "converter",
             use: '<url>',
@@ -202,103 +202,13 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-    cmd({
-        pattern: "circle",
-        alias: ["circlestic","circlesticker","cs"],
-        desc: "Makes sticker of replied image/video.",
-        category: "sticker",
-filename: __filename,
-        use: '<reply to any image/video.>'
-    },
-    async(Void, citel, text) => {
-        if (!citel.quoted) return citel.reply(`*Reply To any Image or video Sir.*`);
-      //console.log("Quoted Data here : ",citel.quoted);
-        let mime = citel.quoted.mtype
-        pack = Config.packname
-        author = Config.author
-       if (mime =="imageMessage" || mime =="stickerMessage") {
-            let media = await citel.quoted.download();
-            //citel.reply("*Processing Your request*");
-            let sticker = new Sticker(media, {
-                pack: pack, // The pack name
-                author: author, // The author name
-                type: StickerTypes.CIRCLE ,
-                categories: ["🤩", "🎉"], // The sticker category
-                id: "12345", // The sticker id
-                quality: 75, // The quality of the output file
-            });
-            const buffer = await sticker.toBuffer();
-            return Void.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
-        }else return citel.reply("*Uhh,Please reply to any image*");
-
-    }
-)
+ 
 //---------------------------------------------------------------------------
-cmd({
-        pattern: "crop",
-        alias: ["cropstic","csticker","cropsticker"],
-        desc: "Makes sticker of replied image/video.",
-        category: "sticker",
-filename: __filename,
-        use: '<reply to any image/video.>'
-    },
-    async(Void, citel, text) => {
-        if (!citel.quoted) return citel.reply(`*Reply To any Image or video Sir.*`);
-      //console.log("Quoted Data here : ",citel.quoted);
-        let mime = citel.quoted.mtype
-        pack = Config.packname
-        author = Config.author
-        if (mime =="imageMessage"  || mime =="stickerMessage") {
-            let media = await citel.quoted.download();
-            //citel.reply("*Processing Your request*");
-            let sticker = new Sticker(media, {
-                pack: pack, // The pack name
-                author: author, // The author name
-                type: StickerTypes.CROPPED,
-                categories: ["🤩", "🎉"], // The sticker category
-                id: "12345", // The sticker id
-                quality: 75, // The quality of the output file
-            });
-            const buffer = await sticker.toBuffer();
-            return Void.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
-        }else return citel.reply("*Uhh,Please reply to any image*");
 
-    }
-)
 //---------------------------------------------------------------------------
-cmd({
-        pattern: "round",
-        alias: ["roundstic","roundsticker"],
-        desc: "Makes sticker of replied image/video.",
-        category: "sticker",
-filename: __filename,
-        use: '<reply to any image/video.>'
-    },
-    async(Void, citel, text) => {
-        if (!citel.quoted) return citel.reply(`*Reply To any Image or video Sir.*`);
-      //console.log("Quoted Data here : ",citel.quoted);
-        let mime = citel.quoted.mtype
-        pack = Config.packname
-        author = Config.author
-       if (mime =="imageMessage" || mime =="stickerMessage") {
-            let media = await citel.quoted.download();
-            //citel.reply("*Processing Your request*");
-            let sticker = new Sticker(media, {
-                pack: pack, // The pack name
-                author: author, // The author name
-                type: StickerTypes.ROUNDED ,
-                categories: ["🤩", "🎉"], // The sticker category
-                id: "12345", // The sticker id
-                quality: 75, // The quality of the output file
-            });
-            const buffer = await sticker.toBuffer();
-            return Void.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
-        }else return citel.reply("*Uhh,Please reply to any image*");
 
-    }
-)
 cmd({
-    pattern: "toaudio",
+    pattern: "صوت",
     alias:['mp3','tomp3'],
     desc: "changes type to audio.",
     category: "converter",
@@ -323,6 +233,6 @@ else return console.log('File deleted successfully in TOAUDIO MP3 at : ' , media
 });
 
 }
-else return citel.reply ("```Uhh Please, Reply To A video Message```")
+else return citel.reply ("```رد على فيديو```")
 }
 )
