@@ -49,9 +49,9 @@ Secktor.cmd({
                 })
                 const time = moment(moment())
                     .format('HH:mm:ss')
-                moment.tz.setDefault('Asia/KOLKATA')
+                moment.tz.setDefault('Asia/Riyadh')
                     .locale('id')
-                const date = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                const date = moment.tz('Asia/ٍRiyadh').format('DD/MM/YYYY')
                 let total = await sck1.countDocuments()
                 let str = `╭────《 ` + fancytext(Config.ownername.split(' ')[0], 58) + ` 》─────⊷\n`
                 str +=
@@ -82,7 +82,7 @@ Secktor.cmd({
                    }
   
                 }
-                str+= `*⭐️النوع:* _${prefix}help cmd_ name to know more about specific command.\n*Eg:* _${prefix}help attp_\n*صنع بحب ❤️ من قبل ثامر* `
+                str+= `*⭐️:* _${prefix} ${prefix}\n*صنع بحب ❤️ من قبل غومونريونغ* `
                 let buttonMessaged = {
                     image: { url: await botpic() },
                     caption: str
@@ -93,7 +93,7 @@ Secktor.cmd({
     )
     //---------------------------------------------------------------------------
 Secktor.cmd({
-            pattern: "list",
+            pattern: "قائمة",
             desc: "list menu",
             category: "general"
         },
@@ -125,7 +125,7 @@ for (let i = 0; i < commands.length; i++)
     )
     //---------------------------------------------------------------------------
 Secktor.cmd({
-        pattern: "owner",
+        pattern: "المالك",
         desc: "To find owner number",
         category: "general",
         react: "🐐",
@@ -144,7 +144,7 @@ Secktor.cmd({
             contextInfo: {
                 externalAdReply: {
                     title: Config.ownername,
-                    body: 'Touch here.',
+                    body: 'اضغط هنا',
                     renderLargerThumbnail: true,
                     thumbnailUrl: ``,
                     thumbnail: log0,
@@ -162,7 +162,7 @@ Secktor.cmd({
 )
 
 Secktor.cmd({
-    pattern: "file",
+    pattern: "ملف",
     desc: "to get extact name where that command is in repo.\nSo user can edit that.",
     category: "general",
     react: "✨",
