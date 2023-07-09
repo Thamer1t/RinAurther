@@ -122,7 +122,7 @@ return await citel.reply(`*10000000 🪙diamond storage تمت اضافة الى
 
              break
 default:
- await citel.reply('*وش قاعد تحاول تسوي؟📉*.')
+ await citel.reply('*؟📉*.')
 
  }
 }
@@ -146,7 +146,7 @@ default:
         let mongoschemas = zerogroup.economy || "false";
         if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
       //  let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-        if (!text) return citel.reply("ياحبيبي! 💰اضف المبلغ الذي تريد ايداعة!");
+        if (!text) return citel.reply("! 💰اضف المبلغ الذي تريد ايداعة");
         let d = parseInt(text)
         const deposit = await eco.deposit(citel.sender, "secktor", d);
         const balance = await eco.balance(citel.sender, "secktor")
@@ -162,8 +162,8 @@ return await citel.reply(`⛩️ المرسل: ${citel.pushName}\n🍀تم 💰�
         react: "💷"
     },
     async(Void, citel, text,{ isCreator }) => {
-	let h = await eco.lb('secktor',10);
-	let str = `*اغنى ${h.length} ناس بالقروب.*\n`
+	let h = await eco.lb('secktor',20);
+	let str = `*توب ${h.length} اغنياء بالبوت، اذا ناقصك شيء كلمهم😏*\n`
 	const { sck1 } = require('../lib');
 	let arr = []
 	 for(let i=0;i<h.length;i++){
@@ -174,7 +174,7 @@ return await citel.reply(`⛩️ المرسل: ${citel.pushName}\n🍀تم 💰�
             } else {
                 tname = Void.getName(h[i].userID)
             }
-str+= `*${i+1}*\n╭─────────────◆\n│ *Name:-* _${tname}_\n│ *User:-* _@${h[i].userID.split('@')[0]}_\n│ *Wallet:-* _${h[i].wallet}_\n│ *Bank Amount:-* _${h[i].bank}_\n│ *Bank Capacity:-* _${h[i].bankCapacity}_\n╰─────────────◆\n\n`  	 
+str+= `*${i+1}*\n╭─────────────◆\n│ *الاسم:-* _${tname}_\n│ *اليوزر:-* _@${h[i].userID.split('@')[0]}_\n│ *المحفظة:-* _${h[i].wallet}_\n│ *البنك:-* _${h[i].bank}_\n│ *سعة البنك:-* _${h[i].bankCapacity}_\n╰─────────────◆\n\n`  	 
 	 arr.push(h[i].userID)
 	 }
 	     citel.reply(str,{mentions:arr})
@@ -196,7 +196,7 @@ async(Void, citel, text,{ isCreator }) => {
         })
         .save());
     let mongoschemas = zerogroup.economy || "false";
-    if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
+    if (mongoschemas == "false") return citel.reply("*🚦Economy* مو مفعل بالقروب، كلم غومونريونغ يفعله");
     let value = text.trim().split(" ");
     if (value[0] === "") return citel.reply(`Use ${prefix}transfer 100 @user`);
     let user = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
@@ -237,7 +237,7 @@ return await citel.reply( `*📠 تم تحويل ${value[0]}  بنجاح💰*`)
             })
             .save());
         let mongoschemas = zerogroup.economy || "false";
-        if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
+        if (mongoschemas == "false") return citel.reply("*🚦Economy* مو مفعل بالقروب، كلم غومونريونغ يفعله");
          const secktor = "secktor"
          const balance = await eco.balance(citel.sender, secktor); //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.
 return await citel.reply(`*👛 ${citel.pushName}'s Purse:*\n\n_🪙${balance.wallet}_`)
@@ -257,9 +257,9 @@ return await citel.reply(`*👛 ${citel.pushName}'s Purse:*\n\n_🪙${balance.wa
 
          const secktor = "secktor"
          let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-         if(!users) return citel.reply('Please give me user to add money.')
+         if(!users) return citel.reply('منشن اللي بتعطيه فلوس')
          await eco.give(users, secktor, parseInt(text.split(' ')[0]));
-        return await Void.sendMessage(citel.chat,{text: `Added 📈 ${parseInt(text.split(' ')[0])} to @${users.split('@')[0]} wallet🛸.`,mentions:[users]},{quoted:citel})
+        return await Void.sendMessage(citel.chat,{text: `تمت اضافة 📈 ${parseInt(text.split(' ')[0])} الى محفظة @${users.split('@')[0]} 🛸.`,mentions:[users]},{quoted:citel})
 
     }
 )
@@ -280,9 +280,9 @@ return await citel.reply(`*👛 ${citel.pushName}'s Purse:*\n\n_🪙${balance.wa
             })
             .save());
         let mongoschemas = zerogroup.economy || "false";
-        if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
+        if (mongoschemas == "false") return citel.reply("*🚦Economy* مو مفعل بالقروب، كلم غومونريونغ يفعله");
         const balance = await eco.balance(citel.sender, "secktor"); //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.
-return await citel.reply(`🍀User: ${citel.pushName}\n\n_🪙${balance.bank}/${balance.bankCapacity}_`)
+return await citel.reply(`🍀اليوزر: ${citel.pushName}\n\n_🪙${balance.bank}/${balance.bankCapacity}_`)
     }
 )
 
@@ -368,7 +368,7 @@ default:
         const withdraw = await eco.withdraw(user, secktor, query);
         if(withdraw.noten) return citel.reply('*🏧 ماعندك فلوس بالبنك عشان تسحبها🫤*'); //if user states more than whats in his wallet
         const add = eco.give(user, secktor, query);
-          citel.reply(`*🏧 تنبية* \n _🪙${withdraw.amount} تم سحب امبلغ من البنك💰._`)
+          citel.reply(`*🏧 تنبية* \n _🪙${withdraw.amount} تم سحب المبلغ من البنك💰._`)
     }
 )
 
