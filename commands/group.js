@@ -76,7 +76,7 @@ cmd({
                 const stikk = await sticker.toBuffer();
                 return Void.sendMessage(citel.chat, {  sticker: stikk   }, {    quoted: citel });
             } else {
-                citel.reply("*Uhh,Please reply to any image or video*");
+                citel.reply("*رد على صورة او فيديو وابشر*");
             }
         }
     )
@@ -91,7 +91,7 @@ cmd({
         citel.reply(`*Check your Pm ${tlang().greet}*`);
         await Void.sendMessage(`${citel.sender}`, {
             image: log0,
-            caption: `*Group Name: Secktor-Support*\n*Group Link:* https://chat.whatsapp.com/Bl2F9UTVU4CBfZU6eVnrbC`,
+            caption: `*اكتب .owner وكلم غومونريونغ اذا عندك اقتراح او استفسار`,
         });
 
     }
@@ -106,7 +106,7 @@ cmd({
             use: '<quote|reply|number>',
         },
         async(Void, citel, text,{ isCreator }) => {
-             if (!citel.isGroup) return citel.reply('This Command is only for group.')
+             if (!citel.isGroup) return citel.reply('امر خاص بالمجموعات')
             const groupAdmins = await getAdmin(Void, citel)
             const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
             if (!isAdmins) return citel.reply('This command is only for Admin.')
@@ -253,9 +253,9 @@ cmd({
         },
         async(Void, citel, text,{isCreator}) => {
             if (!isCreator) return citel.reply(tlang().owner)
-            if (!citel.quoted) return citel.reply('Quote a user master.')
+            if (!citel.quoted) return citel.reply('منشن الشخص سيدي')
             await warndb.deleteOne({ id: citel.quoted.sender.split('@')[0] + 'warn' });
-            return citel.reply('User is now free as a bird.\n.')
+            return citel.reply('تم حذف الانذارات، بداية صفحة جديدة👍🏻\n.')
         }
     )
     //---------------------------------------------------------------------------
@@ -444,11 +444,11 @@ cmd({
             }
             let disc = citel.sender.substring(3, 7);
             let textr = '';
-            textr += `*هلا! ${tlang().greet} ,🌟 ${citel.pushName}∆${disc}'s* Exp\n\n`;
+            textr += `* ${tlang().greet} ,\nرانك:🌟 ${citel.pushName}∆${disc}*\n\n`;
             let ttms = `${userq.xp}` / 8;
-            textr += `*🌟Role*: ${role}\n*🟢Exp*: ${userq.xp} / ${Levels.xpFor(
+            textr += `*الدور*: ${role}\n*🟢نقاط الخبرة*: ${userq.xp} / ${Levels.xpFor(
     userq.level + 1
-  )}\n*🏡Level*: ${userq.level}\n*Total Messages:*- ${ttms}`;
+  )}\n*🏡المستوى*: ${userq.level}\n*مجموع الرسائل:*- ${ttms}`;
             try {
                 ppuser = await Void.profilePictureUrl(citel.sender, "image");
             } catch {
@@ -601,13 +601,13 @@ cmd({
         },
         async(Void, citel, text) => {
             let mime = citel.quoted.mtype
-            if (!/image/.test(mime)) return citel.reply(`Reply to Photo With Caption *text*`)
+            if (!/image/.test(mime)) return citel.reply(`رد على صورة، مع كتابة `)
             mee = await Void.downloadAndSaveMediaMessage(citel.quoted)
             mem = await TelegraPh(mee)
             meme = await getBuffer(`https://api.memegen.link/images/custom/-/${text}.png?background=${mem}`)
             let buttonMessage = {
                 image: meme,
-                caption: "Here we go",
+                caption: "تفضل",
                 footer: tlang().footer,
                 headerType: 4,
             };
@@ -636,11 +636,11 @@ cmd({
             if (!isAdmins) return citel.reply(tlang().admin);
             if (text.split(" ")[0] === "close") {
                 await Void.groupSettingUpdate(citel.chat, "announcement")
-                    .then((res) => reply(`Group Chat Muted :)`))
+                    .then((res) => reply(`تم كتم المحادثة:)`))
                     .catch((err) => console.log(err));
             } else if (text.split(" ")[0] === "open") {
                 await Void.groupSettingUpdate(citel.chat, "not_announcement")
-                    .then((res) => reply(`Group Chat Unmuted :)`))
+                    .then((res) => reply(`تم الغاء كتم المحادثة، تفضلوا سولفوا :)`))
                     .catch((err) => console.log(err));
             } else {
 
@@ -811,8 +811,8 @@ cmd({
                 const botNumber = await Void.decodeJid(Void.user.id)
                 const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
                 const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-                if (!isAdmins) return citel.reply('Only Admins are allowed to delete other persons message.')
-                if (!isBotAdmins) return citel.reply('I can\'t delete anyones message without getting Admin Role.')
+                if (!isAdmins) return citel.reply('خاص بالمشرفين')
+                if (!isBotAdmins) return citel.reply(' مقدر احذف الرسايل بدون اشراف')
                 if (!citel.quoted) return citel.reply(`Please reply to any message. ${tlang().greet}`);
                 let { chat, fromMe, id } = citel.quoted;
                 const key = {
@@ -835,16 +835,16 @@ cmd({
         },
         async(Void, citel, text) => {
             if (!citel.isGroup) return citel.reply('This command is only for Group.')
-            if (!citel.quoted) return citel.reply('Quote a user master.')
+            if (!citel.quoted) return citel.reply('منشن اللي بتعطيه انذار طال عمرك')
             teskd = `*All Warnings.*\n\n`
             let h = await warndb.find({ id: citel.quoted.sender.split('@')[0] + 'warn' })
             console.log(h)
             teskd += `*There are total ${h.length}  warnings.*\n`
             for (let i = 0; i < h.length; i++) {
                 teskd += `*${i+1}*\n╭─────────────◆\n│ *🍁In Group:-* ${h[i].group}\n`
-                teskd += `│ *🔰Time:-* ${h[i].date}\n`
-                teskd += `│ *⚠️Warned by:-* ${h[i].warnedby}\n`
-                teskd += `│ _📍Reason: ${h[i].reason}_\n╰─────────────◆\n\n`
+                teskd += `│ *🔰الوقت:-* ${h[i].date}\n`
+                teskd += `│ *⚠️تم اصدار الانذار من قبل:-* ${h[i].warnedby}\n`
+                teskd += `│ _📍السبب: ${h[i].reason}_\n╰─────────────◆\n\n`
             }
             citel.reply(teskd)
         }
@@ -860,7 +860,7 @@ cmd({
             use: '<quote/reply user.>',
         },
         async(Void, citel, text) => {
-            if (!citel.quoted) return citel.reply("Please reply to user");
+            if (!citel.quoted) return citel.reply("رد عاللي بتحظره طال عمرك");
             if (!isCreator) citel.reply(tlang().owner);
             let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
             await Void.updateBlockStatus(users, "block")
