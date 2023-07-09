@@ -22,7 +22,7 @@
      */
      //---------------------------------------------------------------------------
  cmd({
-         pattern: "daily",
+         pattern: "يومي",
          desc: "daily gold.",
          category: "economy",
          filename: __filename,
@@ -74,7 +74,7 @@
  )
     //---------------------------------------------------------------------------
  cmd({
-    pattern: "capacity",
+    pattern: "السعة",
     desc: "update capacity.",
     category: "economy",
     filename: __filename,
@@ -130,7 +130,7 @@ default:
 
      //---------------------------------------------------------------------------
      cmd({
-        pattern: "deposit",
+        pattern: "ايداع",
         desc: "deposit gold.",
         category: "economy",
         filename: __filename,
@@ -182,7 +182,7 @@ str+= `*${i+1}*\n╭─────────────◆\n│ *الاسم:
      })
 
 cmd({
-    pattern: "transfer",
+    pattern: "تحويل",
     desc: "transfer gold.",
     category: "economy",
     filename: __filename,
@@ -223,7 +223,7 @@ return await citel.reply( `*📠 تم تحويل ${value[0]}  بنجاح💰*`)
 
      //---------------------------------------------------------------------------
      cmd({
-        pattern: "wallet",
+        pattern: "محفظة",
         desc: "shows wallet.",
         category: "economy",
         filename: __filename,
@@ -261,7 +261,7 @@ async (Void, citel, text) => {
   if (mongoschemas == "false") return citel.reply("الألعاب الاقتصادية غير مفعلة في هذه المجموعة.");
   if (!citel.isGroup) return citel.reply("خاص بالقروبات");
   const sector = "Rin";
-  const adventure = await eco.startAdventure(citel.sender, sector);
+  const adventure = await eco.startAdventure(citel.sender, sector, 2000);
   if (adventure.error) {
     return citel.reply(`فيه خطأ: ${adventure.error}`);
   } else {
@@ -296,7 +296,7 @@ async (Void, citel, text) => {
 
      //---------------------------------------------------------------------------
      cmd({
-        pattern: "bank",
+        pattern: "بنك",
         desc: "shows bank amount.",
         category: "economy",
         filename: __filename,
@@ -318,7 +318,7 @@ return await citel.reply(`🍀اليوزر: ${citel.pushName}\n\n_🪙${balance.
 
      //---------------------------------------------------------------------------
      cmd({
-        pattern: "rob",
+        pattern: "سرقة",
         desc: "rob bank amount.",
         category: "economy",
         filename: __filename,
@@ -376,7 +376,7 @@ default:
 
      //---------------------------------------------------------------------------
      cmd({
-        pattern: "withdraw",
+        pattern: "سحب",
         desc: "withdraw money from bank account.",
         category: "economy",
         filename: __filename,
