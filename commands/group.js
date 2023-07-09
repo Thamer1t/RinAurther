@@ -532,7 +532,7 @@ cmd({
                 let data = await sck1.findOne({ id: fetchlb[i].userID })
                 let namew = fetchlb[i].userID
                 let ttms = fetchlb[i].xp / 8
-                leadtext += `*${i + 1}●Name*: ${data.name}\n*●Level*: ${fetchlb[i].level}\n*●Points*: ${fetchlb[i].xp}\n*●Role*: ${role}\n*●Total messages*: ${ttms}\n\n`;
+                leadtext += `*${i + 1}●الاسم*: ${data.name}\n*●المستوى*: ${fetchlb[i].level}\n*●النقاط*: ${fetchlb[i].xp}\n*●الدور*: ${role}\n*●الرسائل*: ${ttms}\n\n`;
             }
             return citel.reply(leadtext)
         }
