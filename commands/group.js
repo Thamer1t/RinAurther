@@ -444,7 +444,7 @@ cmd({
             }
             let disc = citel.sender.substring(3, 7);
             let textr = '';
-            textr += `* ${tlang().greet} ,\nرانك:🌟 ${citel.pushName}∆${disc}*\n\n`;
+            textr += `* ${tlang().greet} *\n*رانك:🌟 ${citel.pushName}∆${disc}*\n\n`;
             let ttms = `${userq.xp}` / 8;
             textr += `*الدور*: ${role}\n*🟢نقاط الخبرة*: ${userq.xp} / ${Levels.xpFor(
     userq.level + 1
