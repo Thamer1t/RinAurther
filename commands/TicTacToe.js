@@ -57,18 +57,15 @@ cmd(
       if (
         Object.values(this.game).find(
           (room) =>
-            room.id.startsWith("tictactoe") &&
-            [room.game.playerX, room.game.playerO].includes(citel.sender)
+            room.state === "انتظار" && (text ? room.name === text : true)
         )
-      )
-        return citel.reply("هناك لعبة قائمة بالفعل");
-      let room = Object.values(this.game).find(
-        (room) =>
-          room.state === "انتظار" && (text ? room.name === text : true)
-      );
-      if (room) {
+      ) {
+        let room = Object.values(this.game).find(
+          (room) =>
+            room.state === "انتظار" && (text ? room.name === text : true)
+        );
         room.o = citel.chat;
-        room.game.playerO = citel.sender || citel.mentionedJid[0] 
+        room.game.playerO = citel.sender || citel.mentionedJid[0];
         room.state = "PLAYING";
         let arr = room.game.render().map((v) => {
           return {
@@ -92,13 +89,12 @@ ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
 `;
-
         return await Void.sendMessage(citel.chat, {
           text: str,
           mentions: [room.game.currentTurn],
         });
       } else {
-        room = {
+        let room = {
           id: "tictactoe-" + +new Date(),
           x: citel.chat,
           o: "",
@@ -112,7 +108,6 @@ ${arr.slice(6).join("  ")}
     }
   }
 );
-
 cmd(
   {
     on: "text"
