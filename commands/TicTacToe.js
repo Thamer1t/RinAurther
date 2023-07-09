@@ -48,44 +48,47 @@ cmd(
     filename: __filename,
     category: "game",
   },
-  async (Void,citel,text) => {
+  async (Void, citel, text) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
-    let {prefix} = require('../lib')
-    {
-      let TicTacToe = require("../lib/ttt");
-      this.game = this.game ? this.game : {};
-      if (
-        Object.values(this.game).find(
-          (room) =>
-            room.id.startsWith("tictactoe") &&
-            [room.game.playerX, room.game.playerO].includes(citel.sender)
-        )
-      )
-        return citel.reply("هناك لعبة قائمة بالفعل");
-      let room = Object.values(this.game).find(
-        (room) =>
-          room.state === "انتظار" && (text ? room.name === text : true)
-      );
-      if (room) {
-        room.o = citel.chat;
-        room.game.playerO = citel.sender || citel.mentionedJid[0] 
-        room.state = "PLAYING";
-        let arr = room.game.render().map((v) => {
-          return {
-            X: "❌",
-            O: "⭕",
-            1: "1️⃣",
-            2: "2️⃣",
-            3: "3️⃣",
-            4: "4️⃣",
-            5: "5️⃣",
-            6: "6️⃣",
-            7: "7️⃣",
-            8: "8️⃣",
-            9: "9️⃣", 
-          }[v];
-        });
-        let str = `
+
+    let { prefix } = require("../lib");
+    let TicTacToe = require("../lib/ttt");
+    this.game = this.game ? this.game : {};
+
+    // Check if the user is already in a TicTacToe game
+    if (Object.values(this.game).find((room) => [room.game.playerX, room.game.playerO].includes(citel.sender))) {
+      return citel.reply("هناك لعبة قائمة بالفعل");
+    }
+
+    // Check if there is an existing game waiting for a player to join
+    let room = Object.values(this.game).find(
+      (room) =>
+        room.id.startsWith("tictactoe") &&
+        room.state === "انتظار" &&
+        ![room.game.playerX, room.game.playerO].includes(citel.sender) &&
+        (text ? room.name === text : true)
+    );
+
+    if (room) {
+      room.o = citel.chat;
+      room.game.playerO = citel.sender || citel.mentionedJid[0];
+      room.state = "لعب";
+      let arr = room.game.render().map((v) => {
+        return {
+          X: "❌",
+          O: "⭕",
+          1: "1️⃣",
+          2: "2️⃣",
+          3: "3️⃣",
+          4: "4️⃣",
+          5: "5️⃣",
+          6: "6️⃣",
+          7: "7️⃣",
+          8: "8️⃣",
+          9: "9️⃣",
+        }[v];
+      });
+      let str = `
 دور: @${room.game.currentTurn.split("@")[0]}
 رمز الغرفة: ${room.id}
 ${arr.slice(0, 3).join("  ")}
@@ -93,22 +96,22 @@ ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
 `;
 
-        return await Void.sendMessage(citel.chat, {
-          text: str,
-          mentions: [room.game.currentTurn],
-        });
-      } else {
-        room = {
-          id: "tictactoe-" + +new Date(),
-          x: citel.chat,
-          o: "",
-          game: new TicTacToe(citel.sender, "o"),
-          state: "WAITING",
-        };
-        if (text) room.name = text;
-        citel.reply("بانتظار اللاعبين، استخدم: .ttt لدخول الغرفة ");
-        this.game[room.id] = room;
-      }
+      await Void.sendMessage(citel.chat, {
+        text: str,
+        mentions: [room.game.currentTurn],
+      });
+    } else {
+      // Create a new game instance
+      room = {
+        id: "tictactoe-" + +new Date(),
+        x: citel.chat,
+        o: "",
+        game: new TicTacToe(citel.sender, "o"),
+        state: "انتظار",
+      };
+      if (text) room.name = text;
+      citel.reply("بانتظار اللاعبين، استخدم: .ttt لدخول الغرفة ");
+      this.game[room.id] = room;
     }
   }
 );
