@@ -32,12 +32,12 @@ Secktor.cmd({
             if (text.split(" ")[0]) {
                 let arr = [];
                 const cmd = commands.find((cmd) => cmd.pattern === (text.split(" ")[0].toLowerCase()))
-                if (!cmd) return await citel.reply("*❌No Such commands.*");
-                else arr.push(`*🍁Command:* ${cmd.pattern}`);
-                if (cmd.category) arr.push(`*🧩Category:* ${cmd.category}`);
-                if (cmd.alias) arr.push(`*🧩Alias:* ${cmd.alias}`);
-                if (cmd.desc) arr.push(`*🧩Description:* ${cmd.desc}`);
-                if (cmd.use) arr.push(`*〽️Usage:*\n \`\`\`${prefix}${cmd.pattern} ${cmd.use}\`\`\``);
+                if (!cmd) return await citel.reply("*❌مافيه امر كذا*");
+                else arr.push(`*🍁الامر:* ${cmd.pattern}`);
+                if (cmd.category) arr.push(`*🧩التصنيف:* ${cmd.category}`);
+                if (cmd.alias) arr.push(`*🧩يسمى ايضا:* ${cmd.alias}`);
+                if (cmd.desc) arr.push(`*🧩الوصف:* ${cmd.desc}`);
+                if (cmd.use) arr.push(`*〽️الاستخدام:*\n \`\`\`${prefix}${cmd.pattern} ${cmd.use}\`\`\``);
                 return await citel.reply(arr.join('\n'));
             } else {
                 const cmds = {}
@@ -56,16 +56,16 @@ Secktor.cmd({
                 let str = `╭────《 ` + fancytext(Config.ownername.split(' ')[0], 58) + ` 》─────⊷\n`
                 str +=
                     '```' + `│ ╭──────────────◆
-│ │ User:- ${citel.pushName}
-│ │ Theme:- ${tlang().title}
-│ │ Prefix:- [ ${prefix} ]
-│ │ Owner:- ${Config.ownername}
-│ │ Plugins:- ${commands.length}
-│ │ Users:- ${total}
-│ │ Uptime:- ${runtime(process.uptime())}
-│ │ Mem:- ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
-│ │ Time:- ${time}
-│ │ Date:- ${date}
+│ │ اليوزر:- ${citel.pushName}
+│ │ البوت:- ${tlang().title}
+│ │ رمز التفعيل:- [ ${prefix} ]
+│ │ المالك:- ${Config.ownername}
+│ │ ؟:- ${commands.length}
+│ │ المستخدمين:- ${total}
+│ │ وقت التشغيل:- ${runtime(process.uptime())}
+│ │ الذاكرة:- ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
+│ │ الوقت:- ${time}
+│ │ التاريخ:- ${date}
 │ ╰──────────────◆
 ╰───────────────⊷\n
 ` + '```'
@@ -82,7 +82,7 @@ Secktor.cmd({
                    }
   
                 }
-                str+= `*⭐️Type:* _${prefix}help cmd_ name to know more about specific command.\n*Eg:* _${prefix}help attp_\n*Made with ❤️ in Nodejs* `
+                str+= `*⭐️النوع:* _${prefix}help cmd_ name to know more about specific command.\n*Eg:* _${prefix}help attp_\n*صنع بحب ❤️ من قبل ثامر* `
                 let buttonMessaged = {
                     image: { url: await botpic() },
                     caption: str
@@ -103,13 +103,13 @@ Secktor.cmd({
 ╭━━〘 ` + fancytext(Config.ownername.split(' ')[0], 58) + ` 〙━━──⊷`
             str += `
 ┃ ⛥╭──────────────      
-┃ ⛥│ User: ${citel.pushName}
-┃ ⛥│ Theme: ${tlang().title}
-┃ ⛥│ Prefix: ${prefix}
-┃ ⛥│ Owner: ${Config.ownername}
-┃ ⛥│ Commands: ${commands.length}
-┃ ⛥│ Uptime: ${runtime(process.uptime())}
-┃ ⛥│ Mem: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
+┃ ⛥│ اليوزر: ${citel.pushName}
+┃ ⛥│ البوت: ${tlang().title}
+┃ ⛥│ رمز التفعيل: ${prefix}
+┃ ⛥│ المالك: ${Config.ownername}
+┃ ⛥│ الاوامر: ${commands.length}
+┃ ⛥│ وقت التشغيل: ${runtime(process.uptime())}
+┃ ⛥│ الذاكرة: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
 ┃ ⛥│  
 ┃ ⛥╰───────────
 ╰━━━━━━━━━━━──⊷\n`
@@ -128,7 +128,7 @@ Secktor.cmd({
         pattern: "owner",
         desc: "To find owner number",
         category: "general",
-        react: "💜",
+        react: "🐐",
         filename: __filename
     },
     async(Void, citel) => {
@@ -172,10 +172,10 @@ async(Void, citel, text) => {
  const { commands } = require('../lib');
  let arr = [];
         const cmd = commands.find((cmd) => cmd.pattern === (text.split(" ")[0].toLowerCase()))
-        if (!cmd) return await citel.reply("*❌No Such commands.*");
-        else arr.push(`*🍁Command:* ${cmd.pattern}`);
-        if (cmd.category) arr.push(`*🧩Type:* ${cmd.category}`);
-        if(cmd.filename) arr.push(`✨FileName: ${cmd.filename}`)
+        if (!cmd) return await citel.reply("*❌هذا الامر غير موجود*");
+        else arr.push(`*🍁الامر:* ${cmd.pattern}`);
+        if (cmd.category) arr.push(`*🧩النوع:* ${cmd.category}`);
+        if(cmd.filename) arr.push(`✨اسم الملف: ${cmd.filename}`)
         return citel.reply(arr.join('\n'));
 
 
