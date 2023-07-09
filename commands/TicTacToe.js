@@ -50,61 +50,54 @@ cmd(
   },
   async (Void,citel,text) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
-    let {prefix} = require('../lib')
-    {
-      let TicTacToe = require("../lib/ttt");
-      this.game = this.game ? this.game : {};
-      if (
-        Object.values(this.game).find(
-          (room) =>
-            room.state === "انتظار" && (text ? room.name === text : true)
-        )
-      ) {
-        let room = Object.values(this.game).find(
-          (room) =>
-            room.state === "انتظار" && (text ? room.name === text : true)
-        );
-        room.o = citel.chat;
-        room.game.playerO = citel.sender || citel.mentionedJid[0];
-        room.state = "PLAYING";
-        let arr = room.game.render().map((v) => {
-          return {
-            X: "❌",
-            O: "⭕",
-            1: "1️⃣",
-            2: "2️⃣",
-            3: "3️⃣",
-            4: "4️⃣",
-            5: "5️⃣",
-            6: "6️⃣",
-            7: "7️⃣",
-            8: "8️⃣",
-            9: "9️⃣", 
-          }[v];
-        });
-        let str = `
+    let {prefix} = require('../lib');
+    let TicTacToe = require("../lib/ttt");
+    this.game = this.game ? this.game : {};
+    let room = Object.values(this.game).find(
+      (room) =>
+        room.state === "انتظار" && (text ? room.name === text : true)
+    );
+    if (room) {
+      room.o = citel.chat;
+      room.game.playerO = citel.sender || citel.mentionedJid[0];
+      room.state = "PLAYING";
+      let arr = room.game.render().map((v) => {
+        return {
+          X: "❌",
+          O: "⭕",
+          1: "1️⃣",
+          2: "2️⃣",
+          3: "3️⃣",
+          4: "4️⃣",
+          5: "5️⃣",
+          6: "6️⃣",
+          7: "7️⃣",
+          8: "8️⃣",
+          9: "9️⃣", 
+        }[v];
+      });
+      let str = `
 دور: @${room.game.currentTurn.split("@")[0]}
 رمز الغرفة: ${room.id}
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
 `;
-        return await Void.sendMessage(citel.chat, {
-          text: str,
-          mentions: [room.game.currentTurn],
-        });
-      } else {
-        let room = {
-          id: "tictactoe-" + +new Date(),
-          x: citel.chat,
-          o: "",
-          game: new TicTacToe(citel.sender, "o"),
-          state: "WAITING",
-        };
-        if (text) room.name = text;
-        citel.reply("بانتظار اللاعبين، استخدم: .ttt لدخول الغرفة ");
-        this.game[room.id] = room;
-      }
+      return await Void.sendMessage(citel.chat, {
+        text: str,
+        mentions: [room.game.currentTurn],
+      });
+    } else {
+      room = {
+        id: "tictactoe-" + +new Date(),
+        x: citel.chat,
+        o: "",
+        game: new TicTacToe(citel.sender, "o"),
+        state: "WAITING",
+      };
+      if (text) room.name = text;
+      this.game[room.id] = room;
+      citel.reply("بانتظار اللاعبين، استخدم: .ttt لدخول الغرفة ");
     }
   }
 );
