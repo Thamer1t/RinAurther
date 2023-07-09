@@ -27,7 +27,7 @@ const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter")
         const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`
         }
-        if (!citel.quoted) return citel.reply(`_Reply to Any Sticker._`)
+        if (!citel.quoted) return citel.reply(`رد على اي ملصق`)
         let mime = citel.quoted.mtype
 if (mime =="imageMessage" || mime =="stickerMessage")
 {
@@ -44,7 +44,7 @@ if (mime =="imageMessage" || mime =="stickerMessage")
          
         })
         
-} else return citel.reply ("```Uhh Please, Reply To A Non Animated Sticker```")
+} else return citel.reply ("```لازم الستيكر يكون ثابت مو متحرك```")
     }
 )
 //---------------------------------------------------------------------------
