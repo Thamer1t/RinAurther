@@ -41,63 +41,102 @@ cmd(
         }
   })
   
+const { cmd, parseJid, getAdmin } = require("../lib/");
+const eco = require('discord-mongoose-economy')
+const ty = eco.connect(mongodb);
+
+// Create an object to track all active game sessions
+let activeSessions = {};
+
 cmd(
   {
-    pattern: "ttt",
-    desc: "Play TicTacToe",
+    pattern: "delttt",
+    desc: "يحذف جلسة اللعب الحالية في لعبة TicTacToe.",
     filename: __filename,
     category: "game",
   },
-  async (Void,citel,text) => {
-    if (!citel.isGroup) return citel.reply(tlang().group);
-    let {prefix} = require('../lib');
-    let TicTacToe = require("../lib/ttt");
-    this.game = this.game ? this.game : {};
-    let room = Object.values(this.game).find(
-      (room) =>
-        room.state === "انتظار" && (text ? room.name === text : true)
-    );
-    if (room) {
-      room.o = citel.chat;
-      room.game.playerO = citel.sender || citel.mentionedJid[0];
-      room.state = "PLAYING";
-      let arr = room.game.render().map((v) => {
-        return {
-          X: "❌",
-          O: "⭕",
-          1: "1️⃣",
-          2: "2️⃣",
-          3: "3️⃣",
-          4: "4️⃣",
-          5: "5️⃣",
-          6: "6️⃣",
-          7: "7️⃣",
-          8: "8️⃣",
-          9: "9️⃣", 
-        }[v];
-      });
-      let str = `
-دور: @${room.game.currentTurn.split("@")[0]}
-رمز الغرفة: ${room.id}
+  async (Void, citel, text, { isCreator }) => {
+    if (!citel.isGroup) return citel.reply("هذا الأمر يمكن استخدامه بس في المجموعة.");
+    const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
+    const participants = citel.isGroup ? await groupMetadata.participants : "";
+    const groupAdmins = await getAdmin(Void, citel)
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+    if (!isAdmins && !isCreator) return citel.reply('هذا الأمر خاص بالمشرفين والمالك.')
+    const roomId = Object.keys(activeSessions).find(roomId => activeSessions[roomId].game.playerX === citel.sender || activeSessions[roomId].game.playerO === citel.sender)
+    if (roomId) {
+      delete activeSessions[roomId];
+      return citel.reply(`تم حذف لعبة TicTacToe الحالية بنجاح.`);
+    } else {
+      return citel.reply(`مافي لعبة TicTacToe حاليًا.`);
+    }
+  })
+
+cmd(
+  {
+    pattern: "ttt",
+    desc: "تلعب TicTacToe",
+    filename: __filename,
+    category: "game",
+  },
+  async (Void, citel, text) => {
+    if (!citel.isGroup) return citel.reply("هذا الأمر يمكن استخدامه بس في المجموعة.");
+    let { prefix } = require('../lib')
+    {
+      let TicTacToe = require("../lib/ttt");
+
+      // Check if the player is already in an active game session
+      const roomId = Object.keys(activeSessions).find(roomId => activeSessions[roomId].game.playerX === citel.sender || activeSessions[roomId].game.playerO === citel.sender)
+      if (roomId) return citel.reply("في لعبة جارية حاليًا.");
+
+      // Check if a room code is provided and try to join the existing session
+      if (text) {
+        const room = activeSessions[text];
+        if (room) {
+          if (room.game.playerO) {
+            return citel.reply("الغرفة ممتلئة بالفعل.");
+          } else {
+            room.game.playerO = citel.sender || citel.mentionedJid[0];
+            room.state = "PLAYING";
+            let arr = room.game.render().map((v) => {
+              return {
+                X: "❌",
+                O: "⭕",
+                1: "1️⃣",
+                2: "2️⃣",
+                3: "3️⃣",
+                4: "4️⃣",
+                5: "5️⃣",
+                6: "6️⃣",
+                7: "7️⃣",
+                8: "8️⃣",
+                9: "9️⃣",
+              }[v];
+            });
+            let str = `
+الدور الحالي: @${room.game.currentTurn.split("@")[0]}
+معرف الغرفة: ${room.id}
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
 `;
-      return await Void.sendMessage(citel.chat, {
-        text: str,
-        mentions: [room.game.currentTurn],
-      });
-    } else {
-      room = {
-        id: "tictactoe-" + +new Date(),
-        x: citel.chat,
-        o: "",
-        game: new TicTacToe(citel.sender, "o"),
+
+            return await Void.sendMessage(citel.chat, {
+              text: str,
+              mentions: [room.game.currentTurn],
+            });
+          }
+        }
+      }
+
+      // If no room code is provided or the room code is invalid, create a new session
+      let roomCode = "tictactoe-" + (+new Date()).toString(36).substring(2, 8);
+      let room = {
+        id: roomCode,
+        game: new TicTacToe(citel.sender, "x"),
         state: "WAITING",
       };
-      if (text) room.name = text;
-      this.game[room.id] = room;
-      citel.reply("بانتظار اللاعبين، استخدم: .ttt لدخول الغرفة ");
+      citel.reply(`انتظر لاعب آخر، استخدم .ttt ${roomCode} للانضمام إلى اللعبة.`);
+      activeSessions[roomCode] = room;
     }
   }
 );
