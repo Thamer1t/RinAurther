@@ -91,7 +91,7 @@ cmd({
         citel.reply(`*Check your Pm ${tlang().greet}*`);
         await Void.sendMessage(`${citel.sender}`, {
             image: log0,
-            caption: `*اكتب .owner وكلم غومونريونغ اذا عندك اقتراح او استفسار`,
+            caption: `*اكتب .المالك وكلم غومونريونغ اذا عندك اقتراح او استفسار`,
         });
 
     }
@@ -99,7 +99,7 @@ cmd({
 
 //---------------------------------------------------------------------------
 cmd({
-            pattern: "warn",
+            pattern: "انذار",
             desc: "Warns user in Group.",
             category: "group",
             filename: __filename,
@@ -287,7 +287,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "profile",
+            pattern: "بروفايل",
             desc: "Shows profile of user.",
             category: "group",
             filename: __filename,
@@ -384,7 +384,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "rank",
+            pattern: "رانك",
             desc: "Sends rank card of user.",
             category: "group",
             filename: __filename,
@@ -464,7 +464,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "leaderboard",
+            pattern: "لائحة",
             alias: ["deck"],
             desc: "To check leaderboard",
             category: "general",
@@ -539,7 +539,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "promote",
+            pattern: "ترقية",
             desc: "Provides admin role to replied/quoted user",
             category: "group",
             filename: __filename,
@@ -566,7 +566,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "kick",
+            pattern: "طرد",
             desc: "Kicks replied/quoted user from group.",
             category: "group",
             filename: __filename,
@@ -759,7 +759,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-        pattern: "demote",
+        pattern: "خفض",
         desc: "Demotes replied/quoted user from group",
         category: "group",
         filename: __filename,
@@ -787,7 +787,7 @@ cmd({
 
 //---------------------------------------------------------------------------
 cmd({
-            pattern: "del",
+            pattern: "حذف",
             alias: ["delete"],
             desc: "Deletes message of any user",
             category: "group",
@@ -827,7 +827,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "checkwarn",
+            pattern: "انذارات",
             desc: "Check warns",
             category: "group",
             filename: __filename,
@@ -852,7 +852,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "block",
+            pattern: "بلوك",
             desc: "blocks that person",
             fromMe: true,
             category: "owner",
