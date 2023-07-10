@@ -70,7 +70,7 @@ async(Void, citel,text) => {
 
 //---------------------------------------------------------------------------
 cmd({
-        pattern: "status",
+        pattern: "الحالة",
         alias: ["about"],
         desc: "To check bot status",
         category: "general",
@@ -82,11 +82,11 @@ cmd({
         latensie = speed() - timestampe;
         let ter = `
 🔰 *${tlang().title}* 🔰
-*🌟Description:* A WhatsApp bot with rich features, build in NodeJs to make your WhatsApp enjoyable.
-*⚡Speed:* ${latensie.toFixed(4)} ms
-*🚦Uptime:* ${runtime(process.uptime())}
+*🌟الوصف:* رين، بوت اوامر.
+*⚡السرعة:* ${latensie.toFixed(4)} ms
+*🚦وقت التشغيل:* ${runtime(process.uptime())}
 *🕸Version:* 0.0.7
-*👤Owner:*  ${Config.ownername}
+*👤المالك:*  ${Config.ownername}
 *Powered by ${tlang().title}*
 `;
         let buttonMessaged = {
