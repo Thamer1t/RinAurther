@@ -25,10 +25,10 @@ async(Void, citel, text,{ isCreator }) => {
           let Group = await sck.findOne({ id: citel.chat })
             if (!Group) {
                 await new sck({ id: citel.chat, welcome: text,events:'true' }).save()
-                return citel.reply('Welcome added added for this group.')
+                return citel.reply('تم اضافة رسالة ترحيب')
             } else {
                 await await sck.updateOne({ id: citel.chat }, { welcome:text ,events:'true'})
-                return citel.reply('Welcome updated successfully.')
+                return citel.reply('تم تحديث رسالة الترحيب')
                 
             }      
 }
@@ -44,10 +44,10 @@ async(Void, citel, text,{ isCreator }) => {
           let Group = await sck.findOne({ id: citel.chat })
             if (!Group) {
                 await new sck({ id: citel.chat, goodbye: text,events:'true' }).save()
-                return citel.reply('Goodbye added for this group.');
+                return citel.reply('تم اضافة رسالة وداع');
             } else {
                 await await sck.updateOne({ id: citel.chat }, { goodbye:text,events:'true' })
-                return citel.reply('Goodbye updated successfully.');     
+                return citel.reply('تم تحديث رسالة الوداع');     
             }      
 }
 )
@@ -83,20 +83,10 @@ async(Void, citel, text,{ isCreator }) => {
          }
      )
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "readmore",
-             desc: "Adds *readmore* in given text.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-            return await citel.reply(text.replace(/\+/g, (String.fromCharCode(8206)).repeat(4001)))
- 
-         }
-     )
+
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "steal",
+             pattern: "اخذ",
              desc: "Makes sticker of replied image/video.",
              category: "sticker",
              filename: __filename,
@@ -143,18 +133,7 @@ async(Void, citel, text,{ isCreator }) => {
          }
      )
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "wm",
-             desc: "Makes wa.me of quoted or mentioned user.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             let users = citel.mentionedJid ? citel.mentionedJid[0].split('@')[0] : citel.quoted ? citel.quoted.sender.split('@')[0] : text.replace('@')[0]
-            return citel.reply(`https://wa.me/${users}`)
- 
-         }
-     )
+
      //---------------------------------------------------------------------------
  cmd({
              pattern: "عشوائي",
