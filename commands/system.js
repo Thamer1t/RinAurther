@@ -80,7 +80,7 @@ cmd({
             if (!isCreator) return citel.reply("This command is onlt for my Owner")
             try {
                 let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-                if (!users) return citel.reply("Please mention any user.❌")
+                if (!users) return citel.reply("لازم تمنشن شخص❌")
                 let pushnamer = Void.getName(users);
                 sck1.findOne({ id: users }).then(async(usr) => {
                     if (!usr) {
@@ -90,11 +90,11 @@ cmd({
                         console.log(usr.ban)
                         if (usr.ban !== "true") return citel.reply(`${usr.name} is already unbanned.`)
                         await sck1.updateOne({ id: users }, { ban: "false" })
-                        return citel.reply(`${usr.name} is free as a bird now`)
+                        return citel.reply(`${usr.name} حر كالطير الان`)
                     }
                 })
             } catch {
-                return citel.reply("Please mention any user.❌")
+                return citel.reply("لازم تمنشن شخص❌")
             }
 
 
@@ -109,7 +109,7 @@ cmd({
         desc: "image to url."
     },
     async(Void, citel, text) => {
-        if (!citel.quoted) return await citel.reply(`*Reply To Any Image/Video To Get Url*`)
+        if (!citel.quoted) return await citel.reply(`*رد على صورة او فيديو احولها رابط*`)
         let mime = citel.quoted.mtype
         if(mime !='videoMessage' && mime !='imageMessage' ) return await citel.reply("Uhh Please, Reply To An Image/Video")
         let media = await Void.downloadAndSaveMediaMessage(citel.quoted);
@@ -128,7 +128,7 @@ cmd({
     desc: "Translate\'s given text in desird language."
 },
 async(Void, citel, text) => {
-    if(!text && !citel.quoted) return await citel.reply(`*Please Give Me Text. Example: _${prefix}trt en Who are you_*`);
+    if(!text && !citel.quoted) return await citel.reply(`*اعطني كتابة اترجمها لك. مثال: _${prefix}trt en Who are you_*`);
     const translatte = require("translatte");
     let lang = text ? text.split(" ")[0].toLowerCase() : 'en';
     if (!citel.quoted)  { text = text.replace( lang , "");  }
@@ -215,16 +215,16 @@ cmd({
             if (!isCreator) return citel.reply(tlang().owner)
             try {
                 let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-                if (!users) return citel.reply(`❌ Please mention any user ${tlang().greet}.`)
+                if (!users) return citel.reply(`منشن اي شخص ${tlang().greet}.`)
                 let pushnamer = Void.getName(users);
                 sck1.findOne({ id: users }).then(async(usr) => {
                     if (!usr) {
                         await new sck1({ id: users, ban: "true" }).save()
                         return citel.reply(`_Banned ${usr.name} from Using Commands._`)
                     } else {
-                        if (usr.ban == "true") return citel.reply(`${pushnamer} is already Banned from Using Commands`)
+                        if (usr.ban == "true") return citel.reply(`${pushnamer} محظور بالفعل من استخدام الاوامر`)
                         await sck1.updateOne({ id: users }, { ban: "true" })
-                        return citel.reply(`_Successfully Banned ${usr.name} from Using Commands._`)
+                        return citel.reply(`_تم حظر ${usr.name} من استخدام الاوامر._`)
                     }
                 })
             } catch (e) {
@@ -273,19 +273,3 @@ _Powered by ${Config.ownername}_
         }
     )
     //---------------------------------------------------------------------------
-cmd({
-        pattern: "allnotes",
-        category: "owner",
-        filename: __filename,
-        desc: "Shows list of all notes."
-    },
-    async(Void, citel, text,{ isCreator }) => {
-        const { tlang } = require('../lib')
-        if (!isCreator) return citel.reply(tlang().owner)
-        const note_store = new Array()
-        let leadtext = `All Available Notes are:-\n\n`
-        leadtext += await allnotes()
-        return citel.reply(leadtext)
-
-    }
-)
