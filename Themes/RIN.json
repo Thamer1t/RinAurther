@@ -1,13 +1,13 @@
 {
     "_JSON_": true,
     "AUTHOR": "Thamer1t",
-    "LANGUAGE": "English",
-    "LANGCODE": "en",
+    "LANGUAGE": "Arabic",
+    "LANGCODE": "ar",
     "STRINGS": {
     "updater": {
     "UPDATE": "محدث اخر تحديث ",
     "NEW_UPDATE": "ترا فيه تحديث للبوت!\n\n*Changes:*\n",
-    "UPDATED_LOCAL": "عالبركة تم التحديث!"
+    "UPDATED_LOCAL": " تم التحديث!"
     },
     "global": {
     "botName": " 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 Rin",
