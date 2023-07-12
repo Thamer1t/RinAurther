@@ -229,7 +229,7 @@ cmd({ pattern: "ship" , category: "fun" }, async(Void, citel, text) => {
     async function couple(percent) {
          var text;
         if (percent < 25) {
-            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\t\tمب مرة، لكن لا رال فيه امل !`
+            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\t\tمب مرة، لكن لا زال فيه امل !`
         } else if (percent < 50) {
             text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\t\t علاقتكم كويسه، اتوقع؟ 💫`
         } else if (percent < 75) {
