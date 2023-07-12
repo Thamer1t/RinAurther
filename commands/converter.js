@@ -140,7 +140,7 @@ cmd({
                     avatar: true,
                     from: {
                         first_name: tname,
-                        language_code: "en",
+                        language_code: "ar",
                         name: tname,
                         photo: {
                             url: pfp,
