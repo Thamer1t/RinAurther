@@ -101,14 +101,14 @@ async(Void, citel, text,{ isCreator }) => {
         case '1':
         if (k > balance.wallet ) return citel.reply(`*_لازم تدفع 🪙100 عشان تزود سعة البنك ~ 1000 sp_*`);
           const deduct1 = await eco.deduct(user, secktor, 100);
-          const add1 = eco.giveCapacity(user, secktor, 1000);
+          const add1 = await eco.giveCapacity(user, secktor, 1000);
 return await citel.reply(`*1000 🪙diamond storage تمت اضافة في بنك ${citel.pushName} *`)
               break
         case '100000':
         case '2':
         if (k < balance.wallet) return citel.reply(`*لازم تدفع 🪙1000 عشان تزود سعة البنك ~ 100000 sp*`);
           const deduct2 = await eco.deduct(user, secktor, 1000);
-          const add2 = eco.giveCapacity(user, secktor, 100000);
+          const add2 = await eco.giveCapacity(user, secktor, 100000);
 return await citel.reply(`*100000 🪙diamond storage تمت اضافة في بنك ${citel.pushName} *`)
 
               break
@@ -116,7 +116,7 @@ return await citel.reply(`*100000 🪙diamond storage تمت اضافة في ب�
         case '3':
         if (k < balance.wallet) return citel.reply(`لازم تدفع 🪙10000 عشان تزود سعة البنك ~ 1000 sp`);
            const deduct3 = await eco.deduct(user, secktor, 10000);
-           const add3 = eco.giveCapacity(user, secktor, 10000000);
+           const add3 = await eco.giveCapacity(user, secktor, 10000000);
 return await citel.reply(`*10000000 🪙diamond storage تمت اضافة الى بنك ${citel.pushName}\ *`)
 
 
