@@ -74,7 +74,7 @@
  )
     //---------------------------------------------------------------------------
  cmd({
-    pattern: "السعة",
+    pattern: "capacity",
     desc: "update capacity.",
     category: "economy",
     filename: __filename,
@@ -122,11 +122,12 @@ return await citel.reply(`*10000000 🪙diamond storage has been added in ${cite
 
              break
 default:
- await citel.reply('*📉?*.')
+ await citel.reply('*What are you trying to do📉*.')
 
  }
 }
 )
+
 
      //---------------------------------------------------------------------------
      cmd({
