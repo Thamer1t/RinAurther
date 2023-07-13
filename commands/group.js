@@ -556,7 +556,7 @@ cmd({
             try {
                 let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
                 if (!users) return;
-                await Void.groupParticipantsUpdate(citel.chat, [users], "promote");
+                await Void.groupParticipantsUpdate(citel.chat, [users], "ترقية");
             } catch {
                 //		citel.reply(tlang().botAdmin);
 
@@ -583,7 +583,7 @@ cmd({
             try {
                 let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
                 if (!users) return;
-                await Void.groupParticipantsUpdate(citel.chat, [users], "remove");
+                await Void.groupParticipantsUpdate(citel.chat, [users], "طرد");
             } catch {
                 //		citel.reply(tlang().botAdmin);
 
