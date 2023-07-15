@@ -44,7 +44,7 @@ cmd({
         const replyf = `
 ╔════◇
 ║ *🎗️الحقيقة:* ${quoo.data.quote.body}
-║ *👤القائل:* ${quoo.data.quote.author}
+║ *:* ${quoo.data.quote.author}
 ║    
 ╚════════════╝ `
 return citel.reply(replyf)
