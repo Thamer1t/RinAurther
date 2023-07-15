@@ -329,9 +329,9 @@ cmd({
 },
 async(Void, citel, text,{ isCreator }) => {
     const userId = citel.sender;
-    if (cooldowns[userId] && (Date.now() - cooldowns[userId]) < (this.cooldown * 1000)) {
-        const remainingTime = (cooldowns[userId] + (this.cooldown * 1000) - Date.now()) / 1000;
-        return citel.reply(`*😑 انتظر ${remainingTime.toFixed(1)} ثانية قبل تسرق مرة ثانية.*`);
+    if (cooldowns[userId] && (Date.now() - cooldowns[userId]) < (cmd.cooldown * 1000)) {
+        const remainingTime = (cooldowns[userId] + (cmd.cooldown * 1000) - Date.now()) / 1000;
+        return citel.reply(`*😴 Please wait ${remainingTime.toFixed(1)} seconds before using this command again.*`);
     }
     cooldowns[userId] = Date.now();
 
