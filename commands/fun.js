@@ -9,31 +9,24 @@
  * @version 0.0.6
  **/
 
-const { dare, truth, random_question } = require('../lib/truth-dare.js')
-const axios = require('axios')
-const { cmd } = require('../lib')
-   
+const fs = require('fs');
+const path = require('path');
+const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
-    //---------------------------------------------------------------------------
-
-    //---------------------------------------------------------------------------
-
-    //---------------------------------------------------------------------------
 cmd({
-        pattern: "حقيقة",
-        desc: "Sends fact in chat.",
-        category: "fun",
-        filename: __filename,
-    },
-    async(Void, citel, text) => {
-        const { data } = await axios.get(`https://waqi3arabiya.com/api/facts/random`)
-        return citel.reply(`*Fact:* ${data.fact}\n\n*Powered by غومونريونغ*`)   
-    }
-
-)
+    pattern: "مقولات",
+    desc: "يرسل مقولة",
+    category: "fun",
+    filename: __filename,
+},
+async (Void, citel, text) => {
+    const quotes = JSON.parse(fs.readFileSync(quotesPath, 'utf8'));
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    return citel.reply(`*المقولة:* ${randomQuote}\n\n*Powered by غومونريونغ*`);
+});
     //---------------------------------------------------------------------------
     cmd({
-        pattern: "مقولات",
+        pattern: "حقيقة",
         desc: "Sends quotes in chat.",
         category: "fun",
         filename: __filename,
