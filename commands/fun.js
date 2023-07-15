@@ -26,8 +26,8 @@ cmd({
         filename: __filename,
     },
     async(Void, citel, text) => {
-        const { data } = await axios.get(`https://nekos.life/api/v2/fact`)
-        return citel.reply(`*Fact:* ${data.fact}\n\n*Powered by Secktor*`)   
+        const { data } = await axios.get(`https://waqi3arabiya.com/api/facts/random`)
+        return citel.reply(`*Fact:* ${data.fact}\n\n*Powered by غومونريونغ*`)   
     }
 
 )
@@ -39,7 +39,7 @@ cmd({
         filename: __filename,
     },
     async(Void, citel, text) => {
-        var quoo = await axios.get(`https://favqs.com/api/qotd`)
+        var quoo = await axios.get(`https://waqi3arabiya.com/api/quotes/random`)
         const replyf = `
 ╔════◇
 ║ *🎗️المقولة:* ${quoo.data.quote.body}
@@ -59,14 +59,14 @@ return citel.reply(replyf)
     },
     async(Void, citel, text) => {
         try{
-            let { data } = await axios.get(`http://api.urbandictionary.com/v0/define?term=${text}`)
+            let { data } = await axios.get(`https://www.ionomy.com/api/v1/bilingual?format=json&term=${text}`)
             var textt = `
             Word: ${text}
             Definition: ${data.list[0].definition.replace(/\[/g, "").replace(/\]/g, "")}
             Example: ${data.list[0].example.replace(/\[/g, "").replace(/\]/g, "")}`
             return citel.reply(textt)
                     } catch {
-                        return citel.reply(`No result for ${text}`)
+                        return citel.reply(`ماحصلت نتائج ل ${text}`)
                     }
     }
 )
