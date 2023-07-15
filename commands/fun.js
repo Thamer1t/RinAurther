@@ -30,7 +30,7 @@ cmd({
   console.log('Parsed quotes:', quotes);
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   console.log('Random quote:', randomQuote);
-  return citel.reply(`*المقولة:* ${JSON.stringify(randomQuote)}\n\n*Powered by غومونريونغ*`);
+  return citel.reply(`** ${JSON.stringify(randomQuote)}\n\n*Powered by غومونريونغ*`);
 });
     //---------------------------------------------------------------------------
     cmd({
