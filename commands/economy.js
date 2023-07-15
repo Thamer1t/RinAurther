@@ -13,6 +13,7 @@
  const Config = require('../config')
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
+ const cooldowns = {};
  /*
   cmd({
          pattern: "economy",
@@ -318,62 +319,66 @@ return await citel.reply(`🍀اليوزر: ${citel.pushName}\n\n_🪙${balance.
 )
 
      //---------------------------------------------------------------------------
-     cmd({
-        pattern: "سرقة",
-        desc: "rob bank amount.",
-        category: "economy",
-        filename: __filename,
-    },
-    async(Void, citel, text,{ isCreator }) => {
-        let zerogroup = (await sck.findOne({
+
+cmd({
+    pattern: "سرقة",
+    desc: "rob bank amount.",
+    category: "economy",
+    filename: __filename,
+    cooldown: 300, // Cooldown period in seconds
+},
+async(Void, citel, text,{ isCreator }) => {
+    const userId = citel.sender;
+    if (cooldowns[userId] && (Date.now() - cooldowns[userId]) < (this.cooldown * 1000)) {
+        const remainingTime = (cooldowns[userId] + (this.cooldown * 1000) - Date.now()) / 1000;
+        return citel.reply(`*😑 انتظر ${remainingTime.toFixed(1)} ثانية قبل تسرق مرة ثانية.*`);
+    }
+    cooldowns[userId] = Date.now();
+
+    let zerogroup = (await sck.findOne({
+        id: citel.chat,
+    })) || (await new sck({
             id: citel.chat,
-        })) || (await new sck({
-                id: citel.chat,
-            })
-            .save());
-        let mongoschemas = zerogroup.economy || "false";
-        if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
-        let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-	if(!users) return citel.reply('منشن شخص تسرقه.')
-        const user1 = citel.sender
-        const user2 = users
-	const secktor = "secktor"
-	    const k = 1000
-        const balance1  = await eco.balance(user1, secktor)
-	const balance2  = await eco.balance(user2, secktor)
-	const typ = ['ran','rob','caught'];
+        })
+        .save());
+    let mongoschemas = zerogroup.economy || "false";
+    if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
+    let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
+    if(!users) return citel.reply('منشن شخص تسرقه.')
+    const user1 = citel.sender
+    const user2 = users
+    const secktor = "secktor"
+    const k = 1000
+    const balance1  = await eco.balance(user1, secktor)
+    const balance2  = await eco.balance(user2, secktor)
+    const typ = ['ran','rob','caught'];
     const random = typ[Math.floor(Math.random() * typ.length)];
     if (k > balance1.wallet) return citel.reply(`*☹️ ماعندك فلوس تدفع الغرامة اذا انمسكت، اترك السرقة لاهلها*`);
     if (k > balance2.wallet) return citel.reply(`*ضحيتك طفرانة، اختر شخص معه فلوس وش تبي بالطفارى🫤.*`);
     let tpy = random    
     switch (random) {
-       
         case 'ran':
-              await citel.reply(`*ضحيتك هرب، واضح انك مب يم السرقة حاول تغير مهنتك🫰.*`)
-              ////citel.react('🥹')
-
-              break
+            await citel.reply(`*ضحيتك هرب، واضح انك مب يم السرقة حاول تغير مهنتك🫰.*`)
+            ////citel.react('🥹')
+            break
         case 'rob':
-	  const deduff = Math.floor(Math.random() * 1000)	    
-          await eco.deduct(user2, secktor, deduff);
-          await eco.give(citel.sender, secktor, deduff);
-          await citel.reply(`*🤑 تم الزرف.🗡️*\nهربت ومعك ${deduff} في مخباك.`)
-          ////citel.react('💀')
-              break
+            const deduff = Math.floor(Math.random() * 1000)	    
+            await eco.deduct(user2, secktor, deduff);
+            await eco.give(citel.sender, secktor, deduff);
+            await citel.reply(`*🤑 تم الزرف.🗡️*\nهربت ومعك ${deduff} في مخباك.`)
+            ////citel.react('💀')
+            break
         case 'caught':
-           const rmoney = Math.floor(Math.random() * 1000)
-           await eco.deduct(user1, secktor, rmoney);
-           await citel.reply(`*مسكوك👮 الشرطة , وغرموك ${rmoney} 🪙 , معوض خير🥹.*`)
-           ////citel.react('😦')
-             break
-default:
- await citel.reply('*وش قاعد تسوي؟👀*.')
- //citel.react('🤔')
-
- }
-
+            const rmoney = Math.floor(Math.random() * 1000)
+            await eco.deduct(user1, secktor, rmoney);
+            await citel.reply(`*مسكوك👮 الشرطة , وغرموك ${rmoney} 🪙 , معوض خير🥹.*`)
+            ////citel.react('😦')
+            break
+        default:
+            await citel.reply('*وش قاعد تسوي؟👀*.')
+            //citel.react('🤔')
     }
-)
+});
 
      //---------------------------------------------------------------------------
      cmd({
