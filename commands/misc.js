@@ -14,6 +14,16 @@
 const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
  const fs = require('fs')
  const axios = require('axios')
+
+module.exports = {
+   name: 'خلفية',
+   category: 'misc',
+   desc: 'Sends a Random Anime Wallpaper.',
+   async exec(citel, Void,args,icmd) {
+  const { data } = await axios.get('https://nekos.life/api/v2/img/wallpaper')
+  citel.imgurl(data.url,'*تفضل 🫡*')
+   }
+}
   //---------------------------------------------------------------------------
  cmd({
     pattern: "setwelcome",
