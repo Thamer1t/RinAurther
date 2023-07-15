@@ -21,15 +21,16 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 
 cmd({
-    pattern: "مقولات",
-    desc: "يرسل مقولة",
-    category: "fun",
-    filename: __filename,
-},
-async (Void, citel, text) => {
-    const quotes = JSON.parse(fs.readFileSync(quotesPath, 'utf8'));
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    return citel.reply(`*المقولة:* ${randomQuote}\n\n*Powered by غومونريونغ*`);
+  pattern: "مقولات",
+  desc: "يرسل مقولة",
+  category: "fun",
+  filename: __filename,
+}, async (Void, citel, text) => {
+  const quotes = JSON.parse(fs.readFileSync(quotesPath, 'utf8'));
+  console.log('Parsed quotes:', quotes);
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  console.log('Random quote:', randomQuote);
+  return citel.reply(`*المقولة:* ${JSON.stringify(randomQuote)}\n\n*Powered by غومونريونغ*`);
 });
     //---------------------------------------------------------------------------
     cmd({
@@ -42,7 +43,7 @@ async (Void, citel, text) => {
         var quoo = await axios.get(`https://waqi3arabiya.com/api/quotes/random`)
         const replyf = `
 ╔════◇
-║ *🎗️المقولة:* ${quoo.data.quote.body}
+║ *🎗️الحقيقة:* ${quoo.data.quote.body}
 ║ *👤القائل:* ${quoo.data.quote.author}
 ║    
 ╚════════════╝ `
