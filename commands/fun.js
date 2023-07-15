@@ -8,10 +8,17 @@
  * @description : Secktor,A Multi-functional whatsapp bot.
  * @version 0.0.6
  **/
+const { dare, truth, random_question } = require('../lib/truth-dare.js');
+const axios = require('axios');
+const { cmd } = require('../lib');
 
 const fs = require('fs');
 const path = require('path');
 const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
+
+
+//......................................................
+
 
 cmd({
     pattern: "مقولات",
