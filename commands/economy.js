@@ -320,20 +320,24 @@ return await citel.reply(`🍀اليوزر: ${citel.pushName}\n\n_🪙${balance.
 
      //---------------------------------------------------------------------------
 
+
 cmd({
     pattern: "سرقة",
     desc: "rob bank amount.",
     category: "economy",
     filename: __filename,
-    cooldown: 300, // Cooldown period in seconds
+    cooldown: 300, // Cooldown period in seconds (5 minutes)
 },
 async(Void, citel, text,{ isCreator }) => {
     const userId = citel.sender;
-    if (cooldowns[userId] && (Date.now() - cooldowns[userId]) < (cmd.cooldown * 1000)) {
-        const remainingTime = (cooldowns[userId] + (cmd.cooldown * 1000) - Date.now()) / 1000;
-        return citel.reply(`*😴 Please wait ${remainingTime.toFixed(1)} seconds before using this command again.*`);
+    const cooldownDuration = cmd.cooldown || 0;
+    const cooldownKey = `cooldown_${userId}_${cmd.pattern}`;
+    const userCooldown = await getCooldown(userId, cooldownKey);
+    const remainingTime = cooldownDuration - (Date.now() - userCooldown);
+    if (userCooldown && remainingTime > 0) {
+        return citel.reply(`*😴 اصبر ${Math.ceil(remainingTime / 1000)} واسرق مرة ثانية عشان ماتنقفط.*`);
     }
-    cooldowns[userId] = Date.now();
+    await setCooldown(userId, cooldownKey, cooldownDuration);
 
     let zerogroup = (await sck.findOne({
         id: citel.chat,
@@ -379,6 +383,17 @@ async(Void, citel, text,{ isCreator }) => {
             //citel.react('🤔')
     }
 });
+
+async function getCooldown(userId, cooldownKey) {
+    const cooldown = await redis.get(cooldownKey);
+    return cooldown ? parseInt(cooldown) : 0;
+}
+
+async function setCooldown(userId, cooldownKey, cooldownDuration) {
+    const cooldownExpiry = Date.now() + cooldownDuration * 1000;
+    await redis.set(cooldownKey, cooldownExpiry, 'EX', cooldownDuration);
+}
+
 
      //---------------------------------------------------------------------------
      cmd({
