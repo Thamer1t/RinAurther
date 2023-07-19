@@ -82,7 +82,7 @@ cmd({
         latensie = speed() - timestampe;
         let ter = `
 🔰 *${tlang().title}* 🔰
-*🌟الوصف:* رين، بوت اوامر.
+*🌟الوصف:*  رين، بوت اوامر.
 *⚡السرعة:* ${latensie.toFixed(4)} ms
 *🚦وقت التشغيل:* ${runtime(process.uptime())}
 *🕸Version:* 0.0.7
