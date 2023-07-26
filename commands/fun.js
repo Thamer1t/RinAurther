@@ -20,8 +20,8 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 //......................................................
 const Poetry = require('../lib/database/Poetry.js');
 
-// Define the bot command handler function
-async function handleCommand(Void, citel, text) {
+// Define the bot command handler function for the "/قصيدة" command
+async function handleGetPoem(Void, citel, text) {
   // Check if the command is "/قصيدة"
   if (text !== '/قصيدة') {
     // Handle other commands here
@@ -43,12 +43,18 @@ cmd({
   desc: "يرسل قصيدة عشوائية",
   category: "fun",
   filename: __filename,
-}, handleCommand);
-//......................................................
+}, handleGetPoem);
 
+// Define the bot command with the pattern "/أضف_قصيدة" and the description "يضيف قصيدة جديدة إلى قاعدة البيانات"
+cmd({
+  pattern: "أضف_قصيدة",
+  desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
+  category: "fun",
+  filename: __filename,
+}, handleAddPoem);
 
-// Define the bot command handler function
-async function handleCommand(Void, citel, text) {
+// Define the bot command handler function for the "/أضف_قصيدة" command
+async function handleAddPoem(Void, citel, text) {
   // Check if the command is "/أضف_قصيدة"
   if (text !== '/أضف_قصيدة') {
     // Handle other commands here
@@ -68,14 +74,6 @@ async function handleCommand(Void, citel, text) {
   // Send a confirmation message to the user
   citel.reply('تم إضافة القصيدة بنجاح!');
 }
-
-// Define the bot command with the pattern "/أضف_قصيدة" and the description "يضيف قصيدة جديدة إلى قاعدة البيانات"
-cmd({
-  pattern: "أضف_قصيدة",
-  desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
-  category: "fun",
-  filename: __filename,
-}, handleCommand)
 //..........................................................
 
 
