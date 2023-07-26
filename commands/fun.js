@@ -36,7 +36,7 @@ cmd({
 
 
   citel.reply(`*${poem.content}*\n\n- *${poem.poet}*`);
-}
+})
 
 
 
