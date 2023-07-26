@@ -47,7 +47,7 @@ citel.onMessage(
           model: "image-alpha-001",
           prompt: `Draw a picture of ${query}`,
           num_images: 1,
-          size: "512x512",
+          size: "1024x1024",
         },
         {
           headers: {
