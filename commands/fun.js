@@ -64,11 +64,7 @@ async (match, citel, text, { isCreator }) => {
     return;
   }
 
-  // Check if the user has replied to a message
-  if (!citel.quoted) {
-    citel.reply(tlang().addPoemReplyToMsg);
-    return;
-  }
+
 
   // Split text by hyphen and extract content and poet fields
   const [content, poet] = text.split("-").map((field) => field.trim());
