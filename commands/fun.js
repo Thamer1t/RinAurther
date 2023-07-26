@@ -21,12 +21,12 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 
 cmd({
-  pattern: "ارسم (.+)",
+  pattern: /^ارسم (.+)$/i,
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
 }, async (message, match) => {
-  // Get the text query from the user input
+  // Get the query from the user input
   const query = match[1];
 
   // Call the DALL-E API to generate an image based on the query
@@ -51,7 +51,7 @@ cmd({
     const imageUrl = response.data.data[0].url;
 
     // Send the image to the user
-    citel.sendFileFromUrl(imageUrl);
+    citel.sendFileFromUrl(imageUrl, "image.jpg");
   } catch (err) {
     console.error(err);
     citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
