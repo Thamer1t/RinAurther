@@ -35,7 +35,7 @@ cmd({
   const poem = await Poetry.findOne().skip(randomIndex);
 
 
-  citel.reply(`*${poem.content}*\n\n- *${poem.poet}*`);
+  citel.reply(`${poem.content}\n\n- ${poem.poet}`);
 })
 
 
