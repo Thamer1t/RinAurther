@@ -18,17 +18,65 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 
 //......................................................
+const Poetry = require('../lib/database/Poetry.js');
 
+// Define the bot command handler function
+async function handleCommand(Void, citel, text) {
+  // Check if the command is "/قصيدة"
+  if (text !== '/قصيدة') {
+    // Handle other commands here
+    return;
+  }
+
+  // Find a random poem in the database
+  const count = await Poetry.countDocuments();
+  const randomIndex = Math.floor(Math.random() * count);
+  const poem = await Poetry.findOne().skip(randomIndex);
+
+  // Send the poem to the user
+  citel.reply(`**${poem.content}\n\n- ${poem.poet}**`);
+}
+
+// Define the bot command with the pattern "/قصيدة" and the description "يرسل قصيدة عشوائية"
 cmd({
   pattern: "قصيدة",
   desc: "يرسل قصيدة عشوائية",
   category: "fun",
   filename: __filename,
-}, async (Void, citel, text) => {
-  const poem = getRandomPoem();
-  return citel.reply(`**${poem.content}\n\n- ${poem.poet}**`);
-});
+}, handleCommand);
 //......................................................
+
+
+// Define the bot command handler function
+async function handleCommand(Void, citel, text) {
+  // Check if the command is "/أضف_قصيدة"
+  if (text !== '/أضف_قصيدة') {
+    // Handle other commands here
+    return;
+  }
+
+  // Parse the poem content and poet from the message text
+  const [, content, poet] = text.split(' ');
+
+  // Create a new Poetry document and save it to the database
+  const poem = new Poetry({
+    content,
+    poet,
+  });
+  await poem.save();
+
+  // Send a confirmation message to the user
+  citel.reply('تم إضافة القصيدة بنجاح!');
+}
+
+// Define the bot command with the pattern "/أضف_قصيدة" and the description "يضيف قصيدة جديدة إلى قاعدة البيانات"
+cmd({
+  pattern: "أضف_قصيدة",
+  desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
+  category: "fun",
+  filename: __filename,
+}, handleCommand)
+//..........................................................
 
 
 cmd({
