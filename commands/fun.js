@@ -15,11 +15,9 @@ const { getRandomPoem } = require('../lib/poetry.js');
 const fs = require('fs');
 const path = require('path');
 const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
-const { getBuffer } = require('node-fetch');
-const { createCanvas, loadImage } = require('canvas');
+
+
 //......................................................
-
-
 
 
 cmd({
@@ -27,56 +25,49 @@ cmd({
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
-}, async (message, match) => {
-  try {
-    // Send a prompt message asking the user to enter the words to draw the picture
-    await message.reply('يرجى إدخال الكلمات التي تريد رسمها.');
+},
+async (match, citel) => {
+  // Prompt the user to enter the words to draw the picture
+  citel.reply("يرجى إدخال الكلمات التي تريد رسمها.");
+});
 
-    // Listen for incoming messages containing the words to draw the picture
-    const filter = (msg) => msg.from === message.from && msg.body !== 'ارسم';
-    const response = await message.client.waitForMessage(message.from, { filter });
-
+// Listen for messages containing the words to draw the picture
+citel.onMessage(
+  async (message, match) => {
     // Get the text query from the user input
-    const query = response.body;
+    const query = message.body;
 
     // Call the DALL-E API to generate an image based on the query
-    const openaiResponse = await axios.post(
-      "https://api.openai.com/v1/images/generations",
-      {
-        model: "image-alpha-001",
-        prompt: `Draw a picture of ${query}`,
-        num_images: 1,
-        size: "512x512",
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-          "Content-Type": "application/json",
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/images/generations",
+        {
+          model: "image-alpha-001",
+          prompt: `Draw a picture of ${query}`,
+          num_images: 1,
+          size: "1024x1024",
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    // Get the URL of the generated image
-    const imageUrl = openaiResponse.data.data[0].url;
+      // Get the URL of the generated image
+      const imageUrl = response.data.data[0].url;
 
-    // Download the image to a buffer
-    const imageBuffer = await getBuffer(imageUrl);
+      // Send the image to the user
+      citel.sendFileFromUrl(imageUrl);
+    } catch (err) {
+      console.error(err);
+      citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
+    }
+  },
+ 
+);
 
-    // Create a new canvas and load the image onto it
-    const canvas = createCanvas(512, 512);
-    const context = canvas.getContext('2d');
-    const image = await loadImage(imageBuffer);
-    context.drawImage(image, 0, 0);
-
-    // Convert the canvas to a buffer and send it as a message
-    const buffer = canvas.toBuffer();
-    await message.reply(buffer, null, { filename: 'image.png', caption: `Here's your ${query} picture!` });
-
-  } catch (err) {
-    console.error(err);
-    await message.reply('حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.');
-  }
-});
 //......................................................
 const Poetry = require('../lib/database/Poetry.js');
 
