@@ -47,12 +47,21 @@ cmd({
   category: "fun",
   filename: __filename,
 },
-
 async(Void, citel, text) => {
- 
+  // Check if text is provided
+  if (!text) {
+    citel.reply('الرجاء تحديد محتوى القصيدة واسم الشاعر');
+    return;
+  }
 
- 
-  const [, content, poet] = text.split('-');
+  // Split text by hyphen and extract content and poet fields
+  const [content, poet] = text.split('-').map(field => field.trim());
+
+  // Check if both content and poet are provided
+  if (!content || !poet) {
+    citel.reply('الرجاء تحديد محتوى القصيدة واسم الشاعر');
+    return;
+  }
 
   // Create a new Poetry document and save it to the database
   const poem = new Poetry({
