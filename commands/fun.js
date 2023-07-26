@@ -63,7 +63,7 @@ async(Void, citel, text) => {
 
   // Send a confirmation message to the user
   citel.reply('تم إضافة القصيدة بنجاح!');
-}
+})
 //..........................................................
 
 
