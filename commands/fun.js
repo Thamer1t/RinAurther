@@ -15,7 +15,6 @@ const { cmd } = require('../lib');
 const fs = require('fs');
 const path = require('path');
 const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
-const قصيدة = require('./lib/قصيدة');
 
 
 //......................................................
@@ -26,7 +25,8 @@ cmd({
   category: "fun",
   filename: __filename,
 }, async (Void, citel, text) => {
-  const randomPoem = قصيدة.getRandomPoem();
+  const poetry = require('./lib/poetry');
+  const randomPoem = poetry.getRandomPoem();
   return citel.reply(`**${randomPoem.content}\n\n- ${randomPoem.poet}**`);
 });
 //......................................................
