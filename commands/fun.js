@@ -25,9 +25,8 @@ cmd({
   category: "fun",
   filename: __filename,
 }, async (Void, citel, text) => {
-  const poetry = require('../lib/poetry.js');
-  const randomPoem = poetry.getRandomPoem();
-  return citel.reply(`**${randomPoem.content}\n\n- ${randomPoem.poet}**`);
+  const poem = getRandomPoem();
+  return citel.reply(`**${poem.content}\n\n- ${poem.poet}**`);
 });
 //......................................................
 
