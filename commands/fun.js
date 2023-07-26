@@ -21,14 +21,19 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 
 cmd({
-  pattern: "ارسم (.*)",
+  pattern: /^ارسم/i,
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
 },
 async (match, citel) => {
   // Get the prompt from the user input
-  const prompt = match[1];
+  const prompt = citel.body.slice(6).trim();
+
+  if (!prompt) {
+    await citel.reply("يجب عليك تحديد ما تريد رسمه.");
+    return;
+  }
 
   // Call the DALL-E API to generate an image based on the prompt
   try {
@@ -59,7 +64,6 @@ async (match, citel) => {
     await citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
   }
 });
-
 //......................................................
 const Poetry = require('../lib/database/Poetry.js');
 
