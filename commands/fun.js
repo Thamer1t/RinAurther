@@ -11,7 +11,7 @@
 const { dare, truth, random_question } = require('../lib/truth-dare.js');
 const axios = require('axios');
 const { cmd } = require('../lib');
-const { getRandomPoem } = require('./lib/poetry.js');
+const { getRandomPoem } = require('../lib/poetry.js');
 const fs = require('fs');
 const path = require('path');
 const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
