@@ -41,22 +41,32 @@ cmd({
 
 
 
+function tlang() {
+  return {
+    owner: "لا يمكنك استخدام هذا الأمر لأنك لست مالك البوت",
+    addPoemSuccess: "تم إضافة القصيدة بنجاح!",
+    addPoemError: "حدث خطأ أثناء إضافة القصيدة. يرجى المحاولة مرة أخرى.",
+    addPoemMissingFields: "الرجاء تحديد محتوى القصيدة واسم الشاعر",
+    addPoemReplyToMsg: "الرجاء الرد على رسالة لإضافة قصيدة جديدة",
+  };
+}
+
 cmd({
   pattern: "أضف_قصيدة",
   desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
   category: "fun",
   filename: __filename,
 },
-async (Void, citel, text, { isCreator }) => {
+async (match, citel, text, { isCreator }) => {
   // Check if the user is the owner of the bot
   if (!isCreator) {
     citel.reply(tlang().owner);
     return;
   }
 
-  // Check if text is provided
-  if (!text) {
-    citel.reply("الرجاء تحديد محتوى القصيدة واسم الشاعر");
+  // Check if the user has replied to a message
+  if (!citel.quoted) {
+    citel.reply(tlang().addPoemReplyToMsg);
     return;
   }
 
@@ -65,7 +75,7 @@ async (Void, citel, text, { isCreator }) => {
 
   // Check if both content and poet are provided
   if (!content || !poet) {
-    citel.reply("الرجاء تحديد محتوى القصيدة واسم الشاعر");
+    citel.reply(tlang().addPoemMissingFields);
     return;
   }
 
@@ -74,10 +84,13 @@ async (Void, citel, text, { isCreator }) => {
     content,
     poet,
   });
-  await poem.save();
-
-  // Send a confirmation message to the user
-  citel.reply("تم إضافة القصيدة بنجاح!");
+  try {
+    await poem.save();
+    citel.reply(tlang().addPoemSuccess);
+  } catch (err) {
+    console.error(err);
+    citel.reply(tlang().addPoemError);
+  }
 });
 //..........................................................
 
