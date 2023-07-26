@@ -15,9 +15,11 @@ const { getRandomPoem } = require('../lib/poetry.js');
 const fs = require('fs');
 const path = require('path');
 const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
-
-
+const { create, Client } = require('@open-wa/wa-automate');
+const { getBuffer } = require('node-fetch');
+const { createCanvas, loadImage } = require('canvas');
 //......................................................
+
 
 
 cmd({
@@ -25,55 +27,67 @@ cmd({
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
-},
-async (match, reply) => {
-  // Prompt the user to enter the words to draw the picture
-  reply("يرجى إدخال الكلمات التي تريد رسمها.");
-});
+}, (async (message, match) => {
+  try {
+    // Send a prompt message asking the user to enter the words to draw the picture
+    await client.sendText(message.from, 'يرجى إدخال الكلمات التي تريد رسمها.');
 
-// Listen for messages containing the words to draw the picture
-onMessage(
-  async (message, match, reply, sendFileFromUrl) => {
-    // Get the text query from the user input
-    const query = message.body;
+    // Listen for incoming messages containing the words to draw the picture
+    client.onMessage(async (message) => {
+      // Check if the message body is not equal to "ارسم"
+      if (message.body !== 'ارسم') {
+        // Get the text query from the user input
+        const query = message.body;
 
-    // Call the DALL-E API to generate an image based on the query
-    try {
-      const response = await axios.post(
-        "https://api.openai.com/v1/images/generations",
-        {
-          model: "image-alpha-001",
-          prompt: `Draw a picture of ${query}`,
-          num_images: 1,
-          size: "1024x1024",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-            "Content-Type": "application/json",
+        // Call the DALL-E API to generate an image based on the query
+        const response = await axios.post(
+          "https://api.openai.com/v1/images/generations",
+          {
+            model: "image-alpha-001",
+            prompt: `Draw a picture of ${query}`,
+            num_images: 1,
+            size: "512x512",
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      // Get the URL of the generated image
-      const imageUrl = response.data.data[0].url;
+        // Get the URL of the generated image
+        const imageUrl = response.data.data[0].url;
 
-      // Send the image to the user
-      sendFileFromUrl(imageUrl);
-    } catch (err) {
-      console.error(err);
-      reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
-    }
-  },
-  {
-    // Only match messages that contain at least one non-whitespace character
-    filters: {
-      text: {
-        $regex: /[^\s]+/,
+        // Download the image to a buffer
+        const imageBuffer = await getBuffer(imageUrl);
+
+        // Create a new canvas and load the image onto it
+        const canvas = createCanvas(512, 512);
+        const context = canvas.getContext('2d');
+        const image = await loadImage(imageBuffer);
+        context.drawImage(image, 0, 0);
+
+        // Convert the canvas to a buffer and send it as a message
+        const buffer = canvas.toBuffer();
+        await client.sendImage(message.from, buffer, 'image.png', `Here's your ${query} picture!`);
+
+        // Stop listening for messages
+        client.removeMessageListener();
+      }
+    }, {
+      // Only match messages that contain at least one non-whitespace character
+      filters: {
+        text: {
+          $regex: /[^\s]+/,
+        },
       },
-    },
+    });
+  } catch (err) {
+    console.error(err);
+    await client.sendText(message.from, 'حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.');
   }
-);
+}));
 //......................................................
 const Poetry = require('../lib/database/Poetry.js');
 
