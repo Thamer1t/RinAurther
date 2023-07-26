@@ -26,14 +26,14 @@ cmd({
   category: "fun",
   filename: __filename,
 },
-async (match, citel) => {
+async (match, reply) => {
   // Prompt the user to enter the words to draw the picture
-  citel.reply("يرجى إدخال الكلمات التي تريد رسمها.");
+  reply("يرجى إدخال الكلمات التي تريد رسمها.");
 });
 
 // Listen for messages containing the words to draw the picture
-citel.onMessage(
-  async (message, match) => {
+onMessage(
+  async (message, match, reply, sendFileFromUrl) => {
     // Get the text query from the user input
     const query = message.body;
 
@@ -59,10 +59,10 @@ citel.onMessage(
       const imageUrl = response.data.data[0].url;
 
       // Send the image to the user
-      citel.sendFileFromUrl(imageUrl);
+      sendFileFromUrl(imageUrl);
     } catch (err) {
       console.error(err);
-      citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
+      reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
     }
   },
   {
