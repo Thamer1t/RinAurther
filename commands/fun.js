@@ -21,50 +21,43 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 
 cmd({
-  pattern: "ارسم",
+  pattern: "ارسم (.*)",
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
 },
 async (match, citel) => {
-  // Prompt the user to enter the words to draw the picture
-  citel.reply("يرجى إدخال الكلمات التي تريد رسمها.");
+  // Get the prompt from the user input
+  const prompt = match[1];
 
-  // Listen for messages containing the words to draw the picture
-  citel.onMessage(
-    async (message, match) => {
-      // Get the text query from the user input
-      const query = message.body;
-
-      // Call the DALL-E API to generate an image based on the query
-      try {
-        const response = await axios.post(
-          "https://api.openai.com/v1/images/generations",
-          {
-            model: "image-alpha-001",
-            prompt: `Draw a picture of ${query}`,
-            num_images: 1,
-            size: "1024x1024",
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        // Get the URL of the generated image
-        const imageUrl = response.data.data[0].url;
-
-        // Send the image to the user
-        citel.sendFileFromUrl(imageUrl);
-      } catch (err) {
-        console.error(err);
-        citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
+  // Call the DALL-E API to generate an image based on the prompt
+  try {
+    const response = await axios.post(
+      "https://api.openai.com/v1/images/generations",
+      {
+        model: "image-alpha-001",
+        prompt: `Draw a picture of ${prompt}`,
+        num_images: 1,
+        size: "1024x1024",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
       }
-    },
-  );
+    );
+
+    // Get the URL of the generated image
+    const imageUrl = response.data.data[0].url;
+
+    // Send the image to the user
+    await citel.reply(`تم رسم الصورة الخاصة بـ "${prompt}"`);
+    await citel.sendFileFromUrl(imageUrl);
+  } catch (err) {
+    console.error(err);
+    await citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
+  }
 });
 
 //......................................................
