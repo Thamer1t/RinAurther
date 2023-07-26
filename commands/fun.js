@@ -20,8 +20,7 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 //......................................................
 const Poetry = require('../lib/database/Poetry.js');
 
-// Define the bot command handler function for the "/قصيدة" command
-// Define the bot command with the pattern "/قصيدة" and the description "يرسل قصيدة عشوائية"
+
 cmd({
   pattern: "قصيدة",
   desc: "يرسل قصيدة عشوائية",
@@ -30,18 +29,18 @@ cmd({
 }, async(Void, citel, text) => {
 
 
-  // Find a random poem in the database
+
   const count = await Poetry.countDocuments();
   const randomIndex = Math.floor(Math.random() * count);
   const poem = await Poetry.findOne().skip(randomIndex);
 
-  // Send the poem to the user
+
   citel.reply(`*${poem.content}*\n\n- *${poem.poet}*`);
 }
 
 
 
-// Define the bot command with the pattern "/أضف_قصيدة" and the description "يضيف قصيدة جديدة إلى قاعدة البيانات"
+
 cmd({
   pattern: "أضف_قصيدة",
   desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
@@ -50,9 +49,9 @@ cmd({
 },
 
 async(Void, citel, text) => {
-  // Check if the command is "/أضف_قصيدة"
+ 
 
-  // Parse the poem content and poet from the message text
+ 
   const [, content, poet] = text.split('-');
 
   // Create a new Poetry document and save it to the database
