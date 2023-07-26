@@ -46,20 +46,27 @@ cmd({
   desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
   category: "fun",
   filename: __filename,
+  isCreator: true, // Only allow the bot owner to use this command
 },
-async(Void, citel, text) => {
+async (match, citel, text) => {
+  // Check if the user is the owner of the bot
+  if (citel.senderId !== process.env.BOT_OWNER_ID) {
+    citel.reply("لا يمكنك استخدام هذا الأمر لأنك لست مالك البوت");
+    return;
+  }
+
   // Check if text is provided
   if (!text) {
-    citel.reply('الرجاء تحديد محتوى القصيدة واسم الشاعر');
+    citel.reply("الرجاء تحديد محتوى القصيدة واسم الشاعر");
     return;
   }
 
   // Split text by hyphen and extract content and poet fields
-  const [content, poet] = text.split('-').map(field => field.trim());
+  const [content, poet] = text.split("-").map((field) => field.trim());
 
   // Check if both content and poet are provided
   if (!content || !poet) {
-    citel.reply('الرجاء تحديد محتوى القصيدة واسم الشاعر');
+    citel.reply("الرجاء تحديد محتوى القصيدة واسم الشاعر");
     return;
   }
 
@@ -71,8 +78,8 @@ async(Void, citel, text) => {
   await poem.save();
 
   // Send a confirmation message to the user
-  citel.reply('تم إضافة القصيدة بنجاح!');
-})
+  citel.reply("تم إضافة القصيدة بنجاح!");
+});
 //..........................................................
 
 
