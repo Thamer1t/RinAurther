@@ -20,7 +20,6 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 //......................................................
 
 
-const axios = require("axios");
 
 cmd({
   pattern: "ارسم",
