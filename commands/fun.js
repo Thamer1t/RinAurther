@@ -51,7 +51,7 @@ cmd({
 async (match, citel, text) => {
   // Check if the user is the owner of the bot
   if (citel.senderId !== process.env.BOT_OWNER_ID) {
-    citel.reply("لا يمكنك استخدام هذا الأمر لأنك لست مالك البوت");
+    citel.reply("خاص بغومونريونغ");
     return;
   }
 
