@@ -12,6 +12,7 @@
                "author": "SamPandey001",
               "dependencies": {
                        "@sampandey001/baileys": "latest", 
+                       "@open-wa/wa-automate": "^4.16.0"
                        "@adiwajshing/keyed-db": "^0.2.4",
                        "awesome-phonenumber": "^3.3.0",
                        "anime-character-random": "latest",
