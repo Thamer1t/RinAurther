@@ -21,7 +21,7 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 
 cmd({
-  pattern: /^ارسم/i,
+  pattern: "ارسم",
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
