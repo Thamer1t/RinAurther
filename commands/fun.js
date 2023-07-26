@@ -19,8 +19,10 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 
 //......................................................
 
+const axios = require("axios");
+
 cmd({
-  pattern: "ارسم",
+  pattern: "ارسم (.+)",
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
   category: "fun",
   filename: __filename,
@@ -29,13 +31,19 @@ async (match, citel) => {
   // Get the text query from the user input
   const query = match[1];
 
+  // Check that the query is not empty or null
+  if (!query) {
+    citel.reply("يرجى تحديد الكلمات لرسم الصورة.");
+    return;
+  }
+
   // Call the DALL-E API to generate an image based on the query
   try {
     const response = await axios.post(
       "https://api.openai.com/v1/images/generations",
       {
         model: "image-alpha-001",
-        prompt: `ارسم ${query}`,
+        prompt: `Draw a picture of ${query}`,
         num_images: 1,
         size: "512x512",
       },
