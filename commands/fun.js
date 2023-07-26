@@ -29,44 +29,43 @@ cmd({
 async (match, citel) => {
   // Prompt the user to enter the words to draw the picture
   citel.reply("يرجى إدخال الكلمات التي تريد رسمها.");
-});
 
-// Listen for messages containing the words to draw the picture
-citel.onMessage(
-  async (message, match) => {
-    // Get the text query from the user input
-    const query = message.body;
+  // Listen for messages containing the words to draw the picture
+  citel.onMessage(
+    async (message, match) => {
+      // Get the text query from the user input
+      const query = message.body;
 
-    // Call the DALL-E API to generate an image based on the query
-    try {
-      const response = await axios.post(
-        "https://api.openai.com/v1/images/generations",
-        {
-          model: "image-alpha-001",
-          prompt: `Draw a picture of ${query}`,
-          num_images: 1,
-          size: "1024x1024",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-            "Content-Type": "application/json",
+      // Call the DALL-E API to generate an image based on the query
+      try {
+        const response = await axios.post(
+          "https://api.openai.com/v1/images/generations",
+          {
+            model: "image-alpha-001",
+            prompt: `Draw a picture of ${query}`,
+            num_images: 1,
+            size: "1024x1024",
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      // Get the URL of the generated image
-      const imageUrl = response.data.data[0].url;
+        // Get the URL of the generated image
+        const imageUrl = response.data.data[0].url;
 
-      // Send the image to the user
-      citel.sendFileFromUrl(imageUrl);
-    } catch (err) {
-      console.error(err);
-      citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
-    }
-  },
- 
-);
+        // Send the image to the user
+        citel.sendFileFromUrl(imageUrl);
+      } catch (err) {
+        console.error(err);
+        citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
+      }
+    },
+  );
+});
 
 //......................................................
 const Poetry = require('../lib/database/Poetry.js');
