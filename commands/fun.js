@@ -46,12 +46,11 @@ cmd({
   desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
   category: "fun",
   filename: __filename,
-  isCreator: true, // Only allow the bot owner to use this command
 },
-async (match, citel, text) => {
+async (Void, citel, text, { isCreator }) => {
   // Check if the user is the owner of the bot
-  if (citel.senderId !== process.env.BOT_OWNER_ID) {
-    citel.reply("خاص بغومونريونغ");
+  if (!isCreator) {
+    citel.reply(tlang().owner);
     return;
   }
 
