@@ -32,32 +32,30 @@ function __lobz(){const H=['R53FWbciV9','reply','rbot_18407','\x5c(\x20*\x5c)','
     */
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "تحدث",
-            desc: "text to speech.",
-            category: "downloader",
-            filename: __filename,
-            use: '<Hii,this is Secktor>',
+    pattern: "قول",
+    desc: "text to speech.",
+    category: "تحويل",
+    filename: __filename,
+    use: '<مرحبًا رين >',
+},
+async (Void, citel, [lang = 'ar', ...text]) => {
+    if (!text) return citel.reply('اكتب كلام احوله صوت')
+    let texttts = text.join(' ')
+    const ttsurl = googleTTS.getAudioUrl(texttts, {
+        lang,
+        slow: false,
+        host: "https://translate.google.com",
+    });
+    return Void.sendMessage(citel.chat, {
+        audio: {
+            url: ttsurl,
         },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply('اكتب كلام احوله صوت')
-            let texttts = text
-            const ttsurl = googleTTS.getAudioUrl(texttts, {
-                lang: "en",
-                slow: false,
-                host: "https://translate.google.com",
-            });
-            return Void.sendMessage(citel.chat, {
-                audio: {
-                    url: ttsurl,
-                },
-                mimetype: "audio/mpeg",
-                fileName: `ttsCitelVoid.m4a`,
-            }, {
-                quoted: citel,
-            });
-        }
-
-    )
+        mimetype: "audio/mpeg",
+        fileName: `ttsCitelVoid.m4a`,
+    }, {
+        quoted: citel,
+    });
+});
      //---------------------------------------------------------------------------
      cmd({
         pattern: "yts",
