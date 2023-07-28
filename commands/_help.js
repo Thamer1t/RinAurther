@@ -59,7 +59,7 @@ async(Void, citel, text) => {
 │ │ البوت: ${tlang().title}
 │ │ رمز التفعيل: [ ${prefix} ]
 │ │ المالك: ${Config.ownername}
-│ │ ؟: ${commands.length}
+│ │ ❓: ${commands.length}
 │ │ المستخدمين: ${total}
 │ │ وقت التشغيل: ${runtime(process.uptime())}
 │ │ الذاكرة: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
