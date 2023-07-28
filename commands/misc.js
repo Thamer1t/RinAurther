@@ -63,7 +63,7 @@ async(Void, citel, text,{ isCreator }) => {
  cmd({
              pattern: "حقوق",
              desc: "Makes sticker of replied image/video.",
-             category: "sticker",
+             category: "تحويل",
              filename: __filename,
          },
          async(Void, citel, text) => {
