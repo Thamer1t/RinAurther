@@ -1,8 +1,8 @@
 const {cmd } = require('../lib')
 cmd({
         pattern: "انستا",
-        desc: "download instagram post.",
-        category: "downloader",
+        desc: "يحمل بوست انستاقرام",
+        category: "تحميل",
         filename: __filename
     },
     async(Void, citel,text,{isCreator}) => {
@@ -10,6 +10,6 @@ cmd({
 if(!text) return citel.reply('رابط البوست؟')
 let response = await Insta(text)
 for (let i=0;i<response.length;i++) {
-await Void.sendFileUrl(citel.chat, response[i], `*تم التحميل، تفضل استمتع*`, citel)
+await Void.sendFileUrl(citel.chat, response[i], `*تم التحميل، استمتع*`, citel)
 }
     });
