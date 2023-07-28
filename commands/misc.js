@@ -18,9 +18,9 @@ const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter")
 
   //---------------------------------------------------------------------------
  cmd({
-    pattern: "setwelcome",
+    pattern: "ترحيب",
     desc: "sets welcome message in specific group.",
-    category: "misc",
+    category: "للمالك",
 },
 async(Void, citel, text,{ isCreator }) => {
     if (!isCreator) return citel.reply(tlang().owner)
@@ -37,9 +37,9 @@ async(Void, citel, text,{ isCreator }) => {
 )
  //---------------------------------------------------------------------------
 cmd({
-    pattern: "setgoodbye",
+    pattern: "وداع",
     desc: "sets goodbye message in specific group.",
-    category: "misc",
+    category: "للمالك",
 },
 async(Void, citel, text,{ isCreator }) => {
     if (!isCreator) return citel.reply(tlang().owner)
@@ -54,78 +54,20 @@ async(Void, citel, text,{ isCreator }) => {
 }
 )
  //---------------------------------------------------------------------------
- cmd({
-             pattern: "attp",
-             desc: "Makes glowing sticker of text.",
-             category: "sticker",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-let a = await getBuffer(`https://citel-x.herokuapp.com/attp/${text}`)
- return citel.reply(a,{packname:'Secktor',author:'ATTP'},"sticker") 
-         }
-     )
- cmd({
-             pattern: "ttp",
-             desc: "Makes static sticker of text.",
-             category: "sticker",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
- return citel.reply(a,{packname:'Secktor',author:'TTP'},"sticker") 
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "exec",
-             desc: "Evaluates quoted code with given language.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             try {
-                 const code = {
-                     script: citel.quoted.text,
-                     language: text[1],
-                     versionIndex: "0",
-                     stdin: text.slice(2).join(" "),
-                     clientId: '694805244d4f825fc02a9d6260a54a99',
-                     clientSecret: '741b8b6a57446508285bb5893f106df3e20f1226fa3858a1f2aba813799d4734'
-                 };
-                 request({
-                     url: "https://api.jdoodle.com/v1/execute",
-                     method: "POST",
-                     json: code
-                 }, function(_error, _response, body) {
-                    return citel.reply("> " + text[1] + "\n\n" + "```" + body.output + "```");
-                 });
-             } catch (error) {
-                 console.log(error);
-             }
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "readmore",
-             desc: "Adds *readmore* in given text.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-            return await citel.reply(text.replace(/\+/g, (String.fromCharCode(8206)).repeat(4001)))
  
-         }
-     )
+     //---------------------------------------------------------------------------
+
+     //---------------------------------------------------------------------------
+
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "steal",
+             pattern: "حقوق",
              desc: "Makes sticker of replied image/video.",
              category: "sticker",
              filename: __filename,
          },
          async(Void, citel, text) => {
-             if (!citel.quoted) return citel.reply(`*Mention any Image or video Sir.*`);
+             if (!citel.quoted) return citel.reply(`*رد على صورة او ملصق.*`);
              let mime = citel.quoted.mtype
              var pack;
              var author;
@@ -138,7 +80,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
                  author = "♥️";
              }
                  let media = await citel.quoted.download();
-                 citel.reply("*Processing Your request*");
+                 citel.reply("*ثواني بس..*");
                 let sticker = new Sticker(media, {
                     pack: pack, // The pack name
                     author: author, // The author name
@@ -154,10 +96,10 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "uptime",
+             pattern: "وقت-التشغيل",
              alias: ["runtime"],
              desc: "Tells runtime/uptime of bot.",
-             category: "misc",
+             category: "للمالك",
              filename: __filename,
          },
          async(Void, citel, text) => {
@@ -166,23 +108,12 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
          }
      )
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "wm",
-             desc: "Makes wa.me of quoted or mentioned user.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             let users = citel.mentionedJid ? citel.mentionedJid[0].split('@')[0] : citel.quoted ? citel.quoted.sender.split('@')[0] : text.replace('@')[0]
-            return citel.reply(`https://wa.me/${users}`)
- 
-         }
-     )
+
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "pick",
+/* cmd({
+             pattern: "منشن-عشوائي",
              desc: "Pics random user from Group",
-             category: "misc",
+             category: "عام",
              filename: __filename,
          },
          async(Void, citel, match) => {
@@ -200,9 +131,9 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
                  quoted: citel,
              });
          }
-     )
+     )*/
      //---------------------------------------------------------------------------
- cmd({
+/* cmd({
              pattern: "npm",
              desc: "download mp4 from url.",
              category: "search",
@@ -216,78 +147,16 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
                  citel.reply(txt)
              }).catch(e => console.log(e))
          }
-     )
+     )*/
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "fliptext",
-             desc: "Flips given text.",
-             category: "misc",
-             use: '<query>',
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             if (!text) return citel.reply(`Example : ${prefix}fliptext Back in black`)
-             flipe = text.split('').reverse().join('')
-             citel.reply(`\`\`\`「  Text Flipper Tool  」\`\`\`\n*IGiven text :*\n${text}\n*Fliped text :*\n${flipe}`)
- 
-         }
-     )
+
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "mp4fromurl",
-             desc: "download mp4 from url.",
-             category: "misc",
-             use: '<url>',
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             if (!text) return citel.reply(`Where's the link ?`);
-             Void.sendMessage(citel.chat, {
-                 video: {
-                     url: text.split(" ")[0],
-                 },
-                 caption: "*HERE WE GO*",
-                 contextInfo: {
-                     externalAdReply: {
-                         title: tlang().title,
-                         body: `${citel.pushName}`,
-                         thumbnail: log0,
-                         mediaType: 2,
-                         mediaUrl: ``,
-                         sourceUrl: ``,
-                     },
-                 },
-             }, {
-                 quoted: citel,
-             });
- 
-         }
-     )
+
      //---------------------------------------------------------------------------
  
- cmd({
-             pattern: "emix",
-             desc: "Mixes two emojies.",
-             category: "misc",
-             use: '<query>',
-             filename: __filename,
-         },
-         async(Void, citel, text,{ isCreator }) => {
-             if (!text) return citel.reply(`Example : ${prefix}emix 😅,🤔`);
-             let [emoji1, emoji2] = text.split `,`;
-             let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1 )}_${encodeURIComponent(emoji2)}`);
-             for (let res of anu.results) {
-                 let encmedia = await Void.sendImageAsSticker(citel.chat, res.url, citel, {
-                     packname: global.packname,
-                     author: global.author,
-                     categories: res.tags,
-                 });
-                 await fs.unlinkSync(encmedia);
-             }
-         }
-     )
+
      //---------------------------------------------------------------------------
- cmd({
+/* cmd({
              pattern: "chatbot",
              desc: "activates and deactivates chatbot.\nuse buttons to toggle.",
              category: "misc",
@@ -350,77 +219,43 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
  
  
          }
-     )
+     )*/
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "ebinary",
-             desc: "encode binary",
-             category: "misc",
-             use: '<query>',
-             filename: __filename,
-         },
-         async(Void, citel, text,{ isCreator }) => {
-             try {
-                 if (!text) return citel.reply(`Send text to be encoded.`);
- 
-                 let textt = text || citel.quoted.text
-                 let eb = await eBinary(textt);
-                 citel.reply(eb);
-             } catch (e) {
-                 console.log(e)
-             }
-         }
-     )
+
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "dbinary",
-             desc: "decode binary",
-             category: "misc",
-             use: '<query>',
-             filename: __filename,
-         },
-         async(Void, citel, text,{ isCreator }) => {
-             try {
-                 if (!text) return citel.reply(`Send text to be decoded.`);
-                 let eb = await dBinary(text);
-                 citel.reply(eb);
-             } catch (e) {
-                 console.log(e)
-             }
-         }
-     )
+
 cmd({
-  pattern: "bot",
+  pattern: "بوت",
   desc: "activates and deactivates bot.\nuse buttons to toggle.",
-  category: "misc",
+  category: "للمالك",
   filename: __filename,
 },
 async(Void, citel, text,{isCreator}) => {
   if (!citel.isGroup) return citel.reply(tlang().group);
   if(!isCreator) return //citel.reply(tlang().owner)
 switch (text.split(" ")[0]) {
- case 'on':{
+ case 'تشغيل':{
          let checkgroup = await sck.findOne({ id: citel.chat })
          if (!checkgroup) {
              await new sck({ id: citel.chat, botenable: "true" }).save()
-             return citel.reply(`Successfully Enabled *${tlang().title}*`)
+             return citel.reply(`تم تشغيل *${tlang().title} , استمتعوا*`)
          } else {
-             if (checkgroup.botenable == "true") return citel.reply("*Bot* was already enabled")
+             if (checkgroup.botenable == "true") return citel.reply("*Rin* مفعل ")
              await sck.updateOne({ id: citel.chat }, { botenable: "true" })
-             return citel.reply(`Successfully Enabled *${tlang().title}*`)
+             return citel.reply(`تم تفعيل *${tlang().title}*، استمتعوا!`)
          }
      }
   
  break
-case 'off':{
+case 'ايقاف':{
             {
              let checkgroup = await sck.findOne({ id: citel.chat })
              if (!checkgroup) {
                  await new sck({ id: citel.chat, botenable: "false" })
                      .save()
-                 return citel.reply(`Successfully disabled *${tlang().title}*`)
+                 return citel.reply(`تم ايقاف *${tlang().title}*, 🥹 نراكم على خير`)
              } else {
-                 if (checkgroup.botenable == "false") return citel.reply("*Bot* was already disabled")
+                 if (checkgroup.botenable == "false") return citel.reply("*Rin* موقف ")
                  await sck.updateOne({ id: citel.chat }, { botenable: "false" })
                  return citel.reply(`Successfully disabled *${tlang().title}*`)
              }
@@ -430,16 +265,16 @@ break
 default:{
 let checkgroup = await sck.findOne({ id: citel.chat })
 let buttons = [{
-          buttonId: `${prefix}bot on`,
+          buttonId: `${prefix}تشغيل-البوت`,
           buttonText: {
-              displayText: "Turn On",
+              displayText: "تشغيل",
           },
           type: 1,
       },
       {
-          buttonId: `${prefix}bot off`,
+          buttonId: `${prefix}ايقاف-البوت`,
           buttonText: {
-              displayText: "Turn Off",
+              displayText: "ايقاف",
           },
           type: 1,
       },
@@ -450,7 +285,7 @@ let buttons = [{
 })   
          
      //---------------------------------------------------------------------------
- cmd({
+/* cmd({
              pattern: "antilink",
              desc: "activates and deactivates antilink.\nuse buttons to toggle.",
              category: "group",
@@ -501,7 +336,7 @@ return await Void.sendMessage(citel.chat ,{image : media } , {quoted:citel} )
 catch (err) { return citel.reply("```Error While Fetching Snapshot```")}
     }
 )
-
+*/
 
      //---------------------------------------------------------------------------
  cmd({ on: "body" }, async(Void, citel) => {
