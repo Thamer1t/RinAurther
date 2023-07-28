@@ -325,17 +325,9 @@ cmd({
   pattern: "سرقة",
   desc: "rob bank amount.",
   category: "economy",
-  filename: __filename,
-  cooldown: 300, // Cooldown period in seconds
+  cooldown: 3600, // Cooldown period in seconds (1 hour)
 },
-async (Void, citel, text, cmd) => {
-  const userId = citel.sender;
-  if (cooldowns[userId] && (Date.now() - cooldowns[userId]) < (cmd.cooldown * 1000)) {
-    const remainingTime = (cooldowns[userId] + (cmd.cooldown * 1000) - Date.now()) / 1000;
-    return citel.reply(`*😴 Please wait ${remainingTime.toFixed(1)} seconds before using this command again.*`);
-  }
-  cooldowns[userId] = Date.now();
-
+async (Void, citel, text,{ isCreator }) => {
   let zerogroup = (await sck.findOne({
     id: citel.chat,
   })) || (await new sck({
@@ -343,8 +335,18 @@ async (Void, citel, text, cmd) => {
   }).save());
   let mongoschemas = zerogroup.economy || "false";
   if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
-  let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-  if(!users) return citel.reply('منشن شخص تسرقه.')
+  
+  // Check if the user is on cooldown
+  const cooldownKey = `${citel.chat}_${citel.sender}`;
+  const remainingTime = await eco.checkCooldown(cooldownKey, "rob");
+  if (remainingTime) {
+    const cooldownMinutes = Math.ceil(remainingTime / 60);
+    return citel.reply(`You're on cooldown, please wait ${cooldownMinutes} minute(s) before using this command again.`);
+  }
+  
+  // Execute the command logic
+  const users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
+  if (!users) return citel.reply('منشن شخص تسرقه.')
   const user1 = citel.sender
   const user2 = users
   const secktor = "secktor"
@@ -358,26 +360,26 @@ async (Void, citel, text, cmd) => {
   let tpy = random    
   switch (random) {
     case 'ran':
-      await citel.reply(`*ضحيتك هرب، واضح انك مب يم السرقة حاول تغير مهنتك🫰.*`)
-      ////citel.react('🥹')
-      break
+      await citel.reply(`*ضحيتك هرب، واضح انك مب يم السرقة حاول تغير مهنتك🫰.*`);
+      break;
     case 'rob':
       const deduff = Math.floor(Math.random() * 1000)	    
       await eco.deduct(user2, secktor, deduff);
       await eco.give(citel.sender, secktor, deduff);
-      await citel.reply(`*🤑 تم الزرف.🗡️*\nهربت ومعك ${deduff} في مخباك.`)
-      ////citel.react('💀')
-      break
+      await citel.reply(`*🤑 تم الزرف.🗡️*\nهربت ومعك ${deduff} في مخباك.`);
+      break;
     case 'caught':
-      const rmoney = Math.floor(Math.random() * 1000)
+      const rmoney = Math.floor(Math.random() * 1000);
       await eco.deduct(user1, secktor, rmoney);
-      await citel.reply(`*مسكوك👮 الشرطة , وغرموك ${rmoney} 🪙 , معوض خير🥹.*`)
-      ////citel.react('😦')
-      break
+      await citel.reply(`*مسكوك👮 الشرطة , وغرموك ${rmoney} 🪙 , معوض خير🥹.*`);
+      break;
     default:
-      await citel.reply('*وش قاعد تسوي؟👀*.')
-      //citel.react('🤔')
+      await citel.reply('*وش قاعد تسوي؟👀*.');
+      break;
   }
+  
+  // Set the user on cooldown
+  await eco.setCooldown(cooldownKey, "rob", 3600);
 });
 
 
