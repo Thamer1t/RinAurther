@@ -198,7 +198,7 @@ async(Void, citel, text) => {
 cmd({
             pattern: "يوتيوب",
             desc: "Downloads video from youtube.",
-            category: "downloader",
+            category: "تحميل",
             filename: __filename,
             use: '<yt video url>',
         },
