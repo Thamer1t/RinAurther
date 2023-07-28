@@ -836,7 +836,7 @@ cmd({ on: "text" }, async(Void, citel) => {
 │ 🎉🎊 *مبروك!* 🎉🎊 │
 │ ⭐ *ازداد مستواك!* ⭐ │
 ├──────────────────────┤
-│ 👤 *الاسم:* ${citel.pushName │
+│ 👤 *الاسم:* ${citel.pushName} │
 │ 🎐 *المستوى:* ${sck1.level} ⚔️ │
 │ 🛑 *نقاط الخبرة:* ${sck1.xp} / ${Levels.xpFor(sck1.level + 1)} │
 │ 📍 *الدور:* *${role}* │
