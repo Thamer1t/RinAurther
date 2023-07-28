@@ -23,7 +23,7 @@ Secktor.cmd({
     pattern: "اوامر",
     alias: ["menu"],
     desc: "Help list",
-    category: "general",
+    category: "عام",
     react: "✨",
     filename: __filename
 },
@@ -98,7 +98,7 @@ async(Void, citel, text) => {
 Secktor.cmd({
             pattern: "قائمة",
             desc: "list menu",
-            category: "general"
+            category: "عام"
         },
         async(Void, citel) => {
             const { commands } = require('../lib');
@@ -130,7 +130,7 @@ for (let i = 0; i < commands.length; i++)
 Secktor.cmd({
         pattern: "المالك",
         desc: "To find owner number",
-        category: "general",
+        category: "معلومات المالك",
         react: "🐐",
         filename: __filename
     },
@@ -147,7 +147,7 @@ Secktor.cmd({
             contextInfo: {
                 externalAdReply: {
                     title: Config.ownername,
-                    body: 'اضغط هنا',
+                    body: 'Touch here.',
                     renderLargerThumbnail: true,
                     thumbnailUrl: ``,
                     thumbnail: log0,
@@ -163,6 +163,7 @@ Secktor.cmd({
 
     }
 )
+
 
 Secktor.cmd({
     pattern: "ملف",
