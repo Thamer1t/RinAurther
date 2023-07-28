@@ -14,7 +14,7 @@ const axios = require('axios')
 const speed = require('performance-now')
 const fetch = require('node-fetch');
 //---------------------------------------------------------------------------
-cmd({
+/*cmd({
     pattern: "ذكاء",
     alias :['gpt'],
     desc: "chat with an AI(GPT)",
@@ -63,7 +63,7 @@ async(Void, citel,text) => {
   return await  citel.reply(data.choices[0].message.content)
 	
 }
-)
+)*/
 
 
 //---------------------------------------------------------------------------
@@ -73,7 +73,7 @@ cmd({
         pattern: "الحالة",
         alias: ["about"],
         desc: "To check bot status",
-        category: "general",
+        category: "عام",
         filename: __filename,
     },
     async(Void, citel) => {
@@ -85,7 +85,7 @@ cmd({
 *🌟الوصف:*  رين، بوت اوامر.
 *⚡السرعة:* ${latensie.toFixed(4)} ms
 *🚦وقت التشغيل:* ${runtime(process.uptime())}
-*🕸Version:* 0.0.7
+*🕸الإصدار:* 0.0.7
 *👤المالك:*  ${Config.ownername}
 *Powered by ${tlang().title}*
 `;
@@ -118,7 +118,7 @@ cmd({
 cmd({
     pattern: "ثيم",
     desc: "To find all themes",
-    category: "general",
+    category: "للمالك",
     filename: __filename,
 },
 async(Void, citel,text,{isCreator}) => {
