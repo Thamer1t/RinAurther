@@ -14,10 +14,10 @@ const ty = eco.connect(mongodb);
 
 cmd(
   {
-    pattern: "delttt",
+    pattern: "delxo",
     desc: "يحذف جلسة اللعب الحالية في لعبة TicTacToe.",
     filename: __filename,
-    category: "game",
+    category: "العاب",
   },
   async (Void, citel, text, { isCreator }) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
@@ -42,10 +42,10 @@ cmd(
 
 cmd(
   {
-    pattern: "ttt",
+    pattern: "xo",
     desc: "يلعب TicTacToe",
     filename: __filename,
-    category: "game",
+    category: "العاب",
   },
   async (Void, citel, text) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
@@ -105,7 +105,7 @@ ${arr.slice(6).join("  ")}
           state: "WAITING",
         };
         if (text) room.name = text;
-        citel.reply("_انتظر لاعب آخر، استخدم .ttt للانضمام إلى اللعبة._ ");
+        citel.reply("_انتظر لاعب آخر، استخدم .xo للانضمام إلى اللعبة._ ");
         this.game[room.id] = room;
       }
     }
@@ -219,7 +219,7 @@ ${
   }
 );
 
-cmd({ pattern: "ship" , category: "fun" }, async(Void, citel, text) => {
+cmd({ pattern: "صداقة" , category: "ترفيه" }, async(Void, citel, text) => {
     const { tlang } = require('../lib')
    if (!citel.isGroup) return citel.reply(tlang().group);
    const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
