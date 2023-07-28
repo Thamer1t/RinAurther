@@ -13,7 +13,6 @@
  const Config = require('../config')
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
- const { cdl } = require('@adiwajshing/baileys')
 // Set the cooldown time to 1 hour (in milliseconds)
 const cooldownTime = 60 * 60 * 1000
 
