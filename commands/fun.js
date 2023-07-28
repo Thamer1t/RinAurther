@@ -35,38 +35,29 @@ async (match, citel) => {
     return;
   }
 
-  // Call the Bing AI Image Generator API to generate an image based on the prompt
+  // Call the DeepAI Image API to generate an image based on the prompt
   try {
-    const response = await axios.get(
-      "https://api.bing.microsoft.com/",
+    const response = await axios.post(
+      "https://api.deepai.org/api/text2img",
+      {
+        text: prompt,
+      },
       {
         headers: {
-          "Ocp-Apim-Subscription-Key": "127b5098f93f4aaf9a1f8cb350e4f84b",
-        },
-        params: {
-          q: prompt,
-          mkt: "ar",
-          count: 1,
-          safeSearch: "Moderate",
-          imageType: "Photo",
+          "api-key": "2f65f612-da75-4449-9cd7-aa6954d7c2b5",
         },
       }
     );
 
-    // Get the URL of the generated image
-    const imageUrl = response.data?.images?.[0]?.contentUrl;
-
-    if (!imageUrl) {
-      await citel.reply("المعذرة ماقدرت ارسمها.");
-      return;
-    }
+    // Get the URL of the generated image from the API response
+    const imageUrl = response.data.output_url;
 
     // Send the image to the user
-    await citel.reply(`تفضل هذي رسمة ل: "${prompt}"`);
-    await citel.sendFileFromUrl(imageUrl);
-  } catch (err) {
-    console.error(err);
-    await citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
+    await citel.sendFileFromUrl(imageUrl, { filename: "image.jpg" });
+
+  } catch (error) {
+    console.error(error);
+    await citel.reply("حصل خطأ أثناء محاولة إنشاء الصورة. الرجاء المحاولة مرة أخرى.");
   }
 });
 //......................................................
