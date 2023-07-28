@@ -161,16 +161,16 @@ cmd({
             pattern: "زخرفة",
             desc: "Makes stylish/fancy given text",
             category: "converter",
-            use: '56 Secktor',
+            use: '56 Rin',
             react: "✅",
             filename: __filename
         },
         async(Void, citel, text) => {
             if (isNaN(text.split(" ")[0]) || !text) {
                 let text = tiny(
-                    "Fancy text generator\n\nExample: .fancy 32 Secktor\n\n"
+                    "زخرفة \n\مثال: .زخرفة 32 Rin\n\n"
                 );
-                listall("Secktor Bot").forEach((txt, num) => {
+                listall("Rin").forEach((txt, num) => {
                     text += `${(num += 1)} ${txt}\n`;
                 });
                 return await citel.reply(text);
