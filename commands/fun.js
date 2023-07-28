@@ -23,7 +23,7 @@ const quotesPath = path.join(__dirname, '..', 'lib', 'Quotes.json');
 cmd({
   pattern: "ارسم",
   desc: "يرسم صورة تتعلق بالكلمات المعطاة",
-  category: "fun",
+  category: "ترفيه",
   filename: __filename,
 },
 async (match, citel) => {
@@ -71,7 +71,7 @@ const Poetry = require('../lib/database/Poetry.js');
 cmd({
   pattern: "قصيدة",
   desc: "يرسل قصيدة عشوائية",
-  category: "fun",
+  category: "ترفيه",
   filename: __filename,
 }, async(Void, citel, text) => {
 
@@ -101,7 +101,7 @@ function tlang() {
 cmd({
   pattern: "أضف_قصيدة",
   desc: "يضيف قصيدة جديدة إلى قاعدة البيانات",
-  category: "fun",
+  category: "للمالك",
   filename: __filename,
 },
 async (match, citel, text, { isCreator }) => {
@@ -141,7 +141,7 @@ async (match, citel, text, { isCreator }) => {
 cmd({
   pattern: "مقولات",
   desc: "يرسل مقولة",
-  category: "fun",
+  category: "ترفيه",
   filename: __filename,
 }, async (Void, citel, text) => {
   const quotes = JSON.parse(fs.readFileSync(quotesPath, 'utf8'));
@@ -154,7 +154,7 @@ cmd({
     cmd({
         pattern: "حقيقة",
         desc: "Sends quotes in chat.",
-        category: "fun",
+        category: "ترفيه",
         filename: __filename,
     },
     async(Void, citel, text) => {
@@ -173,7 +173,7 @@ return citel.reply(replyf)
     cmd({
         pattern: "عرف",
         desc: "urban dictionary.",
-        category: "fun",
+        category: "بحث",
         filename: __filename,
     },
     async(Void, citel, text) => {
