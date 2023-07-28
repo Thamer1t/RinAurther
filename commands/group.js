@@ -16,9 +16,9 @@ const Levels = require("discord-xp");
 const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
 //---------------------------------------------------------------------------
 cmd({
-            pattern: "join",
+            pattern: "انضم",
             desc: "joins group by link",
-            category: "owner",
+            category: "للمالك",
             use: '<group link.>',
         },
         async(Void, citel, text,{ isCreator }) => {
@@ -35,20 +35,20 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "sticker",
+            pattern: "ملصق",
             alias: ["s"],
             desc: "Makes sticker of replied image/video.",
             category: "group",
-            use: '<reply to any image/video.>',
+            use: '<رد على صورة او فيديو.>',
         },
         async(Void, citel, text) => {
-            if (!citel.quoted) return citel.reply(`*Mention any Image or video Sir.*`);
+            if (!citel.quoted) return citel.reply(`*رد على صورة او فيديو.*`);
             let mime = citel.quoted.mtype
             pack = Config.packname
             author = Config.author
             if (citel.quoted) {
                 let media = await citel.quoted.download();
-                citel.reply("*Processing Your request*");
+                citel.reply("*ثواني بس..*");
                 let sticker = new Sticker(media, {
                     pack: pack, // The pack name
                     author: author, // The author name
@@ -62,7 +62,7 @@ cmd({
                 return Void.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
             } else if (/video/.test(mime)) {
                 if ((quoted.msg || citel.quoted)
-                    .seconds > 20) return citel.reply("Cannot fetch videos longer than *20 Seconds*");
+                    .seconds > 20) return citel.reply("المقطع لازم يكون اقل من *20 ثانية*");
                 let media = await quoted.download();
                 let sticker = new Sticker(media, {
                     pack: pack, // The pack name
@@ -81,7 +81,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
         pattern: "support",
         desc: "Sends official support group link.",
         category: "group",
@@ -95,13 +95,13 @@ cmd({
         });
 
     }
-)
+)*/
 
 //---------------------------------------------------------------------------
 cmd({
             pattern: "انذار",
             desc: "Warns user in Group.",
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
             use: '<quote|reply|number>',
         },
@@ -109,16 +109,16 @@ cmd({
              if (!citel.isGroup) return citel.reply('امر خاص بالمجموعات')
             const groupAdmins = await getAdmin(Void, citel)
             const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-            if (!isAdmins) return citel.reply('This command is only for Admin.')
+            if (!isAdmins) return citel.reply('خاص بالمشرفين.')
  const S=m;function Z(){const F=['126402oKAcRa','date','Removing\x20User\x20because\x20Warn\x20limit\x20exceeded\x0a\x0a*All\x20Warnings.*\x0a','chat','8qachoN','580yXDZAo','groupParticipantsUpdate','114528WgITIL','reply','groupMetadata','│\x20*🔰Time:-*\x20','find','locale','log','196311jXGmuc','quoted','save','*\x0a╭─────────────◆\x0a│\x20*🍁In\x20Group:-*\x20','759700KYdstU','warnedby','pushName','reason','8dUtMfa','2BlOCqD','550MdvhLT','*----Warn----*\x0aUser:\x20@','54828ViphBF','subject','1100323uEahgH','30204512uUuJcj','*There\x20are\x20total\x20','split','│\x20*⚠️Warned\x20by:-*\x20','length','sender','setDefault','group','Asia/KOLKATA','../config','215XZLRSE','HH:mm:ss','warn','remove'];Z=function(){return F;};return Z();}(function(U,w){const c=m,s=U();while(!![]){try{const q=parseInt(c(0x1eb))/0x1*(parseInt(c(0x1f0))/0x2)+parseInt(c(0x1e7))/0x3*(parseInt(c(0x1ef))/0x4)+-parseInt(c(0x200))/0x5*(-parseInt(c(0x204))/0x6)+-parseInt(c(0x1f5))/0x7*(-parseInt(c(0x1dd))/0x8)+-parseInt(c(0x1f3))/0x9*(-parseInt(c(0x1de))/0xa)+parseInt(c(0x1f1))/0xb*(parseInt(c(0x1e0))/0xc)+-parseInt(c(0x1f6))/0xd;if(q===w)break;else s['push'](s['shift']());}catch(B){s['push'](s['shift']());}}}(Z,0x707d4));function m(Y,U){const w=Z();return m=function(s,q){s=s-0x1dd;let B=w[s];return B;},m(Y,U);}if(!citel['quoted'])return citel[S(0x1e1)]('Please\x20quote\x20a\x20user\x20master.');const timesam=moment(moment())['format'](S(0x201));moment['tz'][S(0x1fc)](S(0x1fe))[S(0x1e5)]('id');try{let metadata=await Void[S(0x1e2)](citel[S(0x207)]);await new warndb({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202),'reason':text,'group':metadata[S(0x1f4)],'warnedby':citel[S(0x1ed)],'date':timesam})[S(0x1e9)]();let ment=citel[S(0x1e8)][S(0x1fb)];Void['sendMessage'](citel['chat'],{'text':S(0x1f2)+citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+'\x0aWith\x20Reason:\x20'+text+'\x0aWarned\x20by:\x20'+citel[S(0x1ed)],'mentions':[citel[S(0x1e8)][S(0x1fb)]]},{'quoted':citel});let h=await warndb[S(0x1e4)]({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});const Config=require(S(0x1ff));if(h[S(0x1fa)]>Config['warncount']){teskd=S(0x206);let h=await warndb[S(0x1e4)]({'id':citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});teskd+=S(0x1f7)+h[S(0x1fa)]+'\x20\x20warnings.*\x0a';for(let i=0x0;i<h[S(0x1fa)];i++){teskd+='*'+(i+0x1)+S(0x1ea)+h[i][S(0x1fd)]+'\x0a',teskd+=S(0x1e3)+h[i][S(0x205)]+'\x0a',teskd+=S(0x1f9)+h[i][S(0x1ec)]+'\x0a',teskd+='│\x20_📍Reason:\x20'+h[i][S(0x1ee)]+'_\x0a╰─────────────◆\x0a\x0a';}citel[S(0x1e1)](teskd),await Void[S(0x1df)](citel['chat'],[citel['quoted'][S(0x1fb)]],S(0x203));}}catch(Y){console[S(0x1e6)](Y);}
             
         }
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "unblock",
+            pattern: "الغاء-حظر",
             desc: "Unblocked to the quoted user.",
-            category: "owner",
+            category: "للمالك",
             filename: __filename,
 
         },
@@ -134,9 +134,9 @@ cmd({
     )
     //---------------------------------------------------------------------------
     cmd({
-        pattern: "ujid",
+        pattern: "ايدي",
         desc: "get jid of all user in a group.",
-        category: "owner",
+        category: "للمالك",
         filename: __filename,
     },
     async(Void, citel, text,{ isCreator }) => {
@@ -157,9 +157,9 @@ cmd({
 
 //---------------------------------------------------------------------------
 cmd({
-            pattern: "request",
+            pattern: "اقتراح",
             desc: "Sends requst to main Bot developer.",
-            category: "group",
+            category: "معلومات المالك",
             filename: __filename,
             use: '<text>',
         },
@@ -171,7 +171,7 @@ cmd({
             teks1 = `\n\n*User* : @${
     citel.sender.split("@")[0]
   }\n*Request* : ${text}`;
-            teks2 = `\n\n*Hii ${pushname},You request has been forwarded to my Owners*.\n*Please wait.......*`;
+            teks2 = `\n\n*Hii ${pushname},تم ارسال اقتراحك الى غومونريونغ! *.\n*شكرا لك.*`;
             for (let i of owner) {
                 Void.sendMessage(i + "@s.whatsapp.net", {
                     text: textt + teks1,
@@ -190,34 +190,12 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
-            pattern: "retrive",
-            desc: "Copies and Forwords viewonce message.",
-            category: "group",
-            filename: __filename,
-            use: '<reply to a viewonce message.>',
-        },
-        async(Void, citel, text) => {
-            if (!citel.quoted) return reply("Please reply to any message Image or Video!");
-            let mime = citel.quoted.mtype
-            if (/viewOnce/.test(mime)) {
-                const mtype = Object.keys(quoted.message)[0];
-                delete quoted.message[mtype].viewOnce;
-                const msgs = proto.Message.fromObject({
-                    ...quoted.message,
-                  });
-                const prep = generateWAMessageFromContent(citel.chat, msgs, { quoted: citel });
-                await Void.relayMessage(citel.chat, prep.message, { messageId: prep.key.id });
-            } else {
-                await citel.reply("please, reply to viewOnceMessage");
-            }
-        }
-    )
+
     //---------------------------------------------------------------------------
 cmd({
-  pattern: "rwarn",
+  pattern: "حذف-انذار",
   desc: "Deletes all previously given warns of quoted user.",
-  category: "group",
+  category: "للمشرفين",
   filename: __filename,
   use: '<quote|reply|number>',
 }, async (Void, citel, text, { isCreator }) => {
@@ -228,7 +206,7 @@ cmd({
 }
    )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "poll",
             desc: "Makes poll in group.",
             category: "group",
@@ -253,12 +231,12 @@ cmd({
                 }
             })
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
 cmd({
             pattern: "بروفايل",
             desc: "Shows profile of user.",
-            category: "group",
+            category: "عام",
             filename: __filename,
         },
         async(Void, citel, text) => {
@@ -355,7 +333,7 @@ cmd({
 cmd({
             pattern: "رانك",
             desc: "Sends rank card of user.",
-            category: "group",
+            category: "عام",
             filename: __filename,
         },
         async(Void, citel, text) => {
@@ -436,7 +414,7 @@ cmd({
             pattern: "لائحة",
             alias: ["deck"],
             desc: "To check leaderboard",
-            category: "general",
+            category: "عام",
             filename: __filename,
         },
         async(Void, citel) => {
@@ -510,7 +488,7 @@ cmd({
 cmd({
             pattern: "ترقية",
             desc: "Provides admin role to replied/quoted user",
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
             use: '<quote|reply|number>',
         },
@@ -537,7 +515,7 @@ cmd({
 cmd({
             pattern: "طرد",
             desc: "Kicks replied/quoted user from group.",
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
             use: '<quote|reply|number>',
         },
@@ -561,7 +539,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "memegen",
             desc: "Write text on quoted image.",
             category: "group",
@@ -586,42 +564,14 @@ cmd({
             await fs.unlinkSync(mee)
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
-cmd({
-            pattern: "group",
-            desc: "mute and unmute group.",
-            category: "group",
-            filename: __filename,
-        },
-        async(Void, citel, text) => {
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            const groupAdmins = await getAdmin(Void, citel)
-            const botNumber = await Void.decodeJid(Void.user.id)
-            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
-            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-            if (!citel.isGroup) return citel.reply(tlang().group);
-            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
-            if (!isAdmins) return citel.reply(tlang().admin);
-            if (text.split(" ")[0] === "close") {
-                await Void.groupSettingUpdate(citel.chat, "announcement")
-                    .then((res) => reply(`تم كتم المحادثة:)`))
-                    .catch((err) => console.log(err));
-            } else if (text.split(" ")[0] === "open") {
-                await Void.groupSettingUpdate(citel.chat, "not_announcement")
-                    .then((res) => reply(`تم الغاء كتم المحادثة، تفضلوا سولفوا :)`))
-                    .catch((err) => console.log(err));
-            } else {
 
-                return citel.reply(`Group Mode:\n${prefix}group open- to open\n${prefix}group close- to close`);
-            }
-        }
-    )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "grouppic",
+            pattern: "افتار-القروب",
             desc: "Sets a profile pic in Group..",
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
         },
         async(Void, citel, text) => {
@@ -636,9 +586,9 @@ cmd({
             if (!citel.isGroup) citel.reply(tlang().group);
             if (!isAdmins) citel.reply(tlang().admin);
             if (!isBotAdmins) citel.reply(tlang().botadmin);
-            if (!citel.quoted) return citel.reply(`Send/Reply Image With Caption ${command}`);
-            if (!/image/.test(mime)) return citel.reply(`Send/Reply Image With Caption ${command}`);
-            if (/webp/.test(mime)) return citel.reply(`Send/Reply Image With Caption ${command}`);
+            if (!citel.quoted) return citel.reply(`رد على صورة واستخدم الامر ${command}`);
+            if (!/image/.test(mime)) return citel.reply(`رد على صورة واستخدم الامر${command}`);
+            if (/webp/.test(mime)) return citel.reply(`رد على صورة واستخدم الامر ${command}`);
             let media = await Void.downloadAndSaveMediaMessage(citel.quoted);
             await Void.updateProfilePicture(citel.chat, {
                     url: media,
@@ -651,10 +601,10 @@ cmd({
     //---------------------------------------------------------------------------
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "add",
+            pattern: "اضافة",
             desc: "Add that person in group",
             fromMe: true,
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
             use: '<number>',
         },
@@ -665,7 +615,7 @@ cmd({
             const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
             const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
 
-            if (!text) return citel.reply("Please provide me number.");
+            if (!text) return citel.reply("عطني رقم الشخص اللي بتضيفه للقروب");
             if (!isCreator) return citel.reply(tlang().owner)
             if (!isBotAdmins) return citel.reply(tlang().botAdmin);
             let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
@@ -674,7 +624,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "getjids",
             desc: "Sends chat id of every groups.",
             category: "group",
@@ -700,12 +650,12 @@ cmd({
             citel.reply(jackhuh)
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
 cmd({
         pattern: "خفض",
         desc: "Demotes replied/quoted user from group",
-        category: "group",
+        category: "للمشرفين",
         filename: __filename,
         use: '<quote|reply|number>',
     },
@@ -734,7 +684,7 @@ cmd({
             pattern: "حذف",
             alias: ["delete"],
             desc: "Deletes message of any user",
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
             use: '<quote/reply message.>',
         },
@@ -757,7 +707,7 @@ cmd({
                 const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
                 if (!isAdmins) return citel.reply('خاص بالمشرفين')
                 if (!isBotAdmins) return citel.reply(' مقدر احذف الرسايل بدون اشراف')
-                if (!citel.quoted) return citel.reply(`Please reply to any message. ${tlang().greet}`);
+                if (!citel.quoted) return citel.reply(`رد على الرسالة. ${tlang().greet}`);
                 let { chat, fromMe, id } = citel.quoted;
                 const key = {
                     remoteJid: citel.chat,
@@ -773,12 +723,12 @@ cmd({
 cmd({
             pattern: "انذارات",
             desc: "Check warns",
-            category: "group",
+            category: "للمشرفين",
             filename: __filename,
             use: '<quoted/reply user.>',
         },
         async(Void, citel, text) => {
-            if (!citel.isGroup) return citel.reply('This command is only for Group.')
+            if (!citel.isGroup) return citel.reply('خاص بالمجموعات.')
             if (!citel.quoted) return citel.reply('منشن اللي بتعطيه انذار طال عمرك')
             teskd = `*All Warnings.*\n\n`
             let h = await warndb.find({ id: citel.quoted.sender.split('@')[0] + 'warn' })
@@ -796,10 +746,10 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "بلوك",
+            pattern: "حظر",
             desc: "blocks that person",
             fromMe: true,
-            category: "owner",
+            category: "للمالك",
             filename: __filename,
             use: '<quote/reply user.>',
         },
@@ -882,16 +832,17 @@ cmd({ on: "text" }, async(Void, citel) => {
                 image: {
                     url: await botpic(),
                 },
-                caption: `
-╔════◇
-║ *مبروك!*
-║ *ازداد مستواك⭐*
-║ *👤الاسم*: ${citel.pushName}
-║ *🎐المستوى*: ${sck1.level}🍭
-║ *🛑نقاط الخبرة*: ${sck1.xp} / ${Levels.xpFor(sck1.level + 1)}
-║ *📍الدور*: *${role}*
-║ *استمتع🥳*
-╚════════════╝
+                caption: `╭──────────────────────╮
+│ 🎉🎊 *مبروك!* 🎉🎊 │
+│ ⭐ *ازداد مستواك!* ⭐ │
+├──────────────────────┤
+│ 👤 *الاسم:* [citel.pushName] │
+│ 🎐 *المستوى:* [sck1.level] 🍭 │
+│ 🛑 *نقاط الخبرة:* [sck1.xp] / [Levels.xpFor(sck1.level + 1)] │
+│ 📍 *الدور:* [role] │
+├──────────────────────┤
+│ 🥳 استمر في العمل الجاد واستمتع بمستواك الجديد! 👍 │
+╰──────────────────────╯
 `,
             }, {
                 quoted: citel,
