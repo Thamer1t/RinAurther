@@ -391,24 +391,22 @@ cmd({
             } else if (lvpoints <= 55) {
                 var role = "🐉خالد";
             }
-            let disc = citel.sender.substring(3, 7);
-            let textr = '';
-            textr += `* ${tlang().greet} *\n*رانك:🌟 ${citel.pushName}∆${disc}*\n\n`;
-            let ttms = `${userq.xp}` / 8;
-            textr += `*الدور*: ${role}\n*🟢نقاط الخبرة*: ${userq.xp} / ${Levels.xpFor(
-    userq.level + 1
-  )}\n*🏡المستوى*: ${userq.level}\n*مجموع الرسائل:*- ${ttms}`;
-            try {
-                ppuser = await Void.profilePictureUrl(citel.sender, "image");
-            } catch {
-                ppuser = THUMB_IMAGE;
-            }
-                    Void.sendMessage(citel.chat, {
-                        image: await getBuffer(ppuser),
-                        caption: textr,
-                    }, {
-                        quoted: citel,
-                    });
+           let disc = citel.sender.substring(3, 7);
+let textr = `╭─ ${tlang().greet}\n│ 🌟 رانك: ${citel.pushName}∆${disc}\n\n`;
+let ttms = `${userq.xp}` / 8;
+textr += `│ 🎭 الدور: ${role}\n│ 🟢 نقاط الخبرة: ${userq.xp} / ${Levels.xpFor(userq.level + 1)}\n`;
+textr += `│ 🏡 المستوى: ${userq.level}\n│ 📥 مجموع الرسائل: ${ttms}\n`;
+try {
+  ppuser = await Void.profilePictureUrl(citel.sender, "image");
+} catch {
+  ppuser = THUMB_IMAGE;
+}
+Void.sendMessage(citel.chat, {
+  image: await getBuffer(ppuser),
+  caption: textr + `╰─ Powered by ${tlang().title}`,
+}, {
+  quoted: citel,
+});
         }
     )
     //---------------------------------------------------------------------------
