@@ -14,7 +14,7 @@
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
 // Set the cooldown time to 1 hour (in milliseconds)
-const hourlyCooldownTime = 60 * 60 * 1000 // 1 hour in milliseconds
+const hourlyCooldownTime = 1 * 60 * 1000 // 1 hour in milliseconds
 const cooldownTime = 5 * 60 * 1000 // 5 minutes in milliseconds
 const cooldowns = new Map()
 const hourly = {
