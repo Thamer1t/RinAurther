@@ -16,7 +16,7 @@ const axios = require('axios')
 const fetch = require('node-fetch')
 
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "imdb",
             category: "search",
             desc: "Sends image of asked Movie/Series.",
@@ -56,9 +56,9 @@ cmd({
             });
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "weather",
             category: "search",
             desc: "Sends weather info about asked place.",
@@ -92,9 +92,9 @@ cmd({
             );
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "horo",
             category: "search",
             desc: "Gives horoscope info of user.",
@@ -153,7 +153,7 @@ cmd({
             return citel.reply(msg);
         })
     }
-)
+)*/
     //---------------------------------------------------------------------------
 cmd({
             pattern: "image",
@@ -163,8 +163,8 @@ cmd({
             filename: __filename,
         },
         async(Void, citel, text) => {
-            if (!text) return citel.reply("Provide me a query!")
-            if (!text) return reply("Hey bie please tell me for which pic you're looking");
+            if (!text) return citel.reply("وش الصورة اللي تبيها؟!")
+            if (!text) return reply("وش الصوره اللي تبيها؟");
             let name1 = text.split("|")[0]
             let name2 = text.split("|")[1] || `1`
             citel.reply(`Sending ${name2} image(s) of ${name1} in chat`)
@@ -177,7 +177,7 @@ cmd({
                         image: {
                             url: images,
                         },
-                        caption: `_Sector Image Search_\n*${name1}*`,
+                        caption: `_Rin Image Search_\n*${name1}*`,
                         headerType: 4,
                     };
                     Void.sendMessage(citel.chat, buttonMessage, {
@@ -187,7 +187,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "couplepp",
             category: "search",
             desc: "Sends two couples pics.",
@@ -199,9 +199,9 @@ cmd({
             Void.sendMessage(citel.chat, { image: { url: random.male }, caption: `Couple Male` }, { quoted: citel })
             Void.sendMessage(citel.chat, { image: { url: random.female }, caption: `Couple Female` }, { quoted: citel })
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
         pattern: "iswa",
         category: "search",
         desc: "Searches in given rage about given number.",
@@ -266,4 +266,4 @@ cmd({
         citel.reply(`${text}${nobio}${nowhatsapp}`)
 
     }
-)
+)*/
