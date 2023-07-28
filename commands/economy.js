@@ -14,10 +14,12 @@
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
 // Set the cooldown time to 1 hour (in milliseconds)
-const cooldownTime = 60 * 60 * 1000
-
-// Create a cooldown map to store the cooldowns
+const hourlyCooldownTime = 60 * 60 * 1000 // 1 hour in milliseconds
+const cooldownTime = 5 * 60 * 1000 // 5 minutes in milliseconds
 const cooldowns = new Map()
+const hourly = {
+  cooldowns: {}
+}
  /*
   cmd({
          pattern: "economy",
@@ -343,42 +345,39 @@ function cdl(duration) {
 }
 
 cmd({
-    pattern: "سرقة",
-    desc: "rob bank amount.",
-    category: "economy",
-    filename: __filename,
-},
-async (Void, citel, text, { isCreator }) => {
-    // Get the user ID of the person running the command
-    const userId = citel.sender
+  pattern: "سرقة",
+  desc: "rob bank amount.",
+  category: "economy",
+  filename: __filename,
+}, async (Void, citel, text, { isCreator }) => {
+  // Get the user ID of the person running the command
+  const userId = citel.sender
 
-    // Check if there's an hourly cooldown for this user
-    if (hourlyCooldowns.has(userId)) {
-        // Get the remaining time on the cooldown
-        const remainingTime = hourlyCooldowns.get(userId) - Date.now()
+  // Check if there's an hourly cooldown for this user
+  if (hourly.cooldowns[userId] && hourly.cooldowns[userId] > Date.now()) {
+    // Get the remaining time on the cooldown
+    const remainingTime = hourly.cooldowns[userId] - Date.now()
 
-        // If the cooldown hasn't expired yet, send a message indicating how long the user needs to wait
-        if (remainingTime > 0) {
-            return citel.reply(`🫡 تعال بعد ${cdl(remainingTime)} لتسرق مرة أخرى.`)
-        }
+    // Send a message indicating how long the user needs to wait
+    return citel.reply(`🫡 تعال بعد ${cdl(remainingTime)} لتسرق مرة أخرى.`)
+  }
+
+  // Set the hourly cooldown for this user
+  hourly.cooldowns[userId] = Date.now() + hourlyCooldownTime
+
+  // Check if there's a regular cooldown for this user
+  if (cooldowns.has(userId)) {
+    // Get the remaining time on the cooldown
+    const remainingTime = cooldowns.get(userId) - Date.now()
+
+    // If the cooldown hasn't expired yet, send a message indicating how long the user needs to wait
+    if (remainingTime > 0) {
+      return citel.reply(`🫡 تعال بعد ${cdl(remainingTime)} لتسرق مرة أخرى.`)
     }
+  }
 
-    // Set the hourly cooldown for this user
-    hourlyCooldowns.set(userId, Date.now() + hourlyCooldownTime)
-
-    // Check if there's a regular cooldown for this user
-    if (cooldowns.has(userId)) {
-        // Get the remaining time on the cooldown
-        const remainingTime = cooldowns.get(userId) - Date.now()
-
-        // If the cooldown hasn't expired yet, send a message indicating how long the user needs to wait
-        if (remainingTime > 0) {
-            return citel.reply(`🫡 تعال بعد ${cdl(remainingTime)} لتسرق مرة أخرى.`)
-        }
-    }
-
-    // Set the regular cooldown for this user
-    cooldowns.set(userId, Date.now() + cooldownTime)
+  // Set the regular cooldown for this user
+  cooldowns.set(userId, Date.now() + cooldownTime)
 
     // The rest of the command code goes here...
     let zerogroup = (await sck.findOne({
