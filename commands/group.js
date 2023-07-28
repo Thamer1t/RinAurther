@@ -38,7 +38,7 @@ cmd({
             pattern: "ملصق",
             alias: ["s"],
             desc: "Makes sticker of replied image/video.",
-            category: "group",
+            category: "تحويل",
             use: '<رد على صورة او فيديو.>',
         },
         async(Void, citel, text) => {
