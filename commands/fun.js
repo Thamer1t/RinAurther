@@ -188,4 +188,4 @@ return citel.reply(replyf)
                         return citel.reply(`ماحصلت نتائج ل ${text}`)
                     }
     }
-)
+)*/
