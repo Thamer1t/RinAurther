@@ -31,33 +31,38 @@ async (match, citel) => {
   const prompt = citel.body.slice(6).trim();
 
   if (!prompt) {
-    await citel.reply("يجب عليك تحديد ما تريد رسمه.");
+    await citel.reply("وش تبيني ارسم؟ اكتب اللي تبيني ارسمه لك بعد الامر");
     return;
   }
 
-  // Call the DALL-E API to generate an image based on the prompt
+  // Call the Bing AI Image Generator API to generate an image based on the prompt
   try {
-    const response = await axios.post(
-      "https://api.openai.com/v1/images/generations",
-      {
-        model: "image-alpha-001",
-        prompt: `Draw a picture of ${prompt}`,
-        num_images: 1,
-        size: "1024x1024",
-      },
+    const response = await axios.get(
+      "https://api.cognitive.microsoft.com/bing/v7.0/images/visualsearch",
       {
         headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-          "Content-Type": "application/json",
+          "Ocp-Apim-Subscription-Key": "127b5098f93f4aaf9a1f8cb350e4f84b",
+        },
+        params: {
+          q: prompt,
+          mkt: "ar",
+          count: 1,
+          safeSearch: "Moderate",
+          imageType: "Photo",
         },
       }
     );
 
     // Get the URL of the generated image
-    const imageUrl = response.data.data[0].url;
+    const imageUrl = response.data?.images?.[0]?.contentUrl;
+
+    if (!imageUrl) {
+      await citel.reply("المعذرة ماقدرت ارسمها.");
+      return;
+    }
 
     // Send the image to the user
-    await citel.reply(`تم رسم الصورة الخاصة بـ "${prompt}"`);
+    await citel.reply(`تفضل هذي رسمة ل: "${prompt}"`);
     await citel.sendFileFromUrl(imageUrl);
   } catch (err) {
     console.error(err);
