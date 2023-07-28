@@ -328,11 +328,11 @@ cmd({
   filename: __filename,
   cooldown: 300, // Cooldown period in seconds
 },
-async (Void, citel, text, cmd, { isCreator }) => {
+async (Void, citel, text, cmd) => {
   const userId = citel.sender;
   if (cooldowns[userId] && (Date.now() - cooldowns[userId]) < (cmd.cooldown * 1000)) {
     const remainingTime = (cooldowns[userId] + (cmd.cooldown * 1000) - Date.now()) / 1000;
-    return citel.reply(`*😴 تحسب الدنيا فوضى؟ انتظر ${remainingTime.toFixed(1)} ثانية عشان تسرق *`);
+    return citel.reply(`*😴 Please wait ${remainingTime.toFixed(1)} seconds before using this command again.*`);
   }
   cooldowns[userId] = Date.now();
 
@@ -342,7 +342,7 @@ async (Void, citel, text, cmd, { isCreator }) => {
     id: citel.chat,
   }).save());
   let mongoschemas = zerogroup.economy || "false";
-  if (mongoschemas == "false") return citel.reply("العاب الايكونومي مقفلة، كلم المشرف يشغلها");
+  if (mongoschemas == "false") return citel.reply("*🚦Economy* is not active in current group.");
   let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
   if(!users) return citel.reply('منشن شخص تسرقه.')
   const user1 = citel.sender
