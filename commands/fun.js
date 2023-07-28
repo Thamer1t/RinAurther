@@ -38,7 +38,7 @@ async (match, citel) => {
   // Call the Bing AI Image Generator API to generate an image based on the prompt
   try {
     const response = await axios.get(
-      "https://api.cognitive.microsoft.com/bing/v7.0/images/visualsearch",
+      "https://api.bing.microsoft.com/",
       {
         headers: {
           "Ocp-Apim-Subscription-Key": "127b5098f93f4aaf9a1f8cb350e4f84b",
