@@ -19,7 +19,7 @@ const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter")
     cmd({
         pattern: "صورة",
         desc: "Makes photo of replied sticker.",
-        category: "converter",
+        category: "تحويل",
         use: '<reply to any gif>',
         filename: __filename
     },
@@ -49,65 +49,12 @@ if (mime =="imageMessage" || mime =="stickerMessage")
 )
 //---------------------------------------------------------------------------
 
-cmd({
-         pattern: "vv",
-         alias : ['viewonce','retrive'],
-         desc: "Flips given text.",
-         category: "misc",
-         use: '<query>',
-         filename: __filename
-     },
-     async(Void, citel, text) => {
-try {
-const quot = citel.msg.contextInfo.quotedMessage.viewOnceMessageV2;
-if(quot)
-{
-if(quot.message.imageMessage) 
-{ console.log("Quot Entered") 
-   let cap =quot.message.imageMessage.caption;
-   let anu = await Void.downloadAndSaveMediaMessage(quot.message.imageMessage)
-   return Void.sendMessage(citel.chat,{image:{url : anu},caption : cap })
-}
-if(quot.message.videoMessage) 
-{
-   let cap =quot.message.videoMessage.caption;
-   let anu = await Void.downloadAndSaveMediaMessage(quot.message.videoMessage)
-   return Void.sendMessage(citel.chat,{video:{url : anu},caption : cap })
-}
- 
-}
-//else citel.reply("```ليست رسالة قراءة مرة واحدة```") 
-       
-}  
-     
-catch(e) {  console.log("error" , e ) }     
-
-       
-if(!citel.quoted) return citel.reply("```رد على رسالة قراءة مره واحدة```")           
-if(citel.quoted.mtype === "viewOnceMessage")
-{ console.log("ViewOnce Entered") 
- if(citel.quoted.message.imageMessage )
-{ 
-  let cap =citel.quoted.message.imageMessage.caption;
-  let anu = await Void.downloadAndSaveMediaMessage(citel.quoted.message.imageMessage)
-  Void.sendMessage(citel.chat,{image:{url : anu},caption : cap })
-}
-else if(citel.quoted.message.videoMessage )
-{
-  let cap =citel.quoted.message.videoMessage.caption;
-  let anu = await Void.downloadAndSaveMediaMessage(citel.quoted.message.videoMessage)
-  Void.sendMessage(citel.chat,{video:{url : anu},caption : cap })
-}
-
-}
-else return citel.reply("```ليست رسالة قراءة مرة واحدة```")
-
-})    //---------------------------------------------------------------------------
+ //---------------------------------------------------------------------------
 cmd({
             pattern: "مقولة",
             desc: "Makes Sticker of quoted text.",
             alias: ["q"],
-            category: "converter",
+            category: "تحويل",
             use: '<reply to any message.>',
             filename: __filename
         },
@@ -160,7 +107,7 @@ cmd({
 cmd({
             pattern: "زخرفة",
             desc: "Makes stylish/fancy given text",
-            category: "converter",
+            category: "تحويل",
             use: '56 Rin',
             react: "✅",
             filename: __filename
@@ -182,25 +129,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
-            pattern: "رابط",
-            desc: "Makes url tiny.",
-            category: "converter",
-            use: '<url>',
-            react: "✅",
-            filename: __filename
-        },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply('Provide me a link')
-            try {
-                link = text.split(" ")[0];
-                anu = await axios.get(`https://tinyurl.com/api-create.php?url=${link}`);
-                citel.reply(`*🛡️Your Shortened URL*\n\n${anu.data}`);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    )
+
     //---------------------------------------------------------------------------
  
 //---------------------------------------------------------------------------
@@ -211,7 +140,7 @@ cmd({
     pattern: "صوت",
     alias:['mp3','tomp3'],
     desc: "changes type to audio.",
-    category: "converter",
+    category: "تحويل",
     use: '<reply to any Video>',
     filename: __filename
 },
