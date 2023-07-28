@@ -14,9 +14,9 @@
  
      //---------------------------------------------------------------------------
  cmd({
-         pattern: "deact",
+         pattern: "تعطيل",
          desc: "Switches for varios works.",
-         category: "group",
+         category: "للمشرفين",
          filename: __filename
      },
      async(Void, citel, text,{ isCreator }) => {
@@ -27,9 +27,9 @@
          const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
          const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
          //-----------------------------------------  
-         if (!citel.isGroup) return citel.reply("This feature in only for Group.")
+         if (!citel.isGroup) return citel.reply("خاص بالمجموعات.")
          if (!text) return citel.reply(`❌ Please provide me term like like\n1-events\n2-antilink\n3-nsfw\n4-cardgame\n5-bot`)
-         if (!isAdmins) return citel.reply("❌ This Command is only for Admin")
+         if (!isAdmins) return citel.reply("❌ Tخاص بالمشرفين")
          switch (text.split(" ")[0]) {
             case 'antilink':
                 {
@@ -46,13 +46,13 @@
                     }
                 }
                 break
-                       case 'economy':
+                       case 'الاقتصاد':
                 {
                     let checkgroup = await sck.findOne({ id: citel.chat })
                     if (!checkgroup) {
                         await new sck({ id: citel.chat, economy: "false" })
                             .save()
-                        return citel.reply(' Economy disabled Successfully')
+                        return citel.reply(' تم تعطيل الاقتصاد')
                     } else {
                         if (checkgroup.economy == "false") return citel.reply("Economy was alredy disabled.")
                         await sck.updateOne({ id: citel.chat }, { economy: "false" })
