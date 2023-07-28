@@ -169,8 +169,8 @@ return citel.reply(replyf)
     }
 
 )
-    //---------------------------------------------------------------------------
-    cmd({
+
+  /* cmd({
         pattern: "عرف",
         desc: "urban dictionary.",
         category: "بحث",
