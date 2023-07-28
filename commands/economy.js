@@ -44,7 +44,7 @@ const cooldowns = new Map()
         let mongoschemas = zerogroup.economy || "false";
         if (mongoschemas == "false") return citel.reply("*العاب الايكونومي* مو مفعلة بالقروب");
          if (!citel.isGroup) return citel.reply(tlang().group);
-	const secktor = "Rin"
+	const secktor = "secktor"
 	const daily  = await eco.daily(citel.sender, secktor, 2000); //give 500 for daily, can be changed
 	 if (daily.cd) { //cdL is already formatted cooldown Left
         return await  citel.reply(`🧧 استلمت الجوائز اليومية، تعال بعد ${daily.cdL}🫡`)
@@ -207,7 +207,7 @@ async(Void, citel, text,{ isCreator }) => {
     let value = text.trim().split(" ");
     if (value[0] === "") return citel.reply(`Use ${prefix}transfer 100 @user`);
     let user = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-    if(!user) return citel.reply('عطني يوزر احول لهr🤦‍♂️.');
+    if(!user) return citel.reply('عطني يوزر احول له🤦‍♂️.');
     const secktor = "secktor"
         const user1 = citel.sender
         const user2 = user
