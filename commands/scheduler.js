@@ -9,7 +9,7 @@
  * @version 0.0.6
  **/
 
- const { tlang,sck,prefix,cmd } = require('../lib')
+/* const { tlang,sck,prefix,cmd } = require('../lib')
  cmd({
      pattern: "amute",
      desc: "sets auto mute time in group.",
