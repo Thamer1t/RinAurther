@@ -13,7 +13,7 @@ const { addnote,cmd, sck1, delnote, allnotes, delallnote, tlang, botpic, runtime
 const { TelegraPh } = require('../lib/scraper')   
 const util = require('util')
 //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "addnote",
             category: "owner",
             desc: "Adds a note on db.",
@@ -68,11 +68,11 @@ cmd({
 
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "unban",
-            category: "misc",
+            pattern: "ان-بان",
+            category: "للمالك",
             filename: __filename,
             desc: "Unbans banned user (from using bot)."
         },
@@ -101,7 +101,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-    cmd({
+   /* cmd({
         pattern: "url",
         alias : ['createurl'],
         category: "misc",
@@ -117,18 +117,18 @@ cmd({
         await citel.reply('*Here is URL of your media.\n'+util.format(anu));
         return await fs.unlinkSync(media);
     })
-
+*/
     //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 cmd({
-    pattern: "trt",
+    pattern: "ترجم",
     alias :['translate'],
-    category: "misc",
+    category: "عام",
     filename: __filename,
     desc: "Translate\'s given text in desird language."
 },
 async(Void, citel, text) => {
-    if(!text && !citel.quoted) return await citel.reply(`*اعطني كتابة اترجمها لك. مثال: _${prefix}trt en Who are you_*`);
+    if(!text && !citel.quoted) return await citel.reply(`*اعطني كتابة اترجمها لك. مثال: _${prefix}ترجم en Who are you_*`);
     const translatte = require("translatte");
     let lang = text ? text.split(" ")[0].toLowerCase() : 'en';
     if (!citel.quoted)  { text = text.replace( lang , "");  }
@@ -138,7 +138,7 @@ async(Void, citel, text) => {
 }
 )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "shell",
             category: "owner",
             filename: __filename,
@@ -203,11 +203,11 @@ cmd({
              return citel.reply(`All notes deleted from mongodb.`)
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "ban",
-            category: "owner",
+            pattern: "باند",
+            category: "للمالك",
             filename: __filename,
             desc: "Bans user from using bot."
         },
@@ -220,7 +220,7 @@ cmd({
                 sck1.findOne({ id: users }).then(async(usr) => {
                     if (!usr) {
                         await new sck1({ id: users, ban: "true" }).save()
-                        return citel.reply(`_Banned ${usr.name} from Using Commands._`)
+                        return citel.reply(`_تم حظر ${usr.name} من استخدام الاوامر، يستاهل😒._`)
                     } else {
                         if (usr.ban == "true") return citel.reply(`${pushnamer} محظور بالفعل من استخدام الاوامر`)
                         await sck1.updateOne({ id: users }, { ban: "true" })
@@ -236,7 +236,7 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-cmd({
+/*cmd({
             pattern: "alive",
             category: "general",
             filename: __filename,
@@ -254,7 +254,7 @@ ${alivemessage}
 *المالك:-* _${Config.ownername}_
 *برانش:-* _${Config.BRANCH}_
 
-_اكتب ${prefix}اوامر عشان تطلع لك الاوامر_
+_اكتب ${prefix}اوامر عشان تطلع لك اوامر البوت
 
 _Powered by ${Config.ownername}_
 `;
@@ -271,5 +271,5 @@ _Powered by ${Config.ownername}_
             });
 
         }
-    )
+    )*/
     //---------------------------------------------------------------------------
