@@ -14,9 +14,10 @@
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
 // Set the cooldown time to 1 hour (in milliseconds)
+const cooldownTime = 60 * 60 * 1000
 
 // Create a cooldown map to store the cooldowns
-
+const cooldowns = new Map()
  /*
   cmd({
          pattern: "economy",
@@ -324,7 +325,74 @@ return await citel.reply(`🍀اليوزر: ${citel.pushName}\n\n_🪙${balance.
      //---------------------------------------------------------------------------
 
 
+cmd({
+    pattern: "سرقة",
+    desc: "rob bank amount.",
+    category: "economy",
+    filename: __filename,
+},
+async (Void, citel, text, { isCreator }) => {
+    // Get the user ID of the person running the command
+    const userId = citel.sender
 
+    // Check if there's a cooldown for this user
+    if (cooldowns.has(userId)) {
+        // Get the remaining time on the cooldown
+        const remainingTime = cooldowns.get(userId) - Date.now()
+
+        // If the cooldown hasn't expired yet, send a message indicating how long the user needs to wait
+        if (remainingTime > 0) {
+            return citel.reply(`🫡 تعال بعد ${cdl(remainingTime)} لتسرق مرة أخرى.`)
+        }
+    }
+
+    // Set the cooldown for this user
+    cooldowns.set(userId, Date.now() + cooldownTime)
+
+    // The rest of the command code goes here...
+    let zerogroup = (await sck.findOne({
+        id: citel.chat,
+    })) || (await new sck({
+        id: citel.chat,
+    }).save());
+    let mongoschemas = zerogroup.economy || "false";
+    if (mongoschemas == "false") return citel.reply("🚦Economy is not active in current group.");
+    let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
+    if(!users) return citel.reply('منشن شخص تسرقه.')
+    const user1 = citel.sender
+    const user2 = users
+    const secktor = "secktor"
+    const k = 1000
+    const balance1 = await eco.balance(user1, secktor)
+    const balance2 = await eco.balance(user2, secktor)
+    const typ = ['ran','rob','caught'];
+    const random = typ[Math.floor(Math.random() * typ.length)];
+    if (k > balance1.wallet) return citel.reply('*☹️ ماعندك فلوس تدفع الغرامة اذا انمسكت، اترك السرقة لاهلها*');
+    if (k > balance2.wallet) return citel.reply('*ضحيتك طفرانة، اختر شخص معه فلوس وش تبي بالطفارى🫤*');
+    let tpy = random
+    switch (random) {
+        case 'ran':
+            await citel.reply('*ضحيتك هرب، واضح انك مب يم السرقة حاول تغير مهنتك🫰.*')
+            ////citel.react('🥹')
+            break
+        case 'rob':
+            const deduff = Math.floor(Math.random() * 1000)	    
+            await eco.deduct(user2, secktor, deduff);
+            await eco.give(citel.sender, secktor, deduff);
+            await citel.reply(`*🤑 تم الزرف.🗡️*\nهربت ومعك ${deduff} في مخباك.`)
+            ////citel.react('💀')
+            break
+        case 'caught':
+            const rmoney = Math.floor(Math.random() * 1000)
+            await eco.deduct(user1, secktor, rmoney);
+            await citel.reply(`*مسكوك👮 الشرطة , وغرموك ${rmoney} 🪙 , معوض خير🥹.*`)
+            ////citel.react('😦')
+            break
+        default:
+            await citel.reply('وش قاعد تسوي؟👀.')
+            //citel.react('🤔')
+    }
+})
 
 
      //---------------------------------------------------------------------------
