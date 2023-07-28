@@ -13,9 +13,9 @@ const { cmd,sck,sck1, getAdmin, tlang, prefix } = require('../lib')
 const Config = require('../config')
     //---------------------------------------------------------------------------
 cmd({
-        pattern: "act",
+        pattern: "تفعيل",
         desc: "Switches for varios works.",
-        category: "group",
+        category: "للمشرفين",
         filename: __filename,
     },
     async(Void, citel, text,{ isCreator }) => {
@@ -26,9 +26,9 @@ cmd({
         const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
         const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
         //-----------------------------------------
-        if (!citel.isGroup) return citel.reply("This command is only for group")
+        if (!citel.isGroup) return citel.reply("خاص بالقروبات")
         if (!text) return citel.reply(`❌ Please provide me term like like\n1-events\n2-antilink\n3-nsfw\n4-cardgame\n5-bot`)
-        if (!isAdmins) return citel.reply("❌ This command is only for admin")
+        if (!isAdmins) return citel.reply("❌ للمشرفين فقط")
         switch (text.split(" ")[0]) {
             case 'antilink':
                 {
@@ -36,7 +36,7 @@ cmd({
                     if (!checkgroup) {
                         await new sck({ id: citel.chat, antilink: "true" })
                             .save()
-                        return citel.reply(' Antilink Enabled Successfully')
+                        return citel.reply(' تم تفعيل مضاد الروابط')
                     } else {
                         if (checkgroup.antilink == "true") return citel.reply("Antilink was alredy  enabled here.")
                         await sck.updateOne({ id: citel.chat }, { antilink: "true" })
@@ -46,17 +46,17 @@ cmd({
                 }
                 break
           
-                      case 'economy':
+                      case 'الاقتصاد':
                 {
                     let checkgroup = await sck.findOne({ id: citel.chat })
                     if (!checkgroup) {
                         await new sck({ id: citel.chat, economy: "true" })
                             .save()
-                        return citel.reply(' Economy Enabled Successfully')
+                        return citel.reply(' تم تفعيل الاقتصاد بالمجموعة')
                     } else {
-                        if (checkgroup.economy == "true") return citel.reply("Economy was alredy enabled.")
+                        if (checkgroup.economy == "true") return citel.reply("مفعل مسبقا.")
                         await sck.updateOne({ id: citel.chat }, { economy: "true" })
-                        citel.reply('Economy enabled in current chat.')
+                        citel.reply('مفعل.')
                         return
                     }
                 }
