@@ -306,14 +306,16 @@ cmd({
                 pfp = await botpic();
             }
             const profile = `
-*مرحبا! ${citel.pushName},*
-*تفضل البروفايل حقك:*
-*👤اليوزر:* ${citel.pushName}
-*⚡الحالة:* ${bioo}
-*🧩الدور:* ${role}
-*🍁المستوى:* ${userq.level}
-*📥 الرسائل* ${ttms}
-*Powered by ${tlang().title}*
+╭─👤 *مرحبا، ${citel.pushName}!*
+│
+├ ❖ اليوزر: ${citel.pushName}
+├ ✨ الحالة: ${bioo}
+├ 🎭 الدور: ${role}
+│
+├ 🍁 المستوى: ${userq.level}
+├ 📥 الرسائل: ${ttms}
+│
+╰─🚀 *Powered by ${tlang().title}*
 `;
             let buttonMessage = {
                 image: {
