@@ -53,15 +53,14 @@ async(Void, citel, text) => {
             .locale('id')
         const date = moment.tz('Asia/Riyadh').format('DD/MM/YYYY')
         let total = await sck1.countDocuments()
-        let str = `╭────《 ` + fancytext(Config.ownername.split(' ')[0], 58) + ` 》─────⊷\n`
-        str += '```' + `╭──────────《 ${fancytext(Config.ownername.split(' ')[0], 50)} 》─⊷
+        let str = `╭────《 ${fancytext(Config.ownername.split(' ')[0], 58)} 》─────⊷
 │
 ├───── 📝 اليوزر: ${citel.pushName}
 ├───── 🤖 البوت: ${tlang().title}
 ├───── 🔑 رمز التفعيل: [ ${prefix} ]
 ├───── 👑 المالك: ${Config.ownername}
 ├───── ❓ الأوامر: ${commands.length}
-├───── 👥 المستخدمين: ${total}
+├───── 👥 المستخدمين: ${await sck1.countDocuments()}
 ├───── ⏰ وقت التشغيل: ${runtime(process.uptime())}
 ├───── 💾 الذاكرة: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
 ├───── 🕰️ الوقت: ${time}
