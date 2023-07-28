@@ -157,7 +157,7 @@ const fetch = require('node-fetch')
     //---------------------------------------------------------------------------
 cmd({
             pattern: "image",
-            category: "search",
+            category: "تحميل",
             desc: "Searches Image on Google",
             use: '<text>',
             filename: __filename,
@@ -166,8 +166,8 @@ cmd({
             if (!text) return citel.reply("وش الصورة اللي تبيها؟!")
             if (!text) return reply("وش الصوره اللي تبيها؟");
             let name1 = text.split("|")[0]
-            let name2 = text.split("|")[1] || `1`
-            citel.reply(`Sending ${name2} image(s) of ${name1} in chat`)
+            let name2 = text.split("|")[2] || `2`
+            citel.reply(`جاري ارسال ${name2} صورة ل ${name1} in chat`)
             let nn = name2
             for (let i = 0; i < nn; i++) {
 
