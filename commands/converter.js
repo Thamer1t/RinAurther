@@ -145,7 +145,7 @@ cmd({
     filename: __filename
 },
 async(Void, citel, text) => {
-    if (!citel.quoted) return citel.reply(`_Reply to Any Video_`);
+    if (!citel.quoted) return citel.reply(`_رد عالفيديو احوله صوت_`);
     let mime = citel.quoted.mtype
 if (mime =="audioMessage" || mime =="videoMessage")
 {
