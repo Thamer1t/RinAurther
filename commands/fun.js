@@ -30,33 +30,37 @@ async (match, citel) => {
   const prompt = citel.body.slice(6).trim();
 
   if (!prompt) {
-    await citel.reply("وش تبيني ارسم؟ اكتب اللي تبيني ارسمه لك بعد الامر");
+    await citel.reply("يجب عليك تحديد ما تريد رسمه.");
     return;
   }
 
-  // Call the DeepAI Image API to generate an image based on the prompt
+  // Call the DALL-E API to generate an image based on the prompt
   try {
     const response = await axios.post(
-      "https://api.deepai.org/api/text2img",
+      "https://api.openai.com/v1/images/generations",
       {
-        text: prompt,
+        model: "image-alpha-001",
+        prompt: `Draw a picture of ${prompt}`,
+        num_images: 1,
+        size: "1024x1024",
       },
       {
         headers: {
-          "api-key": "2f65f612-da75-4449-9cd7-aa6954d7c2b5",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
         },
       }
     );
 
-    // Get the URL of the generated image from the API response
-    const imageUrl = response.data.output_url;
+    // Get the URL of the generated image
+    const imageUrl = response.data.data[0].url;
 
     // Send the image to the user
-    await citel.sendFileFromUrl(imageUrl, { filename: "image.jpg" });
-
-  } catch (error) {
-    console.error(error);
-    await citel.reply("حصل خطأ أثناء محاولة إنشاء الصورة. الرجاء المحاولة مرة أخرى.");
+    await citel.reply(`تم رسم الصورة الخاصة بـ "${prompt}"`);
+    await citel.sendFileFromUrl(imageUrl);
+  } catch (err) {
+    console.error(err);
+    await citel.reply("حدث خطأ أثناء رسم الصورة. يرجى المحاولة مرة أخرى.");
   }
 });
 //......................................................
