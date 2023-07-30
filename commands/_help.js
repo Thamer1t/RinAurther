@@ -168,7 +168,7 @@ Secktor.cmd({
 Secktor.cmd({
     pattern: "ملف",
     desc: "to get extact name where that command is in repo.\nSo user can edit that.",
-    category: "general",
+    category: "للمالك",
     react: "✨",
     filename: __filename
 },
