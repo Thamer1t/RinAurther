@@ -162,8 +162,7 @@ cmd({
   // Convert the audio file to AAC format
   const randomNameAac = `${randomName}.aac`;
   ffmpeg(`./${randomName}`)
-    .output(`./${randomNameAac}`)
-    .audioCodec('aac')
+    .outputOptions('-c:a', 'aac')
     .on('end', async () => {
       // Read the converted audio file into a buffer
       const audioBuffer = fs.readFileSync(`./${randomNameAac}`);
@@ -195,7 +194,7 @@ cmd({
       fs.unlinkSync(`./${randomName}`);
       fs.unlinkSync(`./${randomNameAac}`);
     })
-    .run();
+    .save(`./${randomNameAac}`);
 
   // Check if the file size is bigger than 100mb
   let stats = fs.statSync(`./${randomName}`);
