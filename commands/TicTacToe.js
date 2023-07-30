@@ -34,9 +34,9 @@ cmd(
       )
     ) {
       delete this.game
-      return citel.reply(`_تم حذف لعبة TicTacToe الحالية بنجاح._`);
+      return citel.reply(`_تم حذف اللعبة الحالية بنجاح._`);
     } else {
-      return citel.reply(`مافي لعبة TicTacToe حاليًا.`)
+      return citel.reply(`مافيه لعبة جارية حاليا.`)
     }
   })
 
@@ -134,7 +134,7 @@ cmd(
       let isWin = !1;
       let isTie = !1;
       let isSurrender = !1;
-      if (!/^([1-9]|(me)?give_up|surr?ender|off|skip)$/i.test(citel.text)) return;
+      if (!/^([1-9]|(me)?give_up|surr?ender|off|skip|استسلم)$/i.test(citel.text)) return;
       isSurrender = !/^[1-9]$/.test(citel.text);
       if (citel.sender !== room.game.currentTurn) {
         if (!isSurrender) return !0;
@@ -253,7 +253,7 @@ cmd({ pattern: "صداقة" , category: "ترفيه" }, async(Void, citel, text)
         caption += `@${citel.sender.split('@')[0]}  x  @${shiper.split('@')[0]}\n`
         caption += `\t\t✯────────────────────✯\n`
         caption += await couple(percentage)
-        if(citel.sender.split('@')[0]===shiper.split('@')[0]) return citel.reply('```'+'بتصير صديق نفسك... صاحي انت؟'+'```')
+        if(citel.sender.split('@')[0]===shiper.split('@')[0]) return citel.reply('```'+' ؟'+'```')
         await Void.sendMessage(citel.chat,{text: caption,mentions: [citel.sender,shiper]},{quoted:citel})
    }
 )
