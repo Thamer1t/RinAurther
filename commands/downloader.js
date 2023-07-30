@@ -162,7 +162,7 @@ cmd({
   // Convert the audio file to AAC format
   const randomNameAac = `${randomName}.aac`;
   ffmpeg(`./${randomName}`)
-    .outputOptions('-c:a', 'aac')
+    .audioCodec('aac')
     .on('end', async () => {
       // Read the converted audio file into a buffer
       const audioBuffer = fs.readFileSync(`./${randomNameAac}`);
