@@ -147,13 +147,23 @@ cmd({
   if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`❌ Video file too big!`);
   let titleYt = infoYt.videoDetails.title;
   let randomName = getRandom('.mp3');
-  citel.reply('*شويات بس احمل:* ' + titleYt);
+  citel.reply('*شويات بس يحمل:* ' + titleYt);
 
-  const randomNameAac = `${randomName}.aac`;
+  // Download the audio file and save it as an MP3
+  const stream = ytdl(anu.url, {
+    filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128,
+  }).pipe(fs.createWriteStream(`./${randomName}`));
+
+  await new Promise((resolve, reject) => {
+    stream.on('error', reject);
+    stream.on('finish', resolve);
+  });
 
   // Convert the audio file to AAC format
+  const randomNameAac = `${randomName}.aac`;
   ffmpeg(`./${randomName}`)
-    .outputOptions('-c:a', 'aac')
+    .output(`./${randomNameAac}`)
+    .audioCodec('aac')
     .on('end', async () => {
       // Read the converted audio file into a buffer
       const audioBuffer = fs.readFileSync(`./${randomNameAac}`);
@@ -185,18 +195,9 @@ cmd({
       fs.unlinkSync(`./${randomName}`);
       fs.unlinkSync(`./${randomNameAac}`);
     })
-    .save(`./${randomNameAac}`);
+    .run();
 
-  // Download the audio file and save it as an MP3
-  const stream = ytdl(anu.url, {
-    filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128,
-  }).pipe(fs.createWriteStream(`./${randomName}`));
-
-  await new Promise((resolve, reject) => {
-    stream.on('error', reject);
-    stream.on('finish', resolve);
-  });
-
+  // Check if the file size is bigger than 100mb
   let stats = fs.statSync(`./${randomName}`);
   let fileSizeInBytes = stats.size;
   let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
