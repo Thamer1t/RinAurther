@@ -3,6 +3,9 @@ const ytdl = require('ytdl-secktor');
 const fs = require('fs');
 const ffmpeg = require('fluent-ffmpeg');
 
+// Define videotime variable
+const videotime = 3600;
+
 cmd({
   pattern: 'شغل',
   alias: ['song'],
