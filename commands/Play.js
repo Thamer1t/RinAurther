@@ -15,7 +15,7 @@ cmd({
   use: '<text>',
 }, async (Void, citel, text) => {
   try {
-    const dlsize = 100; // Maximum file size in MB
+    const dlsize = 250; // Maximum file size in MB
     const yts = require('secktor-pack');
     const search = await yts(text);
     const anu = search.videos[0];
