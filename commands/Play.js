@@ -1,5 +1,5 @@
 const { tlang, ringtone, cmd, fetchJson, sleep, botpic, getBuffer, pinterest, prefix, Config } = require('../lib');
-const ytdl = require('ytdl-core');
+const ytdl = require('ytdl-secktor');
 const fs = require('fs');
 const ffmpeg = require('fluent-ffmpeg');
 
