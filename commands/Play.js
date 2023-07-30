@@ -25,11 +25,11 @@ cmd({
 
     const infoYt = await ytdl.getInfo(anu.url);
     if (infoYt.videoDetails.lengthSeconds >= videotime) {
-      return citel.reply(`❌ Video file too big!`);
+      return citel.reply(`❌ حجم الصوت كبير جدا مقدر احمله`);
     }
     const titleYt = infoYt.videoDetails.title;
     const randomName = getRandom('.mp3');
-    citel.reply('*شويات بس يحمل:* ' + titleYt);
+    citel.reply('*شويات بس احمل لك:* ' + titleYt);
 
     // Download the audio file and save it as an MP3
     const stream = ytdl(anu.url, {
@@ -83,12 +83,12 @@ cmd({
     const fileSizeInBytes = stats.size;
     const fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
     if (fileSizeInMegabytes > dlsize) {
-      citel.reply(`❌ File size bigger than 100mb.`);
+      citel.reply(`❌ الحجم كبير! حاول بصوت ثاني.`);
       fs.unlinkSync(`./${randomName}`);
       fs.unlinkSync(`./${randomNameAac}`);
     }
   } catch (error) {
     console.error(error);
-    citel.reply('❌ An error occurred while processing your request.');
+    citel.reply('❌ صارت مشكلة اثناء المعالجة، حاول مره ثانيه.');
   }
 });
