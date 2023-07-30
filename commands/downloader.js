@@ -8,7 +8,8 @@
  * @description : Secktor,A Multi-functional whatsapp bot.
  * @version 0.0.6
  **/
-
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+ffmpeg.setFfmpegPath(ffmpegPath);
 const { tlang, ringtone, cmd,fetchJson, sleep, botpic,ffmpeg, getBuffer, pinterest, prefix, Config } = require('../lib')
 const { mediafire } = require("../lib/mediafire.js");
 const googleTTS = require("google-tts-api");
@@ -162,7 +163,7 @@ cmd({
   // Convert the audio file to AAC format
   const randomNameAac = `${randomName}.aac`;
   ffmpeg(`./${randomName}`)
-    .withAudioCodec('aac')
+    .audioCodec('aac')
     .on('end', async () => {
       // Read the converted audio file into a buffer
       const audioBuffer = fs.readFileSync(`./${randomNameAac}`);
