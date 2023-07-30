@@ -265,7 +265,7 @@ cmd({
 } else if (lvpoints <= 18) {
   var role = "ادميرال 🛡";
 } else if (lvpoints <= 20) {
-  var role = "هوكاجي 🎗";
+  var role = "كاغي 🎗";
 } else if (lvpoints <= 22) {
   var role = "اوتشيها 🔥";
 } else if (lvpoints <= 24) {
@@ -338,7 +338,7 @@ cmd({
                 pfp = await botpic();
             }
             const profile = `
-╭─👤 *مرحبا، ${citel.pushName}!*
+╮👤 *مرحبا، ${citel.pushName}!*
 │
 ├⭈ ❖ اليوزر: ${citel.pushName}
 ├⭈ ✨ الحالة: ${bioo}
@@ -393,7 +393,7 @@ cmd({
 } else if (lvpoints <= 18) {
   var role = "ادميرال 🛡";
 } else if (lvpoints <= 20) {
-  var role = "هوكاجي 🎗";
+  var role = "كاغي 🎗";
 } else if (lvpoints <= 22) {
   var role = "اوتشيها 🔥";
 } else if (lvpoints <= 24) {
@@ -456,7 +456,7 @@ cmd({
   var role = " القوت 🐐";
 }
            let disc = citel.sender.substring(3, 7);
-let textr = `╭─ ${tlang().greet}\n│ 🌟 رانك: ${citel.pushName}∆${disc}\n\n`;
+let textr = `╮ ${tlang().greet}\n│ 🌟 رانك: ${citel.pushName}∆${disc}\n\n`;
 let ttms = `${userq.xp}` / 8;
 textr += `⭈ 🎭 الدور: ${role}\n⭈ 🟢 نقاط الخبرة: ${userq.xp} / ${Levels.xpFor(userq.level + 1)}\n`;
 textr += `⭈ 🏡 المستوى: ${userq.level}\n⭈ 📥 مجموع الرسائل: ${ttms}\n`;
@@ -510,7 +510,7 @@ cmd({
 } else if (lvpoints <= 18) {
   var role = "ادميرال 🛡";
 } else if (lvpoints <= 20) {
-  var role = "هوكاجي 🎗";
+  var role = "كاغي 🎗";
 } else if (lvpoints <= 22) {
   var role = "اوتشيها 🔥";
 } else if (lvpoints <= 24) {
@@ -891,7 +891,7 @@ cmd({ on: "text" }, async(Void, citel) => {
 } else if (lvpoints <= 18) {
   var role = "ادميرال 🛡";
 } else if (lvpoints <= 20) {
-  var role = "هوكاجي 🎗";
+  var role = "كاغي 🎗";
 } else if (lvpoints <= 22) {
   var role = "اوتشيها 🔥";
 } else if (lvpoints <= 24) {
@@ -958,7 +958,7 @@ cmd({ on: "text" }, async(Void, citel) => {
                 image: {
                     url: await botpic(),
                 },
-                caption: `╭───────────╮
+                caption: `╮───────────╭
 │ 🎉🎊 *مَبْرُوك!* 🎉🎊 │
 │ ⭐️ *ازداد مستواك!* ⭐️ │
 ├───────────┤
@@ -968,7 +968,7 @@ cmd({ on: "text" }, async(Void, citel) => {
 │ 📍 *الدور:* *${role}* │
 ├───────────┤
 │ 🥳 استمتع! 👍 │
-╰───────────╯
+╯───────────╰
 `,
             }, {
                 quoted: citel,
