@@ -67,33 +67,43 @@ async(Void, citel, text) => {
 │ │ التاريخ: ${date}
 │ ╰──────────────◆
 ╰───────────────⊷\n` + '```'
-        for (const category in cmds) {
-            str += `╭────❏ *${tiny(category)}* ❏\n`;
-            if (text.toLowerCase() == category.toLowerCase()){
-                str = `╭─────❏ *${tiny(category)}* ❏\n`;
-                for (const plugins of cmds[category]) {
-                    str += `│ ${fancytext(plugins,1)}\n`;
-                }
-                str += `╰━━━━━━━━━━━━━──⊷\n`;
-                break;
-            }
-            else {
-                for (const plugins of cmds[category]) {
-                    str += `│ ${fancytext(plugins,1)}\n`;
-                }
-                str += `╰━━━━━━━━━━━━━━──⊷\n`;
-            }
-        }
-        str += `*⭐️:* _${prefix} ${prefix}\n*صنع بحب ❤️ من قبل غومونريونغ* `;
-        const buttonMessage = {
-            image: {
-                url: await botpic()
-            },
-            caption: str
-        };
-        return await Void.sendMessage(citel.chat, buttonMessage);
+       // Loop through each category in cmds
+for (const category in cmds) {
+  // Add category header to string
+  str += `╭────❏ 𝐂𝐀𝐓𝐄𝐆𝐎𝐑𝐘: ${tiny(category.toUpperCase())} ❏────\n`;
+
+  // If the text matches the category name, create a new string with only that category's plugins
+  if (text.toLowerCase() == category.toLowerCase()){
+    str = `╭────❏ 𝐂𝐀𝐓𝐄𝐆𝐎𝐑𝐘: ${tiny(category.toUpperCase())} ❏────\n`;
+    for (const plugins of cmds[category]) {
+      str += `│ ${emojify(plugins)}\n`;
     }
-})
+    str += `╰━━━━━━━━━━━━━──⊷\n`;
+    break;
+  }
+  // Otherwise, add all plugins in the category to the string
+  else {
+    for (const plugins of cmds[category]) {
+      str += `│ ${emojify(plugins)}\n`;
+    }
+    str += `╰━━━━━━━━━━━━━━──⊷\n`;
+  }
+}
+
+// Add footer to string
+str += `*⭐️:* _! !_\n*صنع بحب ❤️ من قبل غومونريونغ*`;
+
+// Create button message with image and string as caption
+const buttonMessage = {
+  image: {
+    url: await botpic()
+  },
+  caption: str,
+  parse_mode: "Markdown"
+};
+
+// Send button message to chat
+return await Void.sendMessage(citel.chat, buttonMessage);
     //---------------------------------------------------------------------------
 Secktor.cmd({
             pattern: "قائمة",
