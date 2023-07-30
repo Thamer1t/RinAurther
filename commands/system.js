@@ -134,7 +134,7 @@ async(Void, citel, text) => {
     if (!citel.quoted)  { text = text.replace( lang , "");  }
     else { text = citel.quoted.text; }
     var whole = await translatte(text, { from:"auto",  to: lang , });
-    if ("text" in whole) { return await citel.reply('*Translated text:*\n'+whole.text); }
+    if ("text" in whole) { return await citel.reply('*تفضل الترجمة:*\n'+whole.text); }
 }
 )
     //---------------------------------------------------------------------------
@@ -206,7 +206,7 @@ cmd({
     )*/
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "باند",
+            pattern: "بان",
             category: "للمالك",
             filename: __filename,
             desc: "Bans user from using bot."
