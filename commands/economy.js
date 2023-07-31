@@ -73,7 +73,7 @@ const hourly = {
             } else {
                 tname = Void.getName(h[i].userID)
             }
-str+= `*${i+1}*\n╭─────────────◆\n│ *الاسم:-* _${tname}_\n│ *اليوزر:-* _@${h[i].userID.split('@')[0]}_\n│ *المحفظة:-* _${h[i].wallet}_\n│ *البنك:-* _${h[i].bank}_\n│ *سعة البنك:-* _${h[i].bankCapacity}_\n╰─────────────◆\n\n`  	 
+str+= `*${i+1}*\n╭─────────────◆\n│ *الاسم:-* _${tname}_\n│ *اليوزر:-* _@${h[i].userID.split('@')[0]}_\n│ *المحفظة:-* _${h[i].wallet}_\n╰─────────────◆\n\n`  	 
 	 arr.push(h[i].userID)
 	 }
 	     citel.reply(str,{mentions:arr})
