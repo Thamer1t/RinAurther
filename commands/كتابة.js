@@ -3,7 +3,14 @@ const AnimeName = require('../lib/database/AnimeNames.js');
 const axios = require('axios');
 const { cmd } = require('../lib');
 // Replace the connection string with your own MongoDB URI
-
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => {
+  console.log('Connected to MongoDB');
+}).catch((err) => {
+  console.error('Failed to connect to MongoDB:', err);
+});
 
 // Define the command to get a random anime name from the database
 cmd({
