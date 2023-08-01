@@ -73,11 +73,11 @@ async(Void, citel, text,{ isCreator }) => {
              var author;
              if (text) {
                  anu = text.split("|");
-                 pack = anu[0] !== "" ? anu[0] : citel.pushName + '♥️';
+                 pack = anu[0] !== "" ? anu[0] : citel.pushName + '';
                  author = anu[1] !== "" ? anu[1] : Config.author;
              } else {
                  pack = citel.pushName;
-                 author = "♥️";
+                 author = " ";
              }
                  let media = await citel.quoted.download();
                  citel.reply("*ثواني بس..*");
