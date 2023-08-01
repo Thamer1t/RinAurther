@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const axios = require('axios');
 const { cmd } = require('../lib');
+  const AnimeName = require('../lib/database/AnimeName.js');
+
 // Replace the connection string with your own MongoDB URI
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -45,7 +47,7 @@ cmd({
   }
 
   // Import the AnimeName model
-  const AnimeName = require('../lib/database/AnimeName.js');
+
 
   // Extract the new anime name from the command message
   const newAnimeName = text.trim();
