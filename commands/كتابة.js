@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const AnimeName = require('../lib/database/AnimeName.js');
 const axios = require('axios');
 const { cmd } = require('../lib');
 // Replace the connection string with your own MongoDB URI
@@ -11,6 +10,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).catch((err) => {
   console.error('Failed to connect to MongoDB:', err);
 });
+
 
 // Define the command to get a random anime name from the database
 cmd({
@@ -43,6 +43,9 @@ cmd({
     citel.reply(tlang().owner);
     return;
   }
+
+  // Import the AnimeName model
+  const AnimeName = require('../lib/database/AnimeName.js');
 
   // Extract the new anime name from the command message
   const newAnimeName = text.trim();
