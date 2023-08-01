@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const AnimeName = require('../lib/database/Animenames');
 
 // Replace the connection string with your own MongoDB URI
-const uri = 'mongodb+srv://<username>:<password>@<cluster>.mongodb.net/animeDB';
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 // Define the command to get a random anime name from the database
 cmd({
