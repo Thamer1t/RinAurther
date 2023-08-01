@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const AnimeName = require('../lib/database/AnimeNames.js');
-
+const axios = require('axios');
+const { cmd } = require('../lib');
 // Replace the connection string with your own MongoDB URI
 
 
