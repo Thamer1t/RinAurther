@@ -35,7 +35,7 @@ cmd({
 cmd({
   pattern: "اضافة-كت",
   desc: "Get a random anime name",
-  category: "ترفيه",
+  category: "للمالك",
   filename: __filename,
 }, async (match, citel, text, { isCreator }) => {
   // Check if the user is the owner of the bot
