@@ -50,7 +50,7 @@ cmd({
 
   // Check if the new anime name is provided
   if (!newAnimeName) {
-    citel.reply('الرجاء تحديد اسم الأنمي الجديد.');
+    citel.reply('الرجاء تحديد اسم الشخصية.');
     return;
   }
 
@@ -63,6 +63,6 @@ cmd({
     citel.reply(`تمت إضافة ${newAnimeName} إلى قاعدة البيانات.`);
   } catch (err) {
     console.error(err);
-    citel.reply('حدث خطأ أثناء إضافة اسم الأنمي إلى قاعدة البيانات. يرجى المحاولة مرة أخرى.');
+    citel.reply('حدث خطأ أثناء إضافة اسم الشخصية إلى قاعدة البيانات. يرجى المحاولة مرة أخرى.');
   }
 });
