@@ -25,7 +25,7 @@ cmd({
     const randomIndex = Math.floor(Math.random() * count);
     const anime = await AnimeName.findOne().skip(randomIndex);
 
-  citel.send(`*${anime.name}*`);
+  citel.sender(`*${anime.name}*`);
   } catch (error) {
     console.error(error);
     citel.reply('حدث خطأ، حاول مجددا');
