@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const axios = require('axios');
 const { cmd } = require('../lib');
-  const AnimeName = require('../lib/database/AnimeName.js');
+const AnimeName = require('../lib/database/AnimeName.js');
 
 // Replace the connection string with your own MongoDB URI
 mongoose.connect(process.env.MONGODB_URI, {
@@ -12,7 +12,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).catch((err) => {
   console.error('Failed to connect to MongoDB:', err);
 });
-
 
 // Define the command to get a random anime name from the database
 cmd({
@@ -30,13 +29,13 @@ cmd({
   } catch (error) {
     console.error(error);
     citel.reply('حدث خطأ، حاول مجددا');
-  } finally {
-    mongoose.disconnect();
   }
 });
+
+// Define the command to add a new anime name to the database
 cmd({
   pattern: "اضافة-كت",
-  desc: "Get a random anime name",
+  desc: "Add a new anime name to the database",
   category: "للمالك",
   filename: __filename,
 }, async (match, citel, text, { isCreator }) => {
@@ -45,9 +44,6 @@ cmd({
     citel.reply(tlang().owner);
     return;
   }
-
-  // Import the AnimeName model
-
 
   // Extract the new anime name from the command message
   const newAnimeName = text.trim();
@@ -68,8 +64,5 @@ cmd({
   } catch (err) {
     console.error(err);
     citel.reply('حدث خطأ أثناء إضافة اسم الأنمي إلى قاعدة البيانات. يرجى المحاولة مرة أخرى.');
-  } finally {
-    mongoose.disconnect();
   }
 });
-
