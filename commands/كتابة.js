@@ -24,3 +24,39 @@ cmd({
     mongoose.disconnect();
   }
 });
+cmd({
+  pattern: "اضافة-كت",
+  desc: "Get a random anime name",
+  category: "ترفيه",
+  filename: __filename,
+}, async (match, citel, text, { isCreator }) => {
+  // Check if the user is the owner of the bot
+  if (!isCreator) {
+    citel.reply(tlang().owner);
+    return;
+  }
+
+  // Extract the new anime name from the command message
+  const newAnimeName = text.trim();
+
+  // Check if the new anime name is provided
+  if (!newAnimeName) {
+    citel.reply('الرجاء تحديد اسم الأنمي الجديد.');
+    return;
+  }
+
+  // Create a new AnimeName document and save it to the database
+  const animeName = new AnimeName({
+    name: newAnimeName,
+  });
+  try {
+    await animeName.save();
+    citel.reply(`تمت إضافة ${newAnimeName} إلى قاعدة البيانات.`);
+  } catch (err) {
+    console.error(err);
+    citel.reply('حدث خطأ أثناء إضافة اسم الأنمي إلى قاعدة البيانات. يرجى المحاولة مرة أخرى.');
+  } finally {
+    mongoose.disconnect();
+  }
+});
+
