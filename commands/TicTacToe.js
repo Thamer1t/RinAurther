@@ -186,7 +186,7 @@ ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
 ${
   isWin
-    ? `@${winner.split("@")[0]} فاز وحصل على 2000💎 في المحفظة🤑`
+    ? `@${winner.split("@")[0]} فاز وحصل على 1💎 في المحفظة🤑`
     : isTie
     ? `تعادل,ابدعتوا كلكم👌🏻 .`
     : `Current Turn ${["❌", "⭕"][1 * room.game._currentTurn]} @${
@@ -199,7 +199,7 @@ ${
       if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== citel.chat)
         room[room.game._currentTurn ^ isSurrender ? "x" : "o"] = citel.chat;
         if(isWin){
-        await eco.give(citel.sender, "secktor", 2000);
+        await eco.give(citel.sender, "secktor", 1);
         }
       if (isWin || isTie) {
         await Void.sendMessage(citel.chat, {
