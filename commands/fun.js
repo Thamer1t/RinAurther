@@ -89,7 +89,7 @@ cmd({
 
 function tlang() {
   return {
-    owner: "خاص بغومونريونغ",
+    owner: "خاص ب آرثر",
     addPoemSuccess: "تم إضافة القصيدة بنجاح!",
     addPoemError: "حدث خطأ أثناء إضافة القصيدة. يرجى المحاولة مرة أخرى.",
     addPoemMissingFields: "الرجاء تحديد محتوى القصيدة واسم الشاعر",
