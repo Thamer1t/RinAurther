@@ -99,7 +99,7 @@ cmd({
             };
             let res = await axios.post("https://bot.lyo.su/quote/generate", body);
             let img = Buffer.alloc(res.data.result.image.length, res.data.result.image, "base64");
-            return citel.reply(img,{packname:'غومونريونغ',author:'مقولة'},"sticker")
+            return citel.reply(img,{packname:'AURTHER',author:'مقولة'},"sticker")
 
         }
     )
@@ -108,16 +108,16 @@ cmd({
             pattern: "زخرفة",
             desc: "Makes stylish/fancy given text",
             category: "تحويل",
-            use: '56 Rin',
+            use: '56 AURTH',
             react: "✅",
             filename: __filename
         },
         async(Void, citel, text) => {
             if (isNaN(text.split(" ")[0]) || !text) {
                 let text = tiny(
-                    "زخرفة \n\مثال: .زخرفة 32 Rin\n\n"
+                    "زخرفة \n\مثال: .زخرفة 32 AURTHER\n\n"
                 );
-                listall("Rin").forEach((txt, num) => {
+                listall("AURTH").forEach((txt, num) => {
                     text += `${(num += 1)} ${txt}\n`;
                 });
                 return await citel.reply(text);
