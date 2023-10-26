@@ -14,7 +14,7 @@ const Config = require('../config')
 const { redeploy , getvar , delvar , getallvar , change_env , get_deployments} = require('../lib/koyeb')
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-/*cmd(
+/cmd(
   {
     pattern: "updatenow",
     desc: "update bot with main repo.",
