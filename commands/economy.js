@@ -136,7 +136,7 @@ return await citel.reply( `*📠 تم تحويل ${value[0]}  بنجاح💰*`)
             })
             .save());
         let mongoschemas = zerogroup.economy || "false";
-        if (mongoschemas == "false") return citel.reply("*🚦Economy* مو مفعل بالقروب، كلم غومونريونغ يفعله");
+        if (mongoschemas == "false") return citel.reply("*🚦Economy* مو مفعل بالقروب، كلم آرثر يفعله");
          const secktor = "secktor"
          const balance = await eco.balance(citel.sender, secktor); //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.
 return await citel.reply(`*👛 ${citel.pushName}'s Purse:*\n\n_🪙${balance.wallet}_`)
@@ -153,7 +153,7 @@ return await citel.reply(`*👛 ${citel.pushName}'s Purse:*\n\n_🪙${balance.wa
     async(Void, citel, text,{ isCreator }) => {
         if(!isCreator) return
 
-         const secktor = "secktor"
+         const secktor = "AURTHER"
          let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
          if(!users) return citel.reply('منشن اللي بتعطيه فلوس')
          await eco.give(users, secktor, parseInt(text.split(' ')[0]));
