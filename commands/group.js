@@ -171,7 +171,7 @@ cmd({
             teks1 = `\n\n*User* : @${
     citel.sender.split("@")[0]
   }\n*Request* : ${text}`;
-            teks2 = `\n\n*Hii ${pushname},تم ارسال اقتراحك الى غومونريونغ! *.\n*شكرا لك.*`;
+            teks2 = `\n\n*Hii ${pushname},تم ارسال اقتراحك الى آرثر! *.\n*شكرا لك.*`;
             for (let i of owner) {
                 Void.sendMessage(i + "@s.whatsapp.net", {
                     text: textt + teks1,
