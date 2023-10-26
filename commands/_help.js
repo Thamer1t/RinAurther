@@ -72,7 +72,7 @@ async(Void, citel, text) => {
                 str += `═══════════════⊷\n`;
             }
         }
-        str += `*⭐️:* _${prefix} ${prefix}\n*صنع بحب ❤️ من قبل غومونريونغ* `;
+        str += `*⭐️:* _${prefix} ${prefix}\n*AURTHER* `;
         const buttonMessage = {
             image: {
                 url: await botpic()
