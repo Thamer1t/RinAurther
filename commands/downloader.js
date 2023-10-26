@@ -36,7 +36,7 @@ cmd({
     desc: "text to speech.",
     category: "تحويل",
     filename: __filename,
-    use: '<مرحبًا رين >',
+    use: '<مرحبًا ارثر >',
 },
 async (Void, citel, [lang = 'ar', ...text]) => {
     if (!text) return citel.reply('اكتب كلام احوله صوت')
