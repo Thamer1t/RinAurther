@@ -3,17 +3,17 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 
 //═══════[Required Variables]════════\\
-global.owner = process.env.OWNER_NUMBER.split("966503639743","212684151146")
+global.owner = process.env.OWNER_NUMBER.split("212684151146")
 global.mongodb = process.env.MONGODB_URI || "mongodb+srv://thamerrin:Thamer12@newrin.h3kysst.mongodb.net/?retryWrites=true&w=majority"
 global.port= process.env.PORT || 5000
 global.email = ''
 global.github = 'https://github.com/SamPandey001/Secktor-Md'
 global.location = 'Sultanpur IN'
 global.gurl = '' // add your username
-global.sudo = process.env.SUDO || '966503639743','212684151146'
-global.devs = '966503639743','212684151146';
+global.sudo = process.env.SUDO || '212684151146'
+global.devs = '212684151146';
 global.website = 'https://github.com/SamPandey001/Secktor-Md' //wa.me/+91000000000000
-global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://raw.githubusercontent.com/SecktorBot/Brandimages/main/logos/SocialLogo%201.png'
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://i.pinimg.com/736x/dc/cc/19/dccc19fcc8ba816f253e9bd0e112b7e0.jpg'
 module.exports = {
   botname:   process.env.BOT_NAME === undefined ? '𝐒𝐞𝐜𝐤𝐭𝐨𝐫 𝐁𝐨𝐭𝐭𝐨' : process.env.BOT_NAME,
   ownername: process.env.OWNER_NAME === undefined ? 'SamPandey001' : process.env.OWNER_NAME,
